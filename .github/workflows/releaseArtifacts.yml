@@ -12,8 +12,8 @@ jobs:
   push:
     runs-on: ubuntu-latest
     permissions:
-      # contents: write
-      packages: write
+      contents: write
+      # packages: write
       id-token: write
       attestations: write
     strategy:
