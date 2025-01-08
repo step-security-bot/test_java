@@ -66,16 +66,16 @@ jobs:
         run: |
           cosign verify-blob \
             --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-            --output-certificate ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.pem \
-            --output-signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
+            --certificate ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.pem \
+            --signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
             ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
       - name: Sign EXE with Cosign OIDC
         run: |
           cosign verify-blob  \
             --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-            --output-certificate ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.pem \
-            --output-signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
+            --certificate ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.pem \
+            --signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Generate Attestations for JAR
