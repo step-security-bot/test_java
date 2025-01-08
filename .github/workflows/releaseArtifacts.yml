@@ -107,7 +107,7 @@ jobs:
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Upload binaries, attestations and signatures to release
-        run: gh release upload ${{ github.ref_name }} ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.* ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
+        run: gh release upload v${{ steps.versionNumber.outputs.versionNumber }} ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.* ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
