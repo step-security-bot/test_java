@@ -64,21 +64,23 @@ jobs:
 
       - name: Sign JAR with Cosign OIDC
         run: |
-          cosign sign-blob \
+          cosign verify-blob \
             --yes \
             --oidc-client-id sigstore \
             --oidc-issuer https://token.actions.githubusercontent.com \
-            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar \
-            > ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig
+            --output-certificate ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.pem \
+            --output-signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
+            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
       - name: Sign EXE with Cosign OIDC
         run: |
-          cosign sign-blob  \
+          cosign verify-blob  \
             --yes \
             --oidc-client-id sigstore \
             --oidc-issuer https://token.actions.githubusercontent.com \
-            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe \
-            > ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig
+            --output-certificate ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.pem \
+            --output-signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
+            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Generate Attestations for JAR
         run: |
