@@ -64,20 +64,22 @@ jobs:
 
       - name: Sign JAR with Cosign OIDC
         run: |
-          cosign verify-blob \
-            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-            --certificate-identity-regexp https://github.com/Ludy87/test_java/.github/workflows/ \
-            --certificate ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.pem \
-            --signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
+          cosign sign-blob \
+            --yes \
+            --oidc-client-id sigstore \
+            --oidc-issuer https://token.actions.githubusercontent.com \
+            --output-signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
+            --output-certificate ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.pem \
             ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
       - name: Sign EXE with Cosign OIDC
         run: |
-          cosign verify-blob  \
-            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-            --certificate-identity-regexp https://github.com/Ludy87/test_java/.github/workflows/ \
-            --certificate ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.pem \
-            --signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
+          cosign sign-blob  \
+            --yes \
+            --oidc-client-id sigstore \
+            --oidc-issuer https://token.actions.githubusercontent.com \
+            --output-signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
+            --output-certificate ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.pem \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Generate Attestations for JAR
