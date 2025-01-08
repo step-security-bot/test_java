@@ -40,7 +40,7 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@0bdd871935719febd78681f197cd39af5b6e16a6 # v4.2.2
         with:
-          gradle-version: 8.7
+          gradle-version: 8.12
 
       - name: Generate jar (With Security=${{ matrix.enable_security }})
         run: ./gradlew clean createExe
@@ -59,17 +59,8 @@ jobs:
           cp ./build/launch4j/Stirling-PDF.exe ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
           cp ./build/libs/Stirling-PDF-${{ steps.versionNumber.outputs.versionNumber }}.jar ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
-      # - name: Upload Assets
-      #   id: upload-assets
-      #   uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
-      #   with:
-      #     name: "release-artifacts"
-      #     path: |
-      #       ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
-      #       ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
-
       - name: Install Cosign
-        uses: sigstore/cosign-installer@v3.7.0
+        uses: sigstore/cosign-installer@dc72c7d5c4d10cd6bcb8cf6e3fd625a9e5e537da # v3.7.0
 
       - name: Sign JAR with Cosign OIDC
         run: |
@@ -90,8 +81,6 @@ jobs:
             > ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig
 
       - name: Generate Attestations for JAR
-        env:
-          COSIGN_EXPERIMENTAL: "1"
         run: |
           cosign attest-blob  \
             --predicate - \
@@ -102,8 +91,6 @@ jobs:
             > ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl
 
       - name: Generate Attestations for EXE
-        env:
-          COSIGN_EXPERIMENTAL: "1"
         run: |
           cosign attest-blob  \
             --predicate - \
@@ -113,7 +100,7 @@ jobs:
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe \
             > ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl
 
-      - name: Upload binaries and signatures to release
+      - name: Upload binaries, attestations and signatures to release
         uses: softprops/action-gh-release@01570a1f39cb168c169c802c3bceb9e93fb10974 # v2.1.0
         with:
           tag_name: v${{ steps.versionNumber.outputs.versionNumber }}
