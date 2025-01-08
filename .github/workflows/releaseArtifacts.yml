@@ -106,6 +106,9 @@ jobs:
             --output-attestation ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
+      - name: Create Tag
+        run: git tag -a v${{ steps.versionNumber.outputs.versionNumber }} -m "Automated Release" && git push origin v${{ steps.versionNumber.outputs.versionNumber }}
+
       - name: Upload binaries, attestations and signatures to release
         run: gh release upload v${{ steps.versionNumber.outputs.versionNumber }} ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.* ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
         env:
