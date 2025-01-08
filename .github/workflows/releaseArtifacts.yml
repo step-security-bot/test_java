@@ -65,7 +65,6 @@ jobs:
       - name: Sign JAR with Cosign OIDC
         run: |
           cosign verify-blob \
-            --oidc-client-id sigstore \
             --oidc-issuer https://token.actions.githubusercontent.com \
             --output-certificate ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.pem \
             --output-signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
@@ -74,7 +73,6 @@ jobs:
       - name: Sign EXE with Cosign OIDC
         run: |
           cosign verify-blob  \
-            --oidc-client-id sigstore \
             --oidc-issuer https://token.actions.githubusercontent.com \
             --output-certificate ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.pem \
             --output-signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
