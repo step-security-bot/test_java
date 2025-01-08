@@ -41,6 +41,9 @@ jobs:
         with:
           gradle-version: 8.12
 
+      - name: Install GitHub CLI
+        run: sudo apt-get update && sudo apt-get install -y gh
+
       - name: Generate jar (With Security=${{ matrix.enable_security }})
         run: ./gradlew clean createExe
         env:
