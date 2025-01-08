@@ -89,8 +89,8 @@ jobs:
             --yes \
             --oidc-client-id sigstore \
             --oidc-issuer https://token.actions.githubusercontent.com \
-            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar \
-            > ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl
+            --output-attestation ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl \
+            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
       - name: Generate Attestations for EXE
         run: |
@@ -99,8 +99,8 @@ jobs:
             --yes \
             --oidc-client-id sigstore \
             --oidc-issuer https://token.actions.githubusercontent.com \
-            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe \
-            > ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl
+            --output-attestation ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
+            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Upload binaries, attestations and signatures to release
         uses: softprops/action-gh-release@01570a1f39cb168c169c802c3bceb9e93fb10974 # v2.1.0
