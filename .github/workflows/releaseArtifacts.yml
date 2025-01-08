@@ -106,6 +106,11 @@ jobs:
             --output-attestation ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
+      - name: Set up git config
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Create Tag
         run: git tag -a v${{ steps.versionNumber.outputs.versionNumber }} -m "Automated Release" && git push origin v${{ steps.versionNumber.outputs.versionNumber }}
 
