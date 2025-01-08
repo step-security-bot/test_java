@@ -106,31 +106,31 @@ jobs:
             --output-attestation ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
-      - name: Set up git config
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      # - name: Set up git config
+      #   run: |
+      #     git config --global user.name "github-actions[bot]"
+      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Create Tag
-        run: git tag -a v${{ steps.versionNumber.outputs.versionNumber }} -m "Automated Release" && git push origin v${{ steps.versionNumber.outputs.versionNumber }}
-        continue-on-error: true
+      # - name: Create Tag
+      #   run: git tag -a v${{ steps.versionNumber.outputs.versionNumber }} -m "Automated Release" && git push origin v${{ steps.versionNumber.outputs.versionNumber }}
+      #   continue-on-error: true
 
-      - name: Create Release if not exists
-        run: gh release create v${{ steps.versionNumber.outputs.versionNumber }} --title "Release v${{ steps.versionNumber.outputs.versionNumber }}" --notes "Automated release of version v${{ steps.versionNumber.outputs.versionNumber }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
-
-      - name: Upload binaries, attestations and signatures to release
-        run: gh release upload v${{ steps.versionNumber.outputs.versionNumber }} ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.* ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
+      # - name: Create Release if not exists
+      #   run: gh release create v${{ steps.versionNumber.outputs.versionNumber }} --title "Release v${{ steps.versionNumber.outputs.versionNumber }}" --notes "Automated release of version v${{ steps.versionNumber.outputs.versionNumber }}"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   continue-on-error: true
 
       # - name: Upload binaries, attestations and signatures to release
-      #   uses: softprops/action-gh-release@01570a1f39cb168c169c802c3bceb9e93fb10974 # v2.1.0
-      #   with:
-      #     tag_name: v${{ steps.versionNumber.outputs.versionNumber }}
-      #     files: |
-      #       ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.*
-      #       ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
+      #   run: gh release upload v${{ steps.versionNumber.outputs.versionNumber }} ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.* ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   continue-on-error: true
+
+      - name: Upload binaries, attestations and signatures to release
+        uses: softprops/action-gh-release@01570a1f39cb168c169c802c3bceb9e93fb10974 # v2.1.0
+        with:
+          tag_name: v${{ steps.versionNumber.outputs.versionNumber }}
+          files: |
+            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.*
+            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
