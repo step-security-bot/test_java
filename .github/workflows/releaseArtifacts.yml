@@ -172,5 +172,5 @@ jobs:
           tag_name: v${{ needs.build.outputs.version }}
           generate_release_notes: true
           files: |
-            ./libs/Stirling-PDF${{ matrix.file_suffix }}.*
-            ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
+            ./libs/Stirling-PDF*
+            ./launch4j/Stirling-PDF-Server*
