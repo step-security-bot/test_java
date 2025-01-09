@@ -86,7 +86,6 @@ jobs:
       - name: Verify for EXE
         run: |
           cosign verify-blob  \
-            --yes \
             --oidc-client-id sigstore \
             --oidc-issuer https://token.actions.githubusercontent.com \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
