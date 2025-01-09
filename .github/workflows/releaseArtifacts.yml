@@ -103,34 +103,34 @@ jobs:
           cosign sign-blob \
             --key=./cosign.key \
             --yes \
-            --output-signature $(pwd)/build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
-            $(pwd)/build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
+            --output-signature ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
+            ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
           cosign attest-blob \
             --key=./cosign.key \
             --yes \
-            --output-attestation $(pwd)/build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl \
-            $(pwd)/build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
+            --output-attestation ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl \
+            ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
           cosign sign-blob \
             --key=./cosign.key \
             --yes \
-            --output-signature $(pwd)/build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
-            $(pwd)/build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
+            --output-signature ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
+            ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
           cosign attest-blob \
             --key=./cosign.key \
             --yes \
-            --output-attestation $(pwd)/build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
-            $(pwd)/build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
+            --output-attestation ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
+            ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Upload signed artifacts
         uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
         with:
           name: signed${{ matrix.file_suffix }}
           path: |
-            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.*
-            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
+            ./libs/Stirling-PDF${{ matrix.file_suffix }}.*
+            ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
 
   release:
     needs: sign
@@ -160,5 +160,5 @@ jobs:
         with:
           tag_name: v${{ steps.versionNumber.outputs.versionNumber }}
           files: |
-            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.*
-            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
+            ./libs/Stirling-PDF${{ matrix.file_suffix }}.*
+            ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
