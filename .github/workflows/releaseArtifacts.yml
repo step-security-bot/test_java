@@ -107,6 +107,7 @@ jobs:
             ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
           cosign attest-blob \
+            --predicate - \
             --key=./cosign.key \
             --yes \
             --output-attestation ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl \
@@ -119,6 +120,7 @@ jobs:
             ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
           cosign attest-blob \
+            --predicate - \
             --key=./cosign.key \
             --yes \
             --output-attestation ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
