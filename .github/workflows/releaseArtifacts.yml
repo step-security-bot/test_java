@@ -170,7 +170,7 @@ jobs:
             ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
   release:
-    needs: [build, sign]
+    needs: [build, verify]
     runs-on: ubuntu-latest
     permissions:
       contents: write
