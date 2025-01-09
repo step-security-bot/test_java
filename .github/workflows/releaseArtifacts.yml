@@ -74,7 +74,7 @@ jobs:
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
             ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.*
 
-  sign:
+  sign_verify:
     needs: build
     runs-on: ubuntu-latest
     strategy:
@@ -102,63 +102,31 @@ jobs:
       - name: Sign and generate attestations
         run: |
           cosign sign-blob \
-            --key=./cosign.key \
+            --key ./cosign.key \
             --yes \
             --output-signature ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
             ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
           cosign attest-blob \
             --predicate - \
-            --key=./cosign.key \
+            --key ./cosign.key \
             --yes \
             --output-attestation ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl \
             ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
           cosign sign-blob \
-            --key=./cosign.key \
+            --key ./cosign.key \
             --yes \
             --output-signature ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
             ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
           cosign attest-blob \
             --predicate - \
-            --key=./cosign.key \
+            --key ./cosign.key \
             --yes \
             --output-attestation ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
             ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
-      - name: Upload signed artifacts
-        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
-        with:
-          name: signed${{ matrix.file_suffix }}
-          path: |
-            ./libs/Stirling-PDF${{ matrix.file_suffix }}.*
-            ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
-
-  verify:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        enable_security: [true, false]
-        include:
-          - enable_security: true
-            file_suffix: "-with-login"
-          - enable_security: false
-            file_suffix: ""
-    needs: sign
-    permissions:
-      contents: write
-    steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
-        with:
-          name: binaries${{ matrix.file_suffix }}
-
-      - name: Display structure of downloaded files
-        run: ls -R
-
-      - name: Verify for EXE + JAR
-        run: |
           cosign verify-blob \
             --key ./cosign.pub \
             --signature ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
@@ -169,8 +137,16 @@ jobs:
             --signature ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
             ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
+      - name: Upload signed artifacts
+        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
+        with:
+          name: signed${{ matrix.file_suffix }}
+          path: |
+            ./libs/Stirling-PDF${{ matrix.file_suffix }}.*
+            ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
+
   release:
-    needs: [build, verify]
+    needs: [build, sign_verify]
     runs-on: ubuntu-latest
     permissions:
       contents: write
