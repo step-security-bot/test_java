@@ -75,6 +75,14 @@ jobs:
   sign:
     needs: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        enable_security: [true, false]
+        include:
+          - enable_security: true
+            file_suffix: "-with-login"
+          - enable_security: false
+            file_suffix: ""
     steps:
       - run: echo ${{ matrix.file_suffix }}
       - name: Download build artifacts
@@ -125,6 +133,14 @@ jobs:
   release:
     needs: sign
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        enable_security: [true, false]
+        include:
+          - enable_security: true
+            file_suffix: "-with-login"
+          - enable_security: false
+            file_suffix: ""
     steps:
       - name: Download signed artifacts
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
