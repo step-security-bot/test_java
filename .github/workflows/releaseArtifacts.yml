@@ -76,7 +76,7 @@ jobs:
 
       - run: |
           cosign sign-blob --key=./cosign.key \
-            --output=./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
+            --output-signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Sign, Generate Attestations for EXE
