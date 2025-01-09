@@ -86,7 +86,6 @@ jobs:
           - enable_security: false
             file_suffix: ""
     steps:
-      - run: echo ${{ matrix.file_suffix }}
       - name: Download build artifacts
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
@@ -135,6 +134,40 @@ jobs:
           path: |
             ./libs/Stirling-PDF${{ matrix.file_suffix }}.*
             ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
+
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        enable_security: [true, false]
+        include:
+          - enable_security: true
+            file_suffix: "-with-login"
+          - enable_security: false
+            file_suffix: ""
+    needs: sign
+    permissions:
+      contents: write
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          name: binaries${{ matrix.file_suffix }}
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - name: Verify for EXE + JAR
+        run: |
+          cosign verify-blob \
+            --key ./cosign.pub \
+            --signature ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
+            ./launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
+
+          cosign verify-blob \
+            --key ./cosign.pub \
+            --signature ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
+            ./libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
   release:
     needs: [build, sign]
