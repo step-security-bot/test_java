@@ -86,26 +86,26 @@ jobs:
           cosign sign-blob \
             --key=./cosign.key \
             --yes \
-            --output-signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
-            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
+            --output-signature $(pwd)/build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
+            $(pwd)/build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
           cosign attest-blob \
             --key=./cosign.key \
             --yes \
-            --output-attestation ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl \
-            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
+            --output-attestation $(pwd)/build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl \
+            $(pwd)/build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
           cosign sign-blob \
             --key=./cosign.key \
             --yes \
-            --output-signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
-            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
+            --output-signature $(pwd)/build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
+            $(pwd)/build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
           cosign attest-blob \
             --key=./cosign.key \
             --yes \
-            --output-attestation ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
-            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
+            --output-attestation $(pwd)/build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
+            $(pwd)/build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Upload signed artifacts
         uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
