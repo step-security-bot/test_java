@@ -86,8 +86,8 @@ jobs:
       - name: Verify for EXE
         run: |
           cosign verify-blob \
-            --certificate-identity=https://github.com/Ludy87/test_java/.github/workflows/releaseArtifacts.yml@refs/heads/main
-            --certificate-oidc-issuer=https://token.actions.githubusercontent.com
+            --certificate-identity=https://github.com/Ludy87/test_java/.github/workflows/releaseArtifacts.yml@refs/heads/main \
+            --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             /build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
           # cosign verify-blob  \
           #   --oidc-client-id sigstore \
