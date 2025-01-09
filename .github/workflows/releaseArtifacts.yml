@@ -41,9 +41,6 @@ jobs:
         with:
           gradle-version: 8.12
 
-      - name: Install GitHub CLI
-        run: sudo apt-get update && sudo apt-get install -y gh
-
       - name: Generate jar (With Security=${{ matrix.enable_security }})
         run: ./gradlew clean createExe
         env:
@@ -64,27 +61,7 @@ jobs:
       - name: Install Cosign
         uses: sigstore/cosign-installer@dc72c7d5c4d10cd6bcb8cf6e3fd625a9e5e537da # v3.7.0
 
-      # - name: Sign JAR with Cosign OIDC
-      #   run: |
-      #     cosign sign-blob \
-      #       --yes \
-      #       --oidc-client-id sigstore \
-      #       --oidc-issuer https://token.actions.githubusercontent.com \
-      #       --output-signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
-      #       --output-certificate ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.pem \
-      #       ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
-
-      # - name: Sign EXE with Cosign OIDC
-      #   run: |
-      #     cosign sign-blob  \
-      #       --yes \
-      #       --oidc-client-id sigstore \
-      #       --oidc-issuer https://token.actions.githubusercontent.com \
-      #       --output-signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
-      #       --output-certificate ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.pem \
-      #       ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
-
-      - name: Generate Attestations for JAR
+      - name: Sign, Generate Attestations for JAR
         run: |
           cosign attest-blob  \
             --predicate - \
@@ -95,7 +72,7 @@ jobs:
             --output-attestation ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl \
             ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
-      - name: Generate Attestations for EXE
+      - name: Sign, Generate Attestations for EXE
         run: |
           cosign attest-blob  \
             --predicate - \
@@ -106,26 +83,13 @@ jobs:
             --output-attestation ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
-      # - name: Set up git config
-      #   run: |
-      #     git config --global user.name "github-actions[bot]"
-      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      # - name: Create Tag
-      #   run: git tag -a v${{ steps.versionNumber.outputs.versionNumber }} -m "Automated Release" && git push origin v${{ steps.versionNumber.outputs.versionNumber }}
-      #   continue-on-error: true
-
-      # - name: Create Release if not exists
-      #   run: gh release create v${{ steps.versionNumber.outputs.versionNumber }} --title "Release v${{ steps.versionNumber.outputs.versionNumber }}" --notes "Automated release of version v${{ steps.versionNumber.outputs.versionNumber }}"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   continue-on-error: true
-
-      # - name: Upload binaries, attestations and signatures to release
-      #   run: gh release upload v${{ steps.versionNumber.outputs.versionNumber }} ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.* ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   continue-on-error: true
+      - name: Verify for EXE
+        run: |
+          cosign verify-blob  \
+            --yes \
+            --oidc-client-id sigstore \
+            --oidc-issuer https://token.actions.githubusercontent.com \
+            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Upload binaries, attestations and signatures to release
         uses: softprops/action-gh-release@01570a1f39cb168c169c802c3bceb9e93fb10974 # v2.1.0
