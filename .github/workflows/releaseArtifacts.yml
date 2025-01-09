@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  push:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -58,13 +58,30 @@ jobs:
           cp ./build/launch4j/Stirling-PDF.exe ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
           cp ./build/libs/Stirling-PDF-${{ steps.versionNumber.outputs.versionNumber }}.jar ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
+        with:
+          name: binaries-${{ matrix.file_suffix }}
+          path: |
+            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
+            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.*
+
+  sign:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          name: binaries-${{ matrix.file_suffix }}
+
       - name: Install Cosign
         uses: sigstore/cosign-installer@dc72c7d5c4d10cd6bcb8cf6e3fd625a9e5e537da # v3.7.0
 
       - name: Generate key pair
         run: cosign generate-key-pair
 
-      - name: Sign JAR
+      - name: Sign and generate attestations
         run: |
           cosign sign-blob \
             --key=./cosign.key \
@@ -72,47 +89,48 @@ jobs:
             --output-signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
             ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
-      - name: Generate Attestations for JAR
-        run: |
-          cosign attest-blob  \
-            --predicate - \
-            --yes \
+          cosign attest-blob \
             --key=./cosign.key \
+            --yes \
             --output-attestation ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl \
             ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
-      - name: Verify for JAR
-        run: |
-          cosign verify-blob \
-            --key ./cosign.pub \
-            --signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
-            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
-
-      - name: Sign EXE
-        run: |
           cosign sign-blob \
             --key=./cosign.key \
             --yes \
             --output-signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
-      - name: Generate Attestations for EXE
-        run: |
           cosign attest-blob \
-            --predicate - \
+            --key=./cosign.key \
             --yes \
-            --key ./cosign.key \
             --output-attestation ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
-      - name: Verify for EXE
-        run: |
-          cosign verify-blob \
-            --key ./cosign.pub \
-            --signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
-            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
+      - name: Upload signed artifacts
+        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
+        with:
+          name: signed-${{ matrix.file_suffix }}
+          path: |
+            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.*
+            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.*
 
-      - name: Upload binaries, attestations and signatures to release
+  release:
+    needs: sign
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download signed artifacts
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          name: signed-${{ matrix.file_suffix }}
+
+      - name: Get version number
+        id: versionNumber
+        run: |
+          VERSION=$(grep "^version =" build.gradle | awk -F'"' '{print $2}')
+          echo "versionNumber=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@01570a1f39cb168c169c802c3bceb9e93fb10974 # v2.1.0
         with:
           tag_name: v${{ steps.versionNumber.outputs.versionNumber }}
