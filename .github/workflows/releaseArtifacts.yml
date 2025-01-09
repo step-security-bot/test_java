@@ -55,8 +55,8 @@ jobs:
 
       - name: Rename binaries
         run: |
-          cp ./build/launch4j/Stirling-PDF.exe ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
-          cp ./build/libs/Stirling-PDF-${{ steps.versionNumber.outputs.versionNumber }}.jar ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
+          mv ./build/launch4j/Stirling-PDF.exe ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
+          mv ./build/libs/Stirling-PDF-${{ steps.versionNumber.outputs.versionNumber }}.jar ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
       - name: Debug build artifacts
         run: |
@@ -76,6 +76,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ matrix.file_suffix }}
       - name: Download build artifacts
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
