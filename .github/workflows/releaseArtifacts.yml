@@ -61,46 +61,55 @@ jobs:
       - name: Install Cosign
         uses: sigstore/cosign-installer@dc72c7d5c4d10cd6bcb8cf6e3fd625a9e5e537da # v3.7.0
 
-      - run: cosign generate-key-pair
+      - name: Generate key pair
+        run: cosign generate-key-pair
 
-      - name: Sign, Generate Attestations for JAR
+      - name: Sign JAR
+        run: |
+          cosign sign-blob \
+            --key=./cosign.key \
+            --yes \
+            --output-signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
+            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
+
+      - name: Generate Attestations for JAR
         run: |
           cosign attest-blob  \
             --predicate - \
             --yes \
-            --oidc-client-id sigstore \
-            --oidc-issuer https://token.actions.githubusercontent.com \
-            --output-signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
+            --key=./cosign.key \
             --output-attestation ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.intoto.jsonl \
             ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
-      - run: |
+      - name: Verify for JAR
+        run: |
+          cosign verify-blob \
+            --key ./cosign.pub \
+            --signature ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar.sig \
+            ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
+
+      - name: Sign EXE
+        run: |
           cosign sign-blob \
             --key=./cosign.key \
             --yes \
             --output-signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
-      - name: Sign, Generate Attestations for EXE
+      - name: Generate Attestations for EXE
         run: |
           cosign attest-blob \
             --predicate - \
             --yes \
-            --key=./cosign.key \
+            --key ./cosign.key \
             --output-attestation ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.intoto.jsonl \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Verify for EXE
         run: |
           cosign verify-blob \
-            --key=./cosign.pub \
-            --signature=./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
-            ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
-
-      - name: Verify for intoto
-        run: |
-          cosign verify-attestation \
-            --key cosign.pub \
+            --key ./cosign.pub \
+            --signature ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe.sig \
             ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
 
       - name: Upload binaries, attestations and signatures to release
