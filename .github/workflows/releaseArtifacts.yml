@@ -85,6 +85,7 @@ jobs:
 
       - name: Verify for EXE
         run: |
+          cosign piv-tool generate-key --random-management-key
           cosign public-key --sk > pub.key
           cosign verify-blob \
             --key pub.key
