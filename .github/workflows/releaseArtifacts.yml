@@ -58,6 +58,12 @@ jobs:
           cp ./build/launch4j/Stirling-PDF.exe ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
           cp ./build/libs/Stirling-PDF-${{ steps.versionNumber.outputs.versionNumber }}.jar ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
+      - name: Debug build artifacts
+        run: |
+          echo "Current Directory: $(pwd)"
+          ls -R ./build/libs
+          ls -R ./build/launch4j
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
         with:
