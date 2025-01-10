@@ -28,8 +28,21 @@ repos:
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 3.0.0
     hooks:
+      - id: bundler-audit
+      - id: check-mailmap
+      - id: fasterer
+      - id: forbid-binary
+      - id: forbid-space-in-indent
+      - id: git-check  # Configure in .gitattributes
+      - id: git-dirty  # Configure in .gitignore
+      - id: reek
+      - id: require-ascii
+      - id: rubocop
+      - id: script-must-have-extension
+      - id: script-must-not-have-extension
       - id: shellcheck
         files: ^.*(\.bash|\.sh|\.ksh|\.zsh)$
+      - id: shfmt
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
