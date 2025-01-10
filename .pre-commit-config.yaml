@@ -28,8 +28,6 @@ repos:
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 3.0.0
     hooks:
-      - id: bundler-audit
-      - id: fasterer
       - id: git-check  # Configure in .gitattributes
       - id: git-dirty  # Configure in .gitignore
       - id: script-must-have-extension
