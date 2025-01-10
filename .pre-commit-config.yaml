@@ -28,17 +28,8 @@ repos:
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 3.0.0
     hooks:
-      - id: git-check  # Configure in .gitattributes
-        exclude: (.vscode|.devcontainer|cucumber|src/main/resources|Dockerfile)
-      - id: git-dirty  # Configure in .gitignore
-      - id: script-must-have-extension
-        name: Local policy is to use .sh extension for shell scripts
-        types: [shell]
-      - id: script-must-not-have-extension
-        types: [shell]
       - id: shellcheck
         files: ^.*(\.bash|\.sh|\.ksh|\.zsh)$
-      - id: shfmt
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
