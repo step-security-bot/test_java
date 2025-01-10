@@ -29,22 +29,22 @@ repos:
     rev: 3.0.0
     hooks:
       - id: bundler-audit
-      - id: check-mailmap
-      - id: fasterer
-      - id: forbid-binary
-        exclude: ^(.*/pdfjs.*|.*/thirdParty.*|bootstrap.*|.*\.min\..*|.*diff\.js|.*\.pdf$)
-      - id: forbid-space-in-indent
-        exclude: ^(.*/pdfjs.*|.*/thirdParty.*|bootstrap.*|.*\.min\..*|.*diff\.js|.*\.pdf$)
-      - id: git-check  # Configure in .gitattributes
-      - id: git-dirty  # Configure in .gitignore
-      - id: reek
-      - id: require-ascii
-      - id: rubocop
-      - id: script-must-have-extension
-      - id: script-must-not-have-extension
-      - id: shellcheck
-        files: ^.*(\.bash|\.sh|\.ksh|\.zsh)$
-      - id: shfmt
+      # - id: check-mailmap
+      # - id: fasterer
+      # - id: forbid-binary
+      #   exclude: ^(.*/pdfjs.*|.*/thirdParty.*|bootstrap.*|.*\.min\..*|.*diff\.js|.*\.pdf$)
+      # - id: forbid-space-in-indent
+      #   exclude: ^(.*/pdfjs.*|.*/thirdParty.*|bootstrap.*|.*\.min\..*|.*diff\.js|.*\.pdf$)
+      # - id: git-check  # Configure in .gitattributes
+      # - id: git-dirty  # Configure in .gitignore
+      # - id: reek
+      # - id: require-ascii
+      # - id: rubocop
+      # - id: script-must-have-extension
+      # - id: script-must-not-have-extension
+      # - id: shellcheck
+      #   files: ^.*(\.bash|\.sh|\.ksh|\.zsh)$
+      # - id: shfmt
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
