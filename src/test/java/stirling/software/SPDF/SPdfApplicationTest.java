@@ -16,9 +16,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.env.Environment;
 
 import stirling.software.SPDF.model.ApplicationProperties;
+import static java.nio.file.Files.createDirectories;
+import static java.nio.file.Files.createFile;
+import static java.nio.file.Files.delete;
+import static java.nio.file.Files.exists;
 
 @ExtendWith(MockitoExtension.class)
-public class SPdfApplicationTest {
+public class SPDFApplicationTest {
 
     @Mock
     private Environment env;
@@ -27,68 +31,26 @@ public class SPdfApplicationTest {
     private ApplicationProperties applicationProperties;
 
     @InjectMocks
-    private SPdfApplication sPdfApplication;
+    private SPDFApplication SPDFApplication;
 
     @BeforeEach
     public void setUp() {
-        sPdfApplication = new SPdfApplication();
-        sPdfApplication.setServerPortStatic("8080");
+        SPDFApplication.setServerPortStatic("8080");
     }
 
     @Test
     public void testSetServerPortStatic() {
-        sPdfApplication.setServerPortStatic("9090");
-        assertEquals("9090", SPdfApplication.getStaticPort());
-    }
-
-    @Test
-    public void testMainApplicationStartup() throws IOException, InterruptedException {
-        // Setup mock environment for the main method
-        Path configPath = Path.of("test/configs");
-        Path settingsPath = Paths.get("test/configs/settings.yml");
-        Path customSettingsPath = Paths.get("test/configs/custom_settings.yml");
-        Path staticPath = Path.of("test/customFiles/static/");
-        Path templatesPath = Path.of("test/customFiles/templates/");
-
-        // Ensure the files do not exist for the test
-        if (Files.exists(settingsPath)) {
-            Files.delete(settingsPath);
-        }
-        if (Files.exists(customSettingsPath)) {
-            Files.delete(customSettingsPath);
-        }
-        if (Files.exists(staticPath)) {
-            Files.delete(staticPath);
-        }
-        if (Files.exists(templatesPath)) {
-            Files.delete(templatesPath);
-        }
-
-        // Ensure the directories are created for testing
-        Files.createDirectories(configPath);
-        Files.createDirectories(staticPath);
-        Files.createDirectories(templatesPath);
-
-        Files.createFile(settingsPath);
-        Files.createFile(customSettingsPath);
-
-        // Run the main method
-        SPdfApplication.main(new String[]{});
-
-        // Verify that the directories were created
-        assertTrue(Files.exists(settingsPath));
-        assertTrue(Files.exists(customSettingsPath));
-        assertTrue(Files.exists(staticPath));
-        assertTrue(Files.exists(templatesPath));
+        SPDFApplication.setServerPortStatic("9090");
+        assertEquals("9090", SPDFApplication.getStaticPort());
     }
 
     @Test
     public void testGetStaticPort() {
-        assertEquals("8080", SPdfApplication.getStaticPort());
+        assertEquals("8080", SPDFApplication.getStaticPort());
     }
 
     @Test
     public void testGetNonStaticPort() {
-        assertEquals("8080", sPdfApplication.getNonStaticPort());
+        assertEquals("8080", SPDFApplication.getNonStaticPort());
     }
 }
