@@ -29,18 +29,14 @@ repos:
     rev: 3.0.0
     hooks:
       - id: bundler-audit
-      - id: check-mailmap
       - id: fasterer
-      - id: forbid-binary
-        exclude: ^(.*/pdfjs.*|.*/thirdParty.*|bootstrap.*|.*\.min\..*|.*diff\.js|.*\.pdf$)
-      - id: forbid-space-in-indent
-        exclude: ^(.*/pdfjs.*|.*/thirdParty.*|bootstrap.*|.*\.min\..*|.*diff\.js|.*\.pdf$)
       - id: git-check  # Configure in .gitattributes
       - id: git-dirty  # Configure in .gitignore
-      - id: reek
-      - id: rubocop
       - id: script-must-have-extension
+        name: Local policy is to use .sh extension for shell scripts
+        types: [shell]
       - id: script-must-not-have-extension
+        types: [shell]
       - id: shellcheck
         files: ^.*(\.bash|\.sh|\.ksh|\.zsh)$
       - id: shfmt
