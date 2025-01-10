@@ -29,6 +29,7 @@ repos:
     rev: 3.0.0
     hooks:
       - id: git-check  # Configure in .gitattributes
+        exclude: (.vscode|.devcontainer|cucumber|src/main/resources|Dockerfile)
       - id: git-dirty  # Configure in .gitignore
       - id: script-must-have-extension
         name: Local policy is to use .sh extension for shell scripts
