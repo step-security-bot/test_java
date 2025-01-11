@@ -17,12 +17,12 @@ jobs:
       # attestations: write
     strategy:
       matrix:
-        enable_security: [true]  # false
+        enable_security: [false]
         include:
-          - enable_security: true
-            file_suffix: "-with-login"
-          # - enable_security: false
-            # file_suffix: ""
+          # - enable_security: true
+            # file_suffix: "-with-login"
+          - enable_security: false
+            file_suffix: ""
     outputs:
       version: ${{ steps.versionNumber.outputs.versionNumber }}
     steps:
