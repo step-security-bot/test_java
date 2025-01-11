@@ -128,7 +128,7 @@ jobs:
             ./${{ matrix.platform }}-Stirling-PDF${{ matrix.extra }}-${{ needs.read_versions.outputs.version }}.${{ matrix.ext }}
 
   sign_verify:
-    needs: build-installers
+    needs: [read_versions, build-installers]
     strategy:
       matrix:
         include:
