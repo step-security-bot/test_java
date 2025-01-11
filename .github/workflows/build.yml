@@ -37,15 +37,17 @@ jobs:
           java-version: ${{ matrix.jdk-version }}
           distribution: "temurin"
 
-      # - name: Build with Gradle and no spring security
-      #   run: ./gradlew clean build
-      #   env:
-      #     DOCKER_ENABLE_SECURITY: false
+      - name: Build with Gradle and no spring security
+        run: ./gradlew clean build
+        env:
+          DOCKER_ENABLE_SECURITY: false
+          STIRLING_PDF_DESKTOP_UI: false
 
       - name: Build with Gradle and with spring security
         run: ./gradlew clean build
         env:
           DOCKER_ENABLE_SECURITY: true
+          STIRLING_PDF_DESKTOP_UI: false
 
       - name: Upload Test Reports
         if: always()
