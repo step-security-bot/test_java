@@ -8,6 +8,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.annotation.Conditional;
+
+import stirling.software.SPDF.controller.api.H2SQLCondition;
 import stirling.software.SPDF.model.ApplicationProperties;
 import stirling.software.SPDF.model.provider.UnsupportedProviderException;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -16,6 +19,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@Conditional(H2SQLCondition.class)
 class DatabaseConfigTest {
 
     @Mock
