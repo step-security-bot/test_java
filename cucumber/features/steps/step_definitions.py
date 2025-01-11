@@ -336,7 +336,7 @@ def step_save_response_file(context, filename):
     print(f"Saved response content to {filename}")
 
 @then('the response PDF should contain {page_count:d} pages')
-def step_check_response_pdf_page_count_2(context, page_count):
+def step_check_response_pdf_page_count(context, page_count):
     response_file = io.BytesIO(context.response.content)
     reader = PdfReader(io.BytesIO(response_file.getvalue()))
     actual_page_count = len(reader.pages)
