@@ -76,6 +76,15 @@ public class DatabaseService implements DatabaseInterface {
         if (isH2Database()) {
             Path backupPath = Paths.get(BACKUP_DIR);
 
+            if (!Files.exists(backupPath)) {
+                try {
+                    Files.createDirectories(backupPath);
+                    log.debug("create backup directory: {}", BACKUP_DIR);
+                } catch (IOException e) {
+                    log.error("Error create backup directory: {}", e.getMessage(), e);
+                }
+            }
+
             try (DirectoryStream<Path> stream =
                     Files.newDirectoryStream(
                             backupPath,
