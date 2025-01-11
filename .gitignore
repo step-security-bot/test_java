@@ -14,12 +14,16 @@ local.properties
 .classpath
 .project
 version.properties
+
+#### Stirling-PDF Files ###
 pipeline/watchedFolders/
 pipeline/finishedFolders/
-#### Stirling-PDF Files ###
 customFiles/
 configs/
 watchedFolders/
+!cucumber/
+!cucumber/exampleFiles/
+!cucumber/exampleFiles/example_html.zip
 
 # Gradle
 .gradle
@@ -112,8 +116,6 @@ watchedFolders/
 *.nar
 *.ear
 *.zip
-!cucumber/exampleFiles/
-!cucumber/exampleFiles/example_html.zip
 *.tar.gz
 *.rar
 *.db
