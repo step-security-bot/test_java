@@ -57,7 +57,7 @@ jobs:
             platform: win
             ext: exe
           # - os: macos-latest
-          #   extra: "-installer"
+          #   extra: ""
           #   platform: mac
           #   ext: dmg
           - os: ubuntu-latest
@@ -137,7 +137,7 @@ jobs:
             platform: win
             ext: exe
           # - os: macos-latest
-          #   extra: "-installer"
+          #   extra: ""
           #   platform: mac
           #   ext: dmg
           - os: ubuntu-latest
@@ -204,7 +204,7 @@ jobs:
             platform: win
             ext: exe
           # - os: macos-latest
-          #   extra: "-installer"
+          #   extra: ""
           #   platform: mac
           #   ext: dmg
           - os: ubuntu-latest
