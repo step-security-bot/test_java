@@ -57,7 +57,7 @@ jobs:
 
       - name: Rename binaries
         run: |
-          # mv ./build/launch4j/Stirling-PDF.exe ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
+          mv ./build/launch4j/Stirling-PDF.exe ./build/launch4j/Stirling-PDF-Server${{ matrix.file_suffix }}.exe
           mv ./build/libs/Stirling-PDF-${{ steps.versionNumber.outputs.versionNumber }}.jar ./build/libs/Stirling-PDF${{ matrix.file_suffix }}.jar
 
       - name: Debug build artifacts
