@@ -4,13 +4,16 @@ on:
   push:
     branches: ["main"]
     paths-ignore:
-      - ".github/**"
+      # - ".github/**"
       - "**/*.md"
   pull_request:
     branches: ["main"]
     paths-ignore:
       - ".github/**"
       - "**/*.md"
+
+permissions:
+  contents: read
 
 jobs:
   build:
