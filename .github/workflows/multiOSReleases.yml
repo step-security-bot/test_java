@@ -122,27 +122,27 @@ jobs:
           cosign sign-blob \
             --key ./cosign.key \
             --yes \
-            --output-signature ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe.sig \
-            ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
+            --output-signature ./win-Stirling-PDF-no-install-Server${{ matrix.file_suffix }}-${{ needs.read_versions.outputs.version }}.exe.sig \
+            ./win-Stirling-PDF-no-install-Server${{ matrix.file_suffix }}-${{ needs.read_versions.outputs.version }}.exe
 
           cosign attest-blob \
             --predicate - \
             --key ./cosign.key \
             --yes \
-            --output-attestation ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe.intoto.jsonl \
-            ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
+            --output-attestation ./win-Stirling-PDF-no-install-Server${{ matrix.file_suffix }}-${{ needs.read_versions.outputs.version }}.exe.intoto.jsonl \
+            ./win-Stirling-PDF-no-install-Server${{ matrix.file_suffix }}-${{ needs.read_versions.outputs.version }}.exe
 
           cosign verify-blob \
             --key ./cosign.pub \
-            --signature ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe.sig \
-            ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
+            --signature ./win-Stirling-PDF-no-install-Server${{ matrix.file_suffix }}-${{ needs.read_versions.outputs.version }}.exe.sig \
+            ./win-Stirling-PDF-no-install-Server${{ matrix.file_suffix }}-${{ needs.read_versions.outputs.version }}.exe
 
       - name: Upload signed artifacts
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: stirling-signed${{ matrix.file_suffix }}
           path: |
-            ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.*
+            ./win-Stirling-PDF-no-install-Server${{ matrix.file_suffix }}-${{ needs.read_versions.outputs.version }}.*
 
   release-no-install:
     needs: [read_versions, sign_verify-no-install]
