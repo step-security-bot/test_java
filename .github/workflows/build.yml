@@ -61,7 +61,6 @@ jobs:
           retention-days: 3
 
   docker-compose-tests:
-    needs: [build]
     # if: github.event_name == 'push' && github.ref == 'refs/heads/main' ||
     #     (github.event_name == 'pull_request' &&
     #     contains(github.event.pull_request.labels.*.name, 'licenses') == false &&
