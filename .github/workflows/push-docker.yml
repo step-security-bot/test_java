@@ -2,9 +2,9 @@ name: Push Docker Image with VersionNumber
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 
 permissions:
   contents: read
