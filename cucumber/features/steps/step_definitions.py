@@ -1,7 +1,8 @@
 import os
 import requests
 from behave import given, when, then
-from PyPDF2 import PdfWriter, PdfReader
+from pypdf import PdfWriter, PdfReader
+from pypdf.errors import PdfReadError
 import io
 import random
 import string
@@ -335,7 +336,7 @@ def step_save_response_file(context, filename):
     print(f"Saved response content to {filename}")
 
 @then('the response PDF should contain {page_count:d} pages')
-def step_check_response_pdf_page_count(context, page_count):
+def step_check_response_pdf_page_count_2(context, page_count):
     response_file = io.BytesIO(context.response.content)
     reader = PdfReader(io.BytesIO(response_file.getvalue()))
     actual_page_count = len(reader.pages)
@@ -345,7 +346,7 @@ def step_check_response_pdf_page_count(context, page_count):
 def step_check_response_zip_file_count(context, file_count):
     response_file = io.BytesIO(context.response.content)
     with zipfile.ZipFile(io.BytesIO(response_file.getvalue())) as zip_file:
-      actual_file_count = len(zip_file.namelist())
+        actual_file_count = len(zip_file.namelist())
     assert actual_file_count == file_count, f"Expected {file_count} files but got {actual_file_count} files"
 
 @then('the response ZIP file should contain {doc_count:d} documents each having {pages_per_doc:d} pages')
