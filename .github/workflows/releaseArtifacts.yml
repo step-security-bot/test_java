@@ -44,7 +44,7 @@ jobs:
           gradle-version: 8.12
 
       - name: Generate jar (With Security=${{ matrix.enable_security }})
-        run: ./gradlew clean build --stacktrace
+        run: ./gradlew clean build
         env:
           DOCKER_ENABLE_SECURITY: ${{ matrix.enable_security }}
           STIRLING_PDF_DESKTOP_UI: false
