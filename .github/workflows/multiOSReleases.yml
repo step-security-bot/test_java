@@ -47,21 +47,20 @@ jobs:
           # Schreibe die macOS-Version in den GitHub-Output
           echo "versionNumberMac=$MAC_VERSION" >> $GITHUB_OUTPUT
 
-
   build-installers:
     needs: read_versions
     strategy:
       matrix:
         include:
           - os: windows-latest
-            # platform: win
-            # ext: exe
-         #- os: macos-latest
-         #  platform: mac
-         # ext: dmg
+            platform: win
+            ext: exe
+          # - os: macos-latest
+          #   platform: mac
+          #   ext: dmg
           - os: ubuntu-latest
-         #  platform: linux
-         #  ext: deb
+            platform: linux
+            ext: deb
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
@@ -85,41 +84,38 @@ jobs:
           gradle-version: 8.12
 
       # Install Windows dependencies
-      # - name: Install WiX Toolset
-      #   if: matrix.os == 'windows-latest'
-      #   run: |
-      #     curl -L -o wix.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
-      #     .\wix.exe /install /quiet
+      - name: Install WiX Toolset
+        if: matrix.os == 'windows-latest'
+        run: |
+          curl -L -o wix.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
+          .\wix.exe /install /quiet
 
       # Install Linux dependencies
-      # - name: Install Linux Dependencies
-      #   if: matrix.os == 'ubuntu-latest'
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y fakeroot rpm
-
-      - run: echo ${{ needs.read_versions.outputs.version }}
-      - run: echo ${{ needs.read_versions.outputs.versionMac }}
+      - name: Install Linux Dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fakeroot rpm
 
       # # Build installer
-      # - name: Build Installer
-      #   run: ./gradlew build jpackage -x test --info
-      #   env:
-      #     DOCKER_ENABLE_SECURITY: false
-      #     STIRLING_PDF_DESKTOP_UI: true
+      - name: Build Installer
+        run: ./gradlew build jpackage -x test --info
+        env:
+          DOCKER_ENABLE_SECURITY: false
+          STIRLING_PDF_DESKTOP_UI: true
 
-      # # Rename and collect artifacts based on OS
-      # - name: Prepare artifacts
-      #   id: prepare
-      #   shell: bash
-      #   run: |
-      #     if [ "${{ matrix.os }}" = "windows-latest" ]; then
-      #       mv "build/jpackage/Stirling-PDF-${{ steps.versionNumber.outputs.versionNumber }}.exe" "Stirling-PDF-${{ matrix.platform }}-installer.${{ matrix.ext }}"
-      #     elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-      #       mv "build/jpackage/Stirling-PDF-${{ steps.versionNumberMac.outputs.versionNumberMac }}.dmg" "Stirling-PDF-${{ steps.versionNumber.outputs.versionNumber }}-${{ matrix.platform }}.${{ matrix.ext }}"
-      #     else
-      #       mv "build/jpackage/stirling-pdf_${{ steps.versionNumber.outputs.versionNumber }}-1_amd64.deb" "Stirling-PDF-${{ steps.versionNumber.outputs.versionNumber }}-${{ matrix.platform }}.${{ matrix.ext }}"
-      #     fi
+      # Rename and collect artifacts based on OS
+      - name: Prepare artifacts
+        id: prepare
+        shell: bash
+        run: |
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            mv "build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.version }}.exe" "Stirling-PDF-${{ matrix.platform }}-installer.${{ matrix.ext }}"
+          elif [ "${{ matrix.os }}" = "macos-latest" ]; then
+            mv "build/jpackage/Stirling-PDF-${{ steps.versionNumberMac.outputs.versionNumberMac }}.dmg" "Stirling-PDF-${{ needs.read_versions.outputs.version }}-${{ matrix.platform }}.${{ matrix.ext }}"
+          else
+            mv "build/jpackage/stirling-pdf_${{ needs.read_versions.outputs.version }}-1_amd64.deb" "Stirling-PDF-${{ needs.read_versions.outputs.version }}-${{ matrix.platform }}.${{ matrix.ext }}"
+          fi
 
       # # Upload installer as artifact for testing
       # - name: Upload Installer Artifact
