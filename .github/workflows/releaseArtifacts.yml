@@ -17,7 +17,7 @@ jobs:
       # attestations: write
     strategy:
       matrix:
-        enable_security: [true, false]
+        enable_security: [true]  # false
         include:
           - enable_security: true
             file_suffix: "-with-login"
