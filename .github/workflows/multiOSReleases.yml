@@ -94,7 +94,7 @@ jobs:
         enable_security: [true, false]
         include:
           - enable_security: true
-            file_suffix: "with-login-"
+            file_suffix: "-with-login"
           - enable_security: false
             file_suffix: ""
     steps:
@@ -106,7 +106,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
-          name: stirling-${{ matrix.file_suffix }}binaries
+          name: stirling${{ matrix.file_suffix }}-binaries
 
       - name: Display structure of downloaded files
         run: ls -R
@@ -154,7 +154,7 @@ jobs:
         enable_security: [true, false]
         include:
           - enable_security: true
-            file_suffix: "with-login-"
+            file_suffix: "-with-login"
           - enable_security: false
             file_suffix: ""
     steps:
@@ -162,6 +162,9 @@ jobs:
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: stirling-signed${{ matrix.file_suffix }}
+
+      - name: Display structure of downloaded files
+        run: ls -R
 
       - name: Upload binaries, attestations and signatures to Release and create GitHub Release
         uses: softprops/action-gh-release@01570a1f39cb168c169c802c3bceb9e93fb10974 # v2.1.0
@@ -335,7 +338,8 @@ jobs:
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: ${{ matrix.platform }}signed
-
+      - name: Display structure of downloaded files
+        run: ls -R
       - name: Upload binaries, attestations and signatures to Release and create GitHub Release
         uses: softprops/action-gh-release@01570a1f39cb168c169c802c3bceb9e93fb10974 # v2.1.0
         with:
