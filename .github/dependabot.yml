@@ -7,30 +7,40 @@ version: 2
 updates:
   - package-ecosystem: "github-actions" # See documentation for possible values
     directory: "/" # Location of package manifests
+    labels:
+      - "github-actions"
     schedule:
       interval: daily
       time: "19:45"
       timezone: "Europe/Berlin"
   - package-ecosystem: "composer" # See documentation for possible values
     directory: "/" # Location of package manifests
+    labels:
+      - "composer"
     schedule:
       interval: daily
       time: "19:45"
       timezone: "Europe/Berlin"
   - package-ecosystem: "gradle" # See documentation for possible values
     directory: "/" # Location of package manifests
+    labels:
+      - "gradle"
     schedule:
       interval: daily
       time: "19:45"
       timezone: "Europe/Berlin"
   - package-ecosystem: "maven" # See documentation for possible values
     directory: "/" # Location of package manifests
+    labels:
+      - "maven"
     schedule:
       interval: daily
       time: "19:45"
       timezone: "Europe/Berlin"
   - package-ecosystem: "docker" # See documentation for possible values
     directory: "/" # Location of package manifests
+    labels:
+      - "docker"
     schedule:
       interval: daily
       time: "19:45"
@@ -38,10 +48,14 @@ updates:
 
   - package-ecosystem: pip
     directory: /cucumber
+    labels:
+      - "pip cucumber"
     schedule:
       interval: daily
 
   - package-ecosystem: pip
     directory: /
+    labels:
+      - "pip"
     schedule:
       interval: daily
