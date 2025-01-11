@@ -112,6 +112,7 @@ watchedFolders/
 *.nar
 *.ear
 *.zip
+!cucumber\exampleFiles\example_html.zip
 *.tar.gz
 *.rar
 *.db
