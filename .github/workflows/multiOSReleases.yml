@@ -9,7 +9,45 @@ permissions:
   contents: read
 
 jobs:
+  read_versions:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.versionNumber.outputs.versionNumber }}
+      versionMac: ${{ steps.versionNumberMac.outputs.versionNumberMac }}
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
+        with:
+          egress-policy: audit
+
+      # Get version number
+      - name: Get version number
+        id: versionNumber
+        run: |
+          VERSION=$(grep "^version =" build.gradle | awk -F'"' '{print $2}')
+          echo "versionNumber=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Get version number mac
+        id: versionNumberMac
+        run: |
+          # Extrahiere die Version aus der build.gradle-Datei
+          VERSION=$(grep "^version =" build.gradle | awk -F'"' '{print $2}')
+
+          # Hole das aktuelle Jahr
+          CURRENT_YEAR=$(date +'%Y')
+
+          # Zerlege die Version in ihre Teile
+          IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
+
+          # Setze die neue Version zusammen
+          MAC_VERSION="$CURRENT_YEAR.${VERSION_PARTS[1]:-0}.${VERSION_PARTS[2]:-0}"
+
+          # Schreibe die macOS-Version in den GitHub-Output
+          echo "versionNumberMac=$MAC_VERSION" >> $GITHUB_OUTPUT
+
+
   build-installers:
+    needs: read_versions
     strategy:
       matrix:
         include:
@@ -26,8 +64,6 @@ jobs:
     permissions:
       contents: write
       packages: write
-    outputs:
-      version: ${{ steps.versionNumber.outputs.versionNumber }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
@@ -47,49 +83,21 @@ jobs:
           gradle-version: 8.12
 
       # Install Windows dependencies
-      - name: Install WiX Toolset
-        if: matrix.os == 'windows-latest'
-        run: |
-          curl -L -o wix.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
-          .\wix.exe /install /quiet
+      # - name: Install WiX Toolset
+      #   if: matrix.os == 'windows-latest'
+      #   run: |
+      #     curl -L -o wix.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
+      #     .\wix.exe /install /quiet
 
       # Install Linux dependencies
-      - name: Install Linux Dependencies
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y fakeroot rpm
+      # - name: Install Linux Dependencies
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y fakeroot rpm
 
-      # Get version number
-      - name: Get version number
-        id: versionNumber
-        run: |
-          VERSION=$(grep "^version =" build.gradle | awk -F'"' '{print $2}')
-          echo "versionNumber=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Get version number mac
-        # if: matrix.os == 'macos-latest'
-        id: versionNumberMac
-        run: |
-          # Extrahiere die Version aus der build.gradle-Datei
-          VERSION=$(grep "^version =" build.gradle | awk -F'"' '{print $2}')
-
-          # Hole das aktuelle Jahr
-          CURRENT_YEAR=$(date +'%Y')
-
-          # Teile die Version in Haupt- und Unterversion
-          VERSION_PARTS=(${VERSION//./ })
-          MAIN_VERSION=${VERSION_PARTS[0]}
-          SUB_VERSION=${VERSION_PARTS[1]:-$MAIN_VERSION}
-
-          # Setze die macOS-Version zusammen
-          MAC_VERSION="$CURRENT_YEAR.$SUB_VERSION"
-
-          # Schreibe die macOS-Version in den GitHub-Output
-          echo "versionNumberMac=$MAC_VERSION" >> $GITHUB_OUTPUT
-
-      - run: echo ${{ steps.versionNumber.outputs.versionNumber }}
-      - run: echo ${{ steps.versionNumberMac.outputs.versionNumberMac }}
+      - run: echo ${{ needs.read_versions.outputs.version }}
+      - run: echo ${{ needs.read_versions.outputs.versionMac }}
 
       # # Build installer
       # - name: Build Installer
