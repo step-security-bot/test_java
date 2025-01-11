@@ -335,7 +335,7 @@ dependencies {
             implementation "org.opensaml:opensaml-saml-impl:$openSamlVersion"
         }
         implementation "org.springframework.security:spring-security-saml2-service-provider:$springSecuritySamlVersion"
-//		implementation 'org.springframework.security:spring-security-core:$springSecuritySamlVersion'
+		implementation 'org.springframework.security:spring-security-core:$springSecuritySamlVersion'
         implementation 'com.coveo:saml-client:5.0.0'
 
 
