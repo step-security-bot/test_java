@@ -38,13 +38,13 @@ jobs:
           distribution: "temurin"
 
       - name: Build with Gradle and no spring security
-        run: ./gradlew clean build
+        run: ./gradle clean build
         env:
           DOCKER_ENABLE_SECURITY: false
           STIRLING_PDF_DESKTOP_UI: false
 
       - name: Build with Gradle and with spring security
-        run: ./gradlew clean build
+        run: ./gradle clean build
         env:
           DOCKER_ENABLE_SECURITY: true
           STIRLING_PDF_DESKTOP_UI: false
