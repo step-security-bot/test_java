@@ -45,9 +45,9 @@ jobs:
 
       - name: Generate jar (With Security=${{ matrix.enable_security }})
         run: ./gradlew clean build --stacktrace
-        # env:
-        #   DOCKER_ENABLE_SECURITY: ${{ matrix.enable_security }}
-        #   STIRLING_PDF_DESKTOP_UI: false
+        env:
+          DOCKER_ENABLE_SECURITY: ${{ matrix.enable_security }}
+          STIRLING_PDF_DESKTOP_UI: false
 
       - name: Get version number
         id: versionNumber
