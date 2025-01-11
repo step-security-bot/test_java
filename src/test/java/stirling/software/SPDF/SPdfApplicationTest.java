@@ -41,12 +41,12 @@ public class SPDFApplicationTest {
     @Test
     public void testSetServerPortStatic() {
         SPDFApplication.setServerPortStatic("9090");
-        assertEquals("9090", SPDFApplication.getStaticPort());
+        assertEquals("9090", stirling.software.SPDF.SPDFApplication.getStaticPort());
     }
 
     @Test
     public void testGetStaticPort() {
-        assertEquals("8080", SPDFApplication.getStaticPort());
+        assertEquals("8080", stirling.software.SPDF.SPDFApplication.getStaticPort());
     }
 
     @Test
