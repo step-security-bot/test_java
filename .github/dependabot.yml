@@ -35,3 +35,13 @@ updates:
       interval: daily
       time: "19:45"
       timezone: "Europe/Berlin"
+
+  - package-ecosystem: pip
+    directory: /cucumber
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: daily

@@ -2,6 +2,9 @@ name: Fake deploy with multi-stage Dockerfile
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   fake_deploy_cache_multi:
     runs-on: ubuntu-latest
