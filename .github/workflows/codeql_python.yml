@@ -9,11 +9,13 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: "CodeQL"
+name: "CodeQL Python"
 
 on:
   push:
     branches: ["main"]
+    paths:
+      - "*.py"
   pull_request:
     # The branches below must be a subset of the branches above
     branches: ["main"]
@@ -35,7 +37,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ["java", "javascript", "python"]
+        language: ["python"]
         # CodeQL supports [ $supported-codeql-languages ]
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
