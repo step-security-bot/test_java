@@ -91,3 +91,6 @@
   description: "Testing-related issues or pull requests"
 - name: "Stale"
   color: "000000"
+- name: "build"
+  color: "#66FF00"
+  description: "Build: tests changes"
