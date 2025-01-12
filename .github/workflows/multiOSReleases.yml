@@ -2,16 +2,6 @@ name: Test Installers Build
 
 on:
   workflow_dispatch:
-    inputs:
-      build_type:
-        description: 'Type of build'
-        required: true
-        default: 'full'
-        type: choice
-        options:
-          - portable
-          - installer
-          - full
   release:
     types: [created]
 
@@ -40,7 +30,6 @@ jobs:
           echo "versionNumber=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Get version number mac
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         id: versionNumberMac
         run: |
           VERSION=$(grep "^version =" build.gradle | awk -F'"' '{print $2}')
@@ -62,41 +51,34 @@ jobs:
             file_suffix: ""
     steps:
       - name: Harden Runner
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         uses: step-security/harden-runner@c95a14d0e5bab51a9f56296a4eb0e416910cd350 # v2.10.3
         with:
           egress-policy: audit
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
 
       - name: Set up JDK 21
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4.6.0
         with:
           java-version: "21"
           distribution: "temurin"
 
       - uses: gradle/actions/setup-gradle@0bdd871935719febd78681f197cd39af5b6e16a6 # v4.2.2
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         with:
           gradle-version: 8.12
 
       - name: Generate jar (With Security=${{ matrix.enable_security }})
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         run: ./gradlew clean createExe
         env:
           DOCKER_ENABLE_SECURITY: ${{ matrix.enable_security }}
           STIRLING_PDF_DESKTOP_UI: false
 
       - name: Rename binaries
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         run: |
           mv ./build/launch4j/Stirling-PDF.exe ./win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
           mv ./build/libs/Stirling-PDF-${{ needs.read_versions.outputs.version }}.jar ./Stirling-PDF-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.jar
 
       - name: Upload build artifacts
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           retention-days: 1
@@ -119,19 +101,16 @@ jobs:
             file_suffix: ""
     steps:
       - name: Harden Runner
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         uses: step-security/harden-runner@c95a14d0e5bab51a9f56296a4eb0e416910cd350 # v2.10.3
         with:
           egress-policy: audit
 
       - name: Download build artifacts
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: stirling-${{ matrix.file_suffix }}binaries
 
       - name: Display structure of downloaded files
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         run: ls -R
 
       # - name: Install Cosign
@@ -161,7 +140,6 @@ jobs:
       #       ./win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
 
       - name: Upload signed artifacts
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           retention-days: 1
@@ -193,36 +171,31 @@ jobs:
       contents: write
     steps:
       - name: Harden Runner
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
         with:
           egress-policy: audit
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
 
       - name: Set up JDK 21
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4.6.0
         with:
           java-version: "21"
           distribution: "temurin"
 
       - uses: gradle/actions/setup-gradle@0bdd871935719febd78681f197cd39af5b6e16a6 # v4.2.2
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         with:
           gradle-version: 8.12
 
       # Install Windows dependencies
       - name: Install WiX Toolset
-        if: matrix.os == 'windows-latest' && (github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer')
+        if: matrix.os == 'windows-latest'
         run: |
           curl -L -o wix.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
           .\wix.exe /install /quiet
 
       # # Build installer
       - name: Build Installer
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         run: ./gradlew build jpackage -x test --info
         env:
           DOCKER_ENABLE_SECURITY: false
@@ -230,7 +203,6 @@ jobs:
 
       # Rename and collect artifacts based on OS
       - name: Prepare artifacts
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         id: prepare
         shell: bash
         run: |
@@ -243,7 +215,6 @@ jobs:
           fi
 
       - name: Upload build artifacts
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           retention-days: 1
@@ -272,31 +243,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         uses: step-security/harden-runner@c95a14d0e5bab51a9f56296a4eb0e416910cd350 # v2.10.3
         with:
           egress-policy: audit
 
       - name: Download build artifacts
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: ${{ matrix.platform }}binaries
 
       - name: Display structure of downloaded files
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         run: ls -R
 
       - name: Install Cosign
-        if: matrix.os == 'windows-latest' && (github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer')
+        if: matrix.os == 'windows-latest'
         uses: sigstore/cosign-installer@dc72c7d5c4d10cd6bcb8cf6e3fd625a9e5e537da # v3.7.0
 
       - name: Generate key pair
-        if: matrix.os == 'windows-latest' && (github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer')
+        if: matrix.os == 'windows-latest'
         run: cosign generate-key-pair
 
       - name: Sign and generate attestations
-        if: matrix.os == 'windows-latest' && (github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer')
+        if: matrix.os == 'windows-latest'
         run: |
           cosign sign-blob \
             --key ./cosign.key \
@@ -317,7 +285,6 @@ jobs:
             ./${{ matrix.platform }}Stirling-PDF${{ matrix.extra }}-${{ needs.read_versions.outputs.version }}.${{ matrix.ext }}
 
       - name: Upload signed artifacts
-        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           retention-days: 1
@@ -333,22 +300,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Download win-signed artifacts
+      - name: Download signed artifacts
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
-      #   with:
-      #     name: win-signed
-      # - name: Download linux-signed artifacts
-      #   uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
-      #   with:
-      #     name: linux-signed
-      # - name: Download with-login-signed artifacts
-      #   uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
-      #   with:
-      #     name: with-login-signed
-      # - name: Download signed artifacts
-      #   uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
-      #   with:
-      #     name: signed
       - name: Display structure of downloaded files
         run: ls -R
       - name: Upload binaries, attestations and signatures to Release and create GitHub Release
