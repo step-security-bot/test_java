@@ -38,7 +38,7 @@ jobs:
           MAC_VERSION="$CURRENT_YEAR.${VERSION_PARTS[1]:-0}.${VERSION_PARTS[2]:-0}"
           echo "versionNumberMac=$MAC_VERSION" >> $GITHUB_OUTPUT
 
-  build-no-install:
+  build-portable:
     needs: read_versions
     runs-on: ubuntu-latest
     strategy:
@@ -75,19 +75,21 @@ jobs:
 
       - name: Rename binaries
         run: |
-          mv ./build/launch4j/Stirling-PDF.exe ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
+          mv ./build/launch4j/Stirling-PDF.exe ./win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
           mv ./build/libs/Stirling-PDF-${{ needs.read_versions.outputs.version }}.jar ./Stirling-PDF-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.jar
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
+          retention-days: 1
+          if-no-files-found: error
           name: stirling-${{ matrix.file_suffix }}binaries
           path: |
-            ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
+            ./win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
             ./Stirling-PDF-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.jar
 
-  sign_verify-no-install:
-    needs: [build-no-install, read_versions]
+  sign_verify-portable:
+    needs: [build-portable, read_versions]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -122,24 +124,26 @@ jobs:
       #     cosign sign-blob \
       #       --key ./cosign.key \
       #       --yes \
-      #       --output-signature ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe.sig \
-      #       ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
+      #       --output-signature ./win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe.sig \
+      #       ./win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
 
       #     cosign attest-blob \
       #       --predicate - \
       #       --key ./cosign.key \
       #       --yes \
-      #       --output-attestation ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe.intoto.jsonl \
-      #       ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
+      #       --output-attestation ./win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe.intoto.jsonl \
+      #       ./win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
 
       #     cosign verify-blob \
       #       --key ./cosign.pub \
-      #       --signature ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe.sig \
-      #       ./win-Stirling-PDF-no-install-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
+      #       --signature ./win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe.sig \
+      #       ./win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
 
       - name: Upload signed artifacts
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
+          retention-days: 1
+          if-no-files-found: error
           name: ${{ matrix.file_suffix }}signed
           path: |
             ./*
@@ -214,6 +218,8 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
+          retention-days: 1
+          if-no-files-found: error
           name: ${{ matrix.platform }}binaries
           path: |
             ./${{ matrix.platform }}Stirling-PDF${{ matrix.extra }}-${{ needs.read_versions.outputs.version }}.${{ matrix.ext }}
@@ -282,12 +288,15 @@ jobs:
       - name: Upload signed artifacts
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
+          retention-days: 1
+          if-no-files-found: error
           name: ${{ matrix.platform }}signed
           path: |
             ./${{ matrix.platform }}Stirling-PDF${{ matrix.extra }}-${{ needs.read_versions.outputs.version }}.*
+            !cosign.*
 
   release:
-    needs: [read_versions, sign_verify, sign_verify-no-install]
+    needs: [read_versions, sign_verify, sign_verify-portable]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -317,4 +326,3 @@ jobs:
           generate_release_notes: true
           files: |
             ./*
-            !cosign.*
