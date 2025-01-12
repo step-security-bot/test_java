@@ -62,11 +62,13 @@ jobs:
             file_suffix: ""
     steps:
       - name: Harden Runner
+        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         uses: step-security/harden-runner@c95a14d0e5bab51a9f56296a4eb0e416910cd350 # v2.10.3
         with:
           egress-policy: audit
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
 
       - name: Set up JDK 21
         if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
@@ -117,6 +119,7 @@ jobs:
             file_suffix: ""
     steps:
       - name: Harden Runner
+        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'portable'
         uses: step-security/harden-runner@c95a14d0e5bab51a9f56296a4eb0e416910cd350 # v2.10.3
         with:
           egress-policy: audit
@@ -190,11 +193,13 @@ jobs:
       contents: write
     steps:
       - name: Harden Runner
+        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
         with:
           egress-policy: audit
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
 
       - name: Set up JDK 21
         if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
@@ -267,6 +272,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
+        if: github.event.inputs.build_type == 'full' || github.event.inputs.build_type == 'installer'
         uses: step-security/harden-runner@c95a14d0e5bab51a9f56296a4eb0e416910cd350 # v2.10.3
         with:
           egress-policy: audit
@@ -329,20 +335,20 @@ jobs:
     steps:
       - name: Download win-signed artifacts
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
-        with:
-          name: win-signed
-      - name: Download linux-signed artifacts
-        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
-        with:
-          name: linux-signed
-      - name: Download with-login-signed artifacts
-        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
-        with:
-          name: with-login-signed
-      - name: Download signed artifacts
-        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
-        with:
-          name: signed
+      #   with:
+      #     name: win-signed
+      # - name: Download linux-signed artifacts
+      #   uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+      #   with:
+      #     name: linux-signed
+      # - name: Download with-login-signed artifacts
+      #   uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+      #   with:
+      #     name: with-login-signed
+      # - name: Download signed artifacts
+      #   uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+      #   with:
+      #     name: signed
       - name: Display structure of downloaded files
         run: ls -R
       - name: Upload binaries, attestations and signatures to Release and create GitHub Release
