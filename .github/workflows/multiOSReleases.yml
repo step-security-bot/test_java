@@ -2,6 +2,15 @@ name: Test Installers Build
 
 on:
   workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Art des Builds'
+        required: true
+        default: 'portable'
+        type: choice
+        options:
+          - portable
+          - installer
   release:
     types: [created]
 
