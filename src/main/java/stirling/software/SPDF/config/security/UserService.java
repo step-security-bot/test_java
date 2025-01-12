@@ -335,7 +335,7 @@ public class UserService implements UserServiceInterface {
         // Checks whether the email address is formatted correctly
         boolean isValidEmail =
                 username.matches(
-                        "^(?=.{1,320}$)(?=.{1,64}@)[A-Za-z0-9]+(?:\\.[A-Za-z0-9_+.-]+)*@[^-][A-Za-z0-9-]+(?:\\.[A-Za-z0-9-]+)*(?:\\.[A-Za-z]{2,})$");
+                        "^(?=.{1,320}$)(?=.{1,64}@)[A-Za-z0-9](?:[A-Za-z0-9_.+-]*[A-Za-z0-9])?@[^-][A-Za-z0-9-]+(?:\\\\.[A-Za-z0-9-]+)*(?:\\\\.[A-Za-z]{2,})$");
         List<String> notAllowedUserList = new ArrayList<>();
         notAllowedUserList.add("ALL_USERS".toLowerCase());
         boolean notAllowedUser = notAllowedUserList.contains(username.toLowerCase());
