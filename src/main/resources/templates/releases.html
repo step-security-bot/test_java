@@ -140,7 +140,9 @@
         'br': [],
         'p': [],
         'div': [],
-        'span': []
+        'span': [],
+        'ul': [],
+        'li': []
     };
 
     // Function to safely create HTML elements from string
@@ -234,168 +236,194 @@
     }
 
     function processGitHubReferences(text) {
-    if (!text || typeof text !== 'string') {
-        return text;
-    }
-
-    let currentText = text;
-    let match;
-    let lastIndex = 0;
-    const result = document.createElement('span');
-    const urlRegex = new RegExp('https://github\\.com/' + REPO_OWNER + '/' + REPO_NAME + '/(?:issues|pull)/(\\d+)', 'g');
-
-    while ((match = urlRegex.exec(text)) !== null) {
-        // Add text before the match
-        if (match.index > lastIndex) {
-            result.appendChild(document.createTextNode(text.substring(lastIndex, match.index)));
+        if (!text || typeof text !== 'string') {
+            return text;
         }
 
-        // Create link element
-        const link = document.createElement('a');
-        link.href = encodeURI(match[0]);
-        link.textContent = `#${match[1]}`; // Use issue/PR number
-        link.className = 'release-link';
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        result.appendChild(link);
+        let currentText = text;
+        let match;
+        let lastIndex = 0;
+        const result = document.createElement('span');
+        const urlRegex = new RegExp('https://github\\.com/' + REPO_OWNER + '/' + REPO_NAME + '/(?:issues|pull)/(\\d+)', 'g');
 
-        lastIndex = match.index + match[0].length;
+        while ((match = urlRegex.exec(text)) !== null) {
+            // Add text before the match
+            if (match.index > lastIndex) {
+                result.appendChild(document.createTextNode(text.substring(lastIndex, match.index)));
+            }
+
+            // Create link element
+            const link = document.createElement('a');
+            link.href = encodeURI(match[0]);
+            link.textContent = `#${match[1]}`; // Use issue/PR number
+            link.className = 'release-link';
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            result.appendChild(link);
+
+            lastIndex = match.index + match[0].length;
+        }
+
+        // Add remaining text after last match
+        if (lastIndex < text.length) {
+            result.appendChild(document.createTextNode(text.substring(lastIndex)));
+        }
+
+        return result;
     }
 
-    // Add remaining text after last match
-    if (lastIndex < text.length) {
-        result.appendChild(document.createTextNode(text.substring(lastIndex)));
-    }
+    // Update formatText function to handle processGitHubReferences properly
+    function formatText(text) {
+        const container = document.createElement('div');
 
-    return result;
-}
+        // Split the text into lines
+        let textWithoutComments = text.replace(/<!-- Release notes generated using configuration in .github\/release\.yml at main -->/, '');
+        const lines = textWithoutComments.split('\n');
+        let currentList = null;
 
-// Update formatText function to handle processGitHubReferences properly
-function formatText(text) {
-    const container = document.createElement('div');
+        lines.forEach(line => {
+            const trimmedLine = line.trim();
 
-    // Split the text into lines
-    const textWithoutComments = text.replace(/<!--[\s\S]*?-->/g, '');
-    const lines = textWithoutComments.split('\n');
-    let currentList = null;
+            // Skip empty lines but add spacing
+            if (!trimmedLine) {
+                if (currentList) {
+                    container.appendChild(currentList);
+                    currentList = null;
+                }
+                container.appendChild(document.createElement('br'));
+                return;
+            }
 
-    lines.forEach(line => {
-        const trimmedLine = line.trim();
+            // Check if the line is HTML
+            if (trimmedLine.startsWith('<') && trimmedLine.endsWith('>')) {
+                if (currentList) {
+                    container.appendChild(currentList);
+                    currentList = null;
+                }
 
-        // Skip empty lines but add spacing
-        if (!trimmedLine) {
+                const safeElement = createSafeElement(trimmedLine);
+                if (safeElement) {
+                    container.appendChild(safeElement);
+                } else {
+                    // If HTML parsing fails, treat as plain text
+                    container.appendChild(document.createTextNode(trimmedLine));
+                }
+                return;
+            }
+
+            // Check for headers
+            const headerMatch = trimmedLine.match(/^(#{1,3})\s+(.+)$/);
+            if (headerMatch) {
+                if (currentList) {
+                    container.appendChild(currentList);
+                    currentList = null;
+                }
+                const headerLevel = headerMatch[1].length;
+                const headerContent = headerMatch[2];
+                // Process GitHub references in headers
+                const processedContent = processGitHubReferences(headerContent);
+                const header = createElement(`h${headerLevel}`);
+                header.appendChild(processedContent);
+                container.appendChild(header);
+                return;
+            }
+
+            // Check for bullet points
+            const bulletMatch = trimmedLine.match(/^[-*]\s+(.+)$/);
+            if (bulletMatch) {
+                if (!currentList) {
+                    currentList = document.createElement('ul');
+                }
+
+                const listContent = bulletMatch[1];
+                const listItem = document.createElement('li');
+
+                // Process GitHub references in list items
+                listItem.appendChild(processGitHubReferences(listContent));
+                currentList.appendChild(listItem);
+                return;
+            }
+
+            // If we reach here and have a list, append it
             if (currentList) {
                 container.appendChild(currentList);
                 currentList = null;
             }
-            container.appendChild(document.createElement('br'));
-            return;
-        }
 
-        // Check if the line is HTML
-        if (trimmedLine.startsWith('<') && trimmedLine.endsWith('>')) {
-            if (currentList) {
-                container.appendChild(currentList);
-                currentList = null;
-            }
+            // Handle regular paragraph
+            const paragraph = document.createElement('p');
+            paragraph.appendChild(processGitHubReferences(trimmedLine));
+            container.appendChild(paragraph);
+        });
 
-            const safeElement = createSafeElement(trimmedLine);
-            if (safeElement) {
-                container.appendChild(safeElement);
-            } else {
-                // If HTML parsing fails, treat as plain text
-                container.appendChild(document.createTextNode(trimmedLine));
-            }
-            return;
-        }
-
-        // Check for headers
-        const headerMatch = trimmedLine.match(/^(#{1,3})\s+(.+)$/);
-        if (headerMatch) {
-            if (currentList) {
-                container.appendChild(currentList);
-                currentList = null;
-            }
-            const headerLevel = headerMatch[1].length;
-            const headerContent = headerMatch[2];
-            // Process GitHub references in headers
-            const processedContent = processGitHubReferences(headerContent);
-            const header = createElement(`h${headerLevel}`);
-            header.appendChild(processedContent);
-            container.appendChild(header);
-            return;
-        }
-
-        // Check for bullet points
-        const bulletMatch = trimmedLine.match(/^[-*]\s+(.+)$/);
-        if (bulletMatch) {
-            if (!currentList) {
-                currentList = document.createElement('ul');
-            }
-
-            const listContent = bulletMatch[1];
-            const listItem = document.createElement('li');
-
-            // Process GitHub references in list items
-            listItem.appendChild(processGitHubReferences(listContent));
-            currentList.appendChild(listItem);
-            return;
-        }
-
-        // If we reach here and have a list, append it
+        // Append any remaining list
         if (currentList) {
             container.appendChild(currentList);
-            currentList = null;
         }
 
-        // Handle regular paragraph
-        const paragraph = document.createElement('p');
-        paragraph.appendChild(processGitHubReferences(trimmedLine));
-        container.appendChild(paragraph);
-    });
-
-    // Append any remaining list
-    if (currentList) {
-        container.appendChild(currentList);
+        return container;
     }
-
-    return container;
-}
 
     const MAX_PREVIOUS_RELEASES = 5;
-function compareVersions(v1, v2) {
-    const normalize = v => v.replace(/^v/, '');
-    const v1Parts = normalize(v1).split('.').map(Number);
-    const v2Parts = normalize(v2).split('.').map(Number);
 
-    for (let i = 0; i < Math.max(v1Parts.length, v2Parts.length); i++) {
-        const v1Part = v1Parts[i] || 0;
-        const v2Part = v2Parts[i] || 0;
-        if (v1Part > v2Part) return 1;
-        if (v1Part < v2Part) return -1;
-    }
-    return 0;
-}
+    function compareVersions(v1, v2) {
+        const normalize = v => v.replace(/^v/, '');
+        const v1Parts = normalize(v1).split('.').map(Number);
+        const v2Parts = normalize(v2).split('.').map(Number);
 
-async function loadReleases() {
-    const container = document.getElementById('release-notes-container');
-    const loading = document.getElementById('loading');
-    const errorMessage = document.getElementById('error-message');
-
-    try {
-        loading.classList.remove('d-none');
-        errorMessage.classList.add('d-none');
-
-        // Clear container safely
-        while (container.firstChild) {
-            container.removeChild(container.firstChild);
+        for (let i = 0; i < Math.max(v1Parts.length, v2Parts.length); i++) {
+            const v1Part = v1Parts[i] || 0;
+            const v2Part = v2Parts[i] || 0;
+            if (v1Part > v2Part) return 1;
+            if (v1Part < v2Part) return -1;
         }
+        return 0;
+    }
 
-        const response = await fetch(GITHUB_API + '/releases');
-        if (!response.ok) throw new Error('Failed to fetch releases');
-        const releases = await response.json();
+    async function loadReleases() {
+        const container = document.getElementById('release-notes-container');
+        const loading = document.getElementById('loading');
+        const errorMessage = document.getElementById('error-message');
 
-        // Sort releases by version number (descending)
+        try {
+            loading.classList.remove('d-none');
+            errorMessage.classList.add('d-none');
+
+            // Clear container safely
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+
+            const cachedReleases = sessionStorage.getItem('releases');
+            if (cachedReleases) {
+                displayReleases(JSON.parse(cachedReleases), container);
+                return;
+            }
+
+            const response = await fetch(GITHUB_API + '/releases');
+            if (!response.ok) {
+                if (response.status === 403) {
+                    throw new Error('API rate limit exceeded');
+                }
+                if (response.status === 404) {
+                    throw new Error('Repository not found');
+                }
+                throw new Error('Failed to fetch releases');
+            }
+
+            const releases = await response.json();
+            sessionStorage.setItem('releases', JSON.stringify(releases));
+            displayReleases(releases, container);
+        } catch (error) {
+            console.error('Error loading releases:', error);
+            errorMessage.textContent = error.message;
+            errorMessage.classList.remove('d-none');
+        } finally {
+            loading.classList.add('d-none');
+        }
+    }
+
+    function displayReleases(releases, container) {
         releases.sort((a, b) => compareVersions(b.tag_name, a.tag_name));
 
         // Find index of current version
@@ -454,15 +482,7 @@ async function loadReleases() {
             releaseCard.appendChild(body);
             container.appendChild(releaseCard);
         });
-
-    } catch (error) {
-        console.error('Error loading releases:', error);
-        errorMessage.classList.remove('d-none');
-    } finally {
-        loading.classList.add('d-none');
     }
-}
-
 
     // Load releases when the page loads
     document.addEventListener('DOMContentLoaded', loadReleases);
