@@ -162,10 +162,10 @@ jobs:
           #   extra: ""
           #   platform: mac-
           #   ext: dmg
-          - os: ubuntu-latest
-            extra: ""
-            platform: linux-
-            ext: deb
+          # - os: ubuntu-latest
+          #   extra: ""
+          #   platform: linux-
+          #   ext: deb
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
@@ -194,7 +194,7 @@ jobs:
           curl -L -o wix.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
           .\wix.exe /install /quiet
 
-      # # Build installer
+      # Build installer
       - name: Build Installer
         run: ./gradlew build jpackage -x test --info
         env:
@@ -209,7 +209,7 @@ jobs:
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
             mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.version }}.exe" "${{ matrix.platform }}Stirling-PDF${{ matrix.extra }}-${{ needs.read_versions.outputs.version }}.${{ matrix.ext }}"
           elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-            mv "./build/jpackage/Stirling-PDF-${{ steps.versionNumberMac.outputs.versionNumberMac }}.dmg" "${{ matrix.platform }}Stirling-PDF${{ matrix.extra }}-${{ needs.read_versions.outputs.version }}.${{ matrix.ext }}"
+            mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.versionMac }}.dmg" "${{ matrix.platform }}Stirling-PDF${{ matrix.extra }}-${{ needs.read_versions.outputs.version }}.${{ matrix.ext }}"
           else
             mv "./build/jpackage/stirling-pdf_${{ needs.read_versions.outputs.version }}-1_amd64.deb" "${{ matrix.platform }}Stirling-PDF${{ matrix.extra }}-${{ needs.read_versions.outputs.version }}.${{ matrix.ext }}"
           fi
@@ -236,10 +236,10 @@ jobs:
           #   extra: ""
           #   platform: mac-
           #   ext: dmg
-          - os: ubuntu-latest
-            extra: ""
-            platform: linux-
-            ext: deb
+          # - os: ubuntu-latest
+          #   extra: ""
+          #   platform: linux-
+          #   ext: deb
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
