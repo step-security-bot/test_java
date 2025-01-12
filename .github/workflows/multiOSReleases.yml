@@ -6,11 +6,12 @@ on:
       build_type:
         description: 'Art des Builds'
         required: true
-        default: 'portable'
+        default: 'full'
         type: choice
         options:
           - portable
           - installer
+          - full
   release:
     types: [created]
 
@@ -39,6 +40,7 @@ jobs:
           echo "versionNumber=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Get version number mac
+        if: ${{ github.event.inputs.build_type }} == "full" || ${{ github.event.inputs.build_type }} == "installer"
         id: versionNumberMac
         run: |
           VERSION=$(grep "^version =" build.gradle | awk -F'"' '{print $2}')
@@ -48,6 +50,7 @@ jobs:
           echo "versionNumberMac=$MAC_VERSION" >> $GITHUB_OUTPUT
 
   build-portable:
+    if: ${{ github.event.inputs.build_type }} == "full" || ${{ github.event.inputs.build_type }} == "portable"
     needs: read_versions
     runs-on: ubuntu-latest
     strategy:
@@ -98,6 +101,7 @@ jobs:
             ./Stirling-PDF-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.jar
 
   sign_verify-portable:
+    if: ${{ github.event.inputs.build_type }} == "full" || ${{ github.event.inputs.build_type }} == "portable"
     needs: [build-portable, read_versions]
     runs-on: ubuntu-latest
     strategy:
@@ -159,6 +163,7 @@ jobs:
             !cosign.*
 
   build-installers:
+    if: ${{ github.event.inputs.build_type }} == "full" || ${{ github.event.inputs.build_type }} == "installer"
     needs: read_versions
     strategy:
       matrix:
@@ -233,6 +238,7 @@ jobs:
             ./${{ matrix.platform }}Stirling-PDF${{ matrix.extra }}-${{ needs.read_versions.outputs.version }}.${{ matrix.ext }}
 
   sign_verify:
+    if: ${{ github.event.inputs.build_type }} == "full" || ${{ github.event.inputs.build_type }} == "installer"
     needs: [read_versions, build-installers]
     strategy:
       matrix:
