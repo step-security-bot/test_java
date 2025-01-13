@@ -43,9 +43,14 @@ jobs:
       - name: Read Labels
         id: read-labels
         run: |
-          labels=$(cat labels.txt)
-          echo "Labels: $labels"
-          echo "labels=$labels" >> $GITHUB_OUTPUT
+          if [ -s labels.txt ]; then
+            labels=$(cat labels.txt)
+            echo "Labels found: $labels"
+            echo "labels=$labels" >> $GITHUB_OUTPUT
+          else
+            echo "No labels found or labels.txt is empty."
+            echo "labels=" >> $GITHUB_OUTPUT
+          fi
 
       - name: Fetch Labels from Previous Workflow
         id: fetch-labels
