@@ -3,8 +3,11 @@ name: "Build & Docker Test"
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
+  workflow_run:
+    workflows:
+      - "Pull Request Labeler"
+    types:
+      - completed
 
 permissions:
   contents: read
@@ -30,6 +33,11 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Fetch Labels from Previous Workflow
+        id: fetch-labels
+        run: |
+          echo "Labels: ${{ github.event.workflow_run.outputs.all-labels }}"
 
       - name: Set up JDK ${{ matrix.jdk-version }}
         uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4.6.0
