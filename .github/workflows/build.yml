@@ -38,6 +38,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: pr-labels
+        continue-on-error: true
 
       - name: Read Labels
         id: read-labels
