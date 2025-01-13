@@ -34,10 +34,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
+      - name: Download Labels File
+        uses: actions/download-artifact@v4
+        with:
+          name: pr-labels
+
+      - name: Read Labels
+        id: read-labels
+        run: |
+          labels=$(cat labels.txt)
+          echo "Labels: $labels"
+          echo "labels=$labels" >> $GITHUB_OUTPUT
+
       - name: Fetch Labels from Previous Workflow
         id: fetch-labels
         run: |
-          echo "Labels: ${{ github.event.workflow_run.outputs.all-labels }}"
+          echo "Labels: ${{ steps.read-labels.outputs.labels }}"
 
       - name: Set up JDK ${{ matrix.jdk-version }}
         uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4.6.0
