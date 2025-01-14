@@ -137,6 +137,6 @@ jobs:
 
       - name: Run Docker Compose Tests
         run: |
-          chmod +x ./cucumber/test_webpages.sh
+          # chmod +x ./cucumber/test_webpages.sh
           chmod +x ./test.sh
           ./test.sh
