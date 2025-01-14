@@ -76,6 +76,8 @@ jobs:
 
       - run: echo ${{ steps.cpr.outputs.pull-request-operation }}
 
+      - run: echo ${{ github.event.action }}
+
       - name: Auto approve
         if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
         run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
