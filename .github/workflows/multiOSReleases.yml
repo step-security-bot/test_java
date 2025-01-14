@@ -75,6 +75,7 @@ jobs:
 
       - name: Rename binaries
         run: |
+          mkdir ./binaries
           mv ./build/launch4j/Stirling-PDF.exe ./binaries/win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
           mv ./build/libs/Stirling-PDF-${{ needs.read_versions.outputs.version }}.jar ./binaries/Stirling-PDF-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.jar
 
@@ -179,6 +180,7 @@ jobs:
         id: prepare
         shell: bash
         run: |
+          mkdir ./binaries
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
             mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.version }}.exe" "./binaries/Stirling-PDF-win-installer.exe"
           elif [ "${{ matrix.os }}" = "macos-latest" ]; then
