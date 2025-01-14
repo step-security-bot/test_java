@@ -84,7 +84,7 @@ jobs:
         with:
           retention-days: 1
           if-no-files-found: error
-          name: stirling-${{ matrix.file_suffix }}binaries
+          name: stirling${{ matrix.file_suffix }}-binaries
           path: |
             ./binaries/*
 
