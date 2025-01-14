@@ -9,7 +9,9 @@ on:
   push:
     branches: ["main"]
   pull_request:
-    branches: ["main", "update-3rd-party-licenses"]
+    branches:
+      - "main"
+      - "update-3rd-party-licenses"
 
 permissions:
   contents: read
