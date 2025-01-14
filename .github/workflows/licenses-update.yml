@@ -63,6 +63,7 @@ jobs:
           committer: GitHub Action <action@github.com>
           author: GitHub Action <action@github.com>
           signoff: true
+          base: main
           branch: update-3rd-party-licenses
           title: "Update 3rd Party Licenses"
           body: |
