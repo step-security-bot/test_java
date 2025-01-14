@@ -46,7 +46,7 @@ jobs:
         enable_security: [true, false]
         include:
           - enable_security: true
-            file_suffix: "with-login-"
+            file_suffix: "-with-login"
           - enable_security: false
             file_suffix: ""
     steps:
@@ -76,8 +76,8 @@ jobs:
       - name: Rename binaries
         run: |
           mkdir ./binaries
-          mv ./build/launch4j/Stirling-PDF.exe ./binaries/win-Stirling-PDF-portable-Server-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.exe
-          mv ./build/libs/Stirling-PDF-${{ needs.read_versions.outputs.version }}.jar ./binaries/Stirling-PDF-${{ matrix.file_suffix }}${{ needs.read_versions.outputs.version }}.jar
+          mv ./build/launch4j/Stirling-PDF.exe ./binaries/win-Stirling-PDF-portable-Server${{ matrix.file_suffix }}.exe
+          mv ./build/libs/Stirling-PDF-${{ needs.read_versions.outputs.version }}.jar ./binaries/Stirling-PDF${{ matrix.file_suffix }}.jar
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
@@ -129,17 +129,11 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            extra: "-installer"
             platform: win-
-            ext: exe
           # - os: macos-latest
-          #   extra: ""
           #   platform: mac-
-          #   ext: dmg
           # - os: ubuntu-latest
-          #   extra: ""
           #   platform: linux-
-          #   ext: deb
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
@@ -189,6 +183,9 @@ jobs:
             mv "./build/jpackage/stirling-pdf_${{ needs.read_versions.outputs.version }}-1_amd64.deb" "./binaries/Stirling-PDF-linux-installer.deb"
           fi
 
+      - name: Display structure of downloaded files
+        run: ls -R ./binaries
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
@@ -204,17 +201,11 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            extra: "-installer"
             platform: win-
-            ext: exe
           # - os: macos-latest
-          #   extra: ""
           #   platform: mac-
-          #   ext: dmg
           # - os: ubuntu-latest
-          #   extra: ""
           #   platform: linux-
-          #   ext: deb
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
@@ -259,6 +250,9 @@ jobs:
             --signature ./Stirling-PDF-win-installer.exe.sig \
             ./Stirling-PDF-win-installer.exe
 
+      - name: Display structure of downloaded files
+        run: ls -R
+
       - name: Upload signed artifacts
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
@@ -266,8 +260,7 @@ jobs:
           if-no-files-found: error
           name: ${{ matrix.platform }}signed
           path: |
-            ./Stirling-PDF-win-installer.*
-            ./${{ matrix.platform }}Stirling-PDF${{ matrix.extra }}-${{ needs.read_versions.outputs.version }}.*
+            ./Stirling-PDF-${{ matrix.platform }}installer.*
             !cosign.*
 
   create-release:
