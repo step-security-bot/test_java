@@ -1,16 +1,10 @@
 name: "Build & Docker Test"
 
 on:
-  # push:
-  #   branches: ["main"]
+  push:
+    branches: ["main"]
   pull_request:
-    branches:
-      - "main"
-  # pull_request_target:
-  workflow_run:
-    workflows: ["License Report Workflow"]
-    types:
-      - completed
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -118,34 +112,3 @@ jobs:
           # chmod +x ./cucumber/test_webpages.sh
           chmod +x ./test.sh
           ./test.sh
-
-      - run: echo  ${{ github.event.workflow_run.referenced_workflows }}
-      - run: echo  ${{ github.event.workflow_run.workflow_id }}
-      - run: echo  ${{ github.event.workflow_run.workflow_url }}
-      - run: echo  ${{ github.event.pull_request.number }}
-
-  squash-merge-pr:
-    # if: ${{ github.event.workflow_run.workflow == 'License Report Workflow'}} # Nur ausführen, wenn der Workflow "License Report Workflow" abgeschlossen ist
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Get PR Number from License Report Workflow
-        id: get_pr_number
-        run: |
-          PR_NUMBER="${{ needs.generate-license-report.outputs.PR_NUMBER }}"
-          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
-
-      - name: Squash Merge PR
-        run: |
-          PR_NUMBER=${{ github.event.pull_request.number }} # Verwende die PR-Nummer, die im vorherigen Job festgelegt wurde
-          if [ -n "$PR_NUMBER" ]; then
-            gh pr merge $PR_NUMBER --squash --delete-branch --merge
-            echo "PR #$PR_NUMBER merged successfully."
-          else
-            echo "No open PR found to merge."
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
