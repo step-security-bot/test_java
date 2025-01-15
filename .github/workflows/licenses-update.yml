@@ -86,6 +86,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Genehmige und merge PR automatisch
+        if: env.pr_exists == 'true' && env.CHANGES_DETECTED == 'true'
         run: |
           gh pr review "${{ env.pr_number }}" --approve
           gh pr merge "${{ env.pr_number }}" --merge --squash
