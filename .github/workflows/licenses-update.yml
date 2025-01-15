@@ -77,30 +77,30 @@ jobs:
 
       - run: echo ${{ steps.cpr.outputs.pull-request-operation }}
 
-      - run: echo ${{ github.event.action }}
+      # - run: echo ${{ github.event.action }}
 
-      - name: Auto approve
-        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
-        run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
+      # - name: Auto approve
+      #   if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+      #   run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   continue-on-error: true
 
-      - name: Wait for status check to pass
-        run: |
-          gh pr checks update-3rd-party-licenses
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
+      # - name: Wait for status check to pass
+      #   run: |
+      #     gh pr checks update-3rd-party-licenses
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   continue-on-error: true
 
-      - name: Enable auto-merge
-        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
-        run: |
-          gh api \
-          --method POST \
-          -H "Accept: application/vnd.github+json" \
-          -H "X-GitHub-Api-Version: 2022-11-28" \
-          /repos/${{ github.repository }}/merges \
-          -f "base=main" -f "head=update-3rd-party-licenses" -f "commit_message=Shipped cool_feature!"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Enable auto-merge
+      #   if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+      #   run: |
+      #     gh api \
+      #     --method POST \
+      #     -H "Accept: application/vnd.github+json" \
+      #     -H "X-GitHub-Api-Version: 2022-11-28" \
+      #     /repos/${{ github.repository }}/merges \
+      #     -f "base=main" -f "head=update-3rd-party-licenses" -f "commit_message=Shipped cool_feature!"
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
