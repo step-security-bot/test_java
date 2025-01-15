@@ -81,7 +81,7 @@ jobs:
         if: env.pr_exists == 'true' && env.CHANGES_DETECTED == 'true'
         run: |
           gh pr comment ${{ env.pr_number }} --body "The PR has been updated with new changes."
-          gh pr update-branch ${{ env.pr_number }} --rebase
+          gh pr update-branch ${{ env.pr_number }} --repo Ludy87/test_java
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
