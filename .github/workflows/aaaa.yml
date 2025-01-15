@@ -1,9 +1,9 @@
 name: aaaa
 
 on:
-  push:
   pull_request:
-  pull_request_target:
+    types:
+      - labeled # Dieser Typ löst den Workflow aus, wenn ein Label zugewiesen wird
 
 permissions:
   contents: read
