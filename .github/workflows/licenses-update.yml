@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "build.gradle"
+    # paths:
+    #   - "build.gradle"
   pull_request_target:
     paths:
       - "build.gradle"
@@ -91,6 +91,7 @@ jobs:
           gh pr checks update-3rd-party-licenses
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
 
       - name: Enable auto-merge
         if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
