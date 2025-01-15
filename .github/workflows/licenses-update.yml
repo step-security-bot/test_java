@@ -95,3 +95,5 @@ jobs:
           -H "X-GitHub-Api-Version: 2022-11-28" \
           /repos/${{ github.repository }}/merges \
           -f "base=master" -f "head=cool_feature" -f "commit_message=Shipped cool_feature!"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
