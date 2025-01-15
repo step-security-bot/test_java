@@ -84,7 +84,7 @@ jobs:
         run: |
           PR_NUMBER=${{ steps.cpr.outputs.pull-request-number }} # Verwende die PR-Nummer, die im vorherigen Job festgelegt wurde
           if [ -n "$PR_NUMBER" ]; then
-            gh pr merge $PR_NUMBER --squash --delete-branch
+            gh pr merge $PR_NUMBER --squash --delete-branch --admin --auto
             echo "PR #$PR_NUMBER merged successfully."
           else
             echo "No open PR found to merge."
