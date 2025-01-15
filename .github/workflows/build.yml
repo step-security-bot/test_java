@@ -132,6 +132,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Get PR Number from License Report Workflow
+        id: get_pr_number
+        run: |
+          PR_NUMBER="${{ needs.generate-license-report.outputs.PR_NUMBER }}"
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+
       - name: Squash Merge PR
         run: |
           PR_NUMBER=${{ github.event.pull_request.number }} # Verwende die PR-Nummer, die im vorherigen Job festgelegt wurde
