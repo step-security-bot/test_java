@@ -120,7 +120,7 @@ jobs:
           ./test.sh
 
   squash-merge-pr:
-    if: ${{ success() }}
+    if: ${{ github.event.workflow_run.workflow == 'License Report Workflow' && success() }} # Nur ausführen, wenn der Workflow "License Report Workflow" abgeschlossen ist
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -128,9 +128,10 @@ jobs:
 
       - name: Squash Merge PR
         run: |
-          PR_NUMBER=$(gh pr list --state open --head ${{ github.repository }} --json number -q ".[0].number")
+          PR_NUMBER=${{ secrets.PR_NUMBER }} # Verwende die PR-Nummer, die im vorherigen Job festgelegt wurde
           if [ -n "$PR_NUMBER" ]; then
             gh pr merge $PR_NUMBER --squash --delete-branch --merge
+            echo "PR #$PR_NUMBER merged successfully."
           else
             echo "No open PR found to merge."
           fi
