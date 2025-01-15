@@ -85,6 +85,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Genehmige und merge PR automatisch
+        run: |
+          gh pr review "${{ env.pr_number }}" --approve
+          gh pr merge "${{ env.pr_number }}" --merge --squash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # - name: Create Pull Request
       #   id: cpr
       #   if: env.CHANGES_DETECTED == 'true'
