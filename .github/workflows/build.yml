@@ -119,6 +119,10 @@ jobs:
           chmod +x ./test.sh
           ./test.sh
 
+      - run: echo  ${{ github.event.workflow_run.referenced_workflows }}
+      - run: echo  ${{ github.event.workflow_run.workflow_id }}
+      - run: echo  ${{ github.event.workflow_run.workflow_url }}
+
   squash-merge-pr:
     # if: ${{ github.event.workflow_run.workflow == 'License Report Workflow'}} # Nur ausführen, wenn der Workflow "License Report Workflow" abgeschlossen ist
     needs: [build]
