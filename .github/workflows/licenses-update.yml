@@ -85,13 +85,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Genehmige und merge PR automatisch
-        if: env.pr_exists == 'true' && env.CHANGES_DETECTED == 'true'
+      - name: Merge PR
         run: |
-          gh pr review "${{ env.pr_number }}" --approve
-          gh pr merge "${{ env.pr_number }}" --merge --squash
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -d '{"commit_title": "Automated Merge", "commit_message": "Automated merge by bot", "merge_method": "squash"}' \
+          "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/merge"
+
+      # - name: Genehmige und merge PR automatisch
+      #   if: env.pr_exists == 'true' && env.CHANGES_DETECTED == 'true'
+      #   run: |
+      #     gh pr review "${{ env.pr_number }}" --approve
+      #     gh pr merge "${{ env.pr_number }}" --merge --squash
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Create Pull Request
       #   id: cpr
