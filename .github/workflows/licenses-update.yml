@@ -90,6 +90,8 @@ jobs:
 
       - run: |
           gh pr edit ${{ steps.cpr.outputs.pull-request-number }} --add-label "github-actions"
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       # - name: Auto approve
       #   if: steps.cpr.outputs.pull-request-operation == 'created'
