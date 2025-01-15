@@ -73,7 +73,7 @@ jobs:
       - name: Create or Update Pull Request
         if: env.pr_exists == 'false' && env.CHANGES_DETECTED == 'true'
         run: |
-          gh pr create --base main --head update-3rd-party-licenses --title "Update 3rd Party Licenses" --body "Auto-generated PR to update 3rd Party Licenses" --label "licenses,github-actions"
+          gh pr create --base main --head update-3rd-party-licenses --title "Update 3rd Party Licenses" --body "Auto-generated PR to update 3rd Party Licenses" --label "Licenses,github-actions"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
