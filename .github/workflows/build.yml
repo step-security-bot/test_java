@@ -121,7 +121,7 @@ jobs:
 
   squash-merge-pr:
     if: ${{ github.event.workflow_run.workflow == 'License Report Workflow' && success() }} # Nur ausführen, wenn der Workflow "License Report Workflow" abgeschlossen ist
-    needs: build
+    needs: [build, docker-compose-tests]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
