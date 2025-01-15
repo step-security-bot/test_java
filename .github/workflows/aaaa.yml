@@ -4,7 +4,6 @@ on:
   push:
     branches: ["update-3rd-party-licenses"]
   pull_request_target:
-    branches: ["update-3rd-party-licenses"]
 
 permissions:
   contents: read
