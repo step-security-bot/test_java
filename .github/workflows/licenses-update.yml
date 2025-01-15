@@ -6,9 +6,6 @@ on:
       - main
     # paths:
     #   - "build.gradle"
-  pull_request_target:
-    paths:
-      - "build.gradle"
 
 permissions:
   contents: read
