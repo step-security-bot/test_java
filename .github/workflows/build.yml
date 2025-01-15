@@ -122,6 +122,7 @@ jobs:
       - run: echo  ${{ github.event.workflow_run.referenced_workflows }}
       - run: echo  ${{ github.event.workflow_run.workflow_id }}
       - run: echo  ${{ github.event.workflow_run.workflow_url }}
+      - run: echo  ${{ github.event.pull_request.number }}
 
   squash-merge-pr:
     # if: ${{ github.event.workflow_run.workflow == 'License Report Workflow'}} # Nur ausführen, wenn der Workflow "License Report Workflow" abgeschlossen ist
@@ -133,7 +134,7 @@ jobs:
 
       - name: Squash Merge PR
         run: |
-          PR_NUMBER=${{ secrets.PR_NUMBER }} # Verwende die PR-Nummer, die im vorherigen Job festgelegt wurde
+          PR_NUMBER=${{ github.event.pull_request.number }} # Verwende die PR-Nummer, die im vorherigen Job festgelegt wurde
           if [ -n "$PR_NUMBER" ]; then
             gh pr merge $PR_NUMBER --squash --delete-branch --merge
             echo "PR #$PR_NUMBER merged successfully."
