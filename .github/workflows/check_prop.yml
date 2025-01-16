@@ -59,7 +59,8 @@ jobs:
         run: |
           echo "Fetching PR changed files..."
           echo "Getting list of changed files from PR..."
-          gh pr view ${{ steps.get-pr-data.outputs.pr_number }} --json files -q ".files[].path" | grep -E '^src/main/resources/messages_[a-zA-Z_]{2}_[a-zA-Z_]{2,7}\.properties$' > changed_files.txt # Filter only matching property files
+          gh pr view ${{ steps.get-pr-data.outputs.pr_number }} --json files -q ".files[].path" | \
+              grep -E '^src/main/resources/messages_[a-zA-Z_]{2}_[a-zA-Z_]{2,7}\.properties$' > changed_files.txt # Filter only matching property files
 
       - name: Determine reference file test
         id: determine-file
