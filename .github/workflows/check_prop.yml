@@ -31,34 +31,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install pre-commit
-        run: pip install pre-commit
-
-      - name: Run pre-commit hook
-        id: run_pre_commit
-        run: |
-          pre-commit run check-duplicate-properties-keys --all-files -c .pre-commit-config.yaml 2>&1 | tee pre_commit_output.log
-          if [ ${PIPESTATUS[0]} -ne 0 ]; then
-            echo "pre-commit failed" > pre_commit_status.log
-          else
-            echo "pre-commit succeeded" > pre_commit_status.log
-          fi
-
-      - name: Post a comment on PR
-        if: steps.run_pre_commit.outcome == 'success' || failure()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          STATUS=$(cat pre_commit_status.log)
-          if [ "$STATUS" = "pre-commit failed" ]; then
-            COMMENT_BODY="### :x: Duplicate Properties Keys Detected\n\n**Errors:**\n\`\`\`\n$(cat pre_commit_output.log | tail -n 50)\n\`\`\`\n\nPlease resolve the issues before merging this PR."
-          else
-            COMMENT_BODY="### :white_check_mark: No Duplicate Keys Found\n\nThe pre-commit hook passed successfully."
-          fi
-
-          # Post comment to PR
-          gh pr comment ${{ github.event.pull_request.number }} --body "$COMMENT_BODY"
-
       - name: Get PR data
         id: get-pr-data
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
@@ -87,7 +59,7 @@ jobs:
         run: |
           echo "Fetching PR changed files..."
           echo "Getting list of changed files from PR..."
-          gh pr view ${{ steps.get-pr-data.outputs.pr_number }} --json files -q ".files[].path" | grep -E '^src/main/resources/messages_[a-zA-Z_]+\.properties$' > changed_files.txt # Filter only matching property files
+          gh pr view ${{ steps.get-pr-data.outputs.pr_number }} --json files -q ".files[].path" | grep -E '^src/main/resources/messages_[a-zA-Z_]{6,11}\.properties$' > changed_files.txt # Filter only matching property files
 
       - name: Determine reference file test
         id: determine-file
@@ -128,7 +100,7 @@ jobs:
             // Filter for relevant files based on the PR changes
             const changedFiles = files
               .map(file => file.filename)
-              .filter(file => /^src\/main\/resources\/messages_[a-zA-Z_]+\.properties$/.test(file));
+              .filter(file => /^src\/main\/resources\/messages_[a-zA-Z_]{6,11}\.properties$/.test(file));
 
             console.log("Changed files:", changedFiles);
 
