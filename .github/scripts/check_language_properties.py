@@ -285,6 +285,12 @@ if __name__ == "__main__":
         help="Branch name.",
     )
     parser.add_argument(
+        "--check-file",
+        type=str,
+        required=False,
+        help="List of changed files, separated by spaces.",
+    )
+    parser.add_argument(
         "--files",
         nargs="+",
         required=False,
@@ -302,11 +308,14 @@ if __name__ == "__main__":
 
     file_list = args.files
     if file_list is None:
-        file_list = glob.glob(
-            os.path.join(
-                os.getcwd(), "src", "main", "resources", "messages_*.properties"
+        if args.check_file:
+            file_list = [args.check_file]
+        else:
+            file_list = glob.glob(
+                os.path.join(
+                    os.getcwd(), "src", "main", "resources", "messages_*.properties"
+                )
             )
-        )
         update_missing_keys(args.reference_file, file_list)
     else:
         check_for_differences(args.reference_file, file_list, args.branch, args.actor)
