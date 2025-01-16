@@ -11,6 +11,8 @@ adjusting the format.
 Usage:
     python check_language_properties.py --reference-file <path_to_reference_file> --branch <branch_name> [--actor <actor_name>] [--files <list_of_changed_files>]
 """
+# Sample for Windows:
+# python .\.github\scripts\check_language_properties.py --reference-file src\main\resources\messages_en_GB.properties --branch "" --files src\main\resources\messages_de_DE.propertie src\main\resources\messages_uk_UA.properties
 
 import copy
 import glob
@@ -166,6 +168,7 @@ def check_for_differences(reference_file, file_list, branch, actor):
         if (
             basename_current_file == basename_reference_file
             or (
+                # only local windows command
                 not file_path.startswith(
                     os.path.join("", "src", "main", "resources", "messages_")
                 )
