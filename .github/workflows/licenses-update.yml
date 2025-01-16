@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "build.gradle"
+    # paths:
+    #   - "build.gradle"
 
 permissions:
   contents: read
