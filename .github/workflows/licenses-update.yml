@@ -88,6 +88,8 @@ jobs:
           draft: false
           delete-branch: true
           sign-commits: true
+          add-paths: |
+            src/main/resources/static/3rdPartyLicenses.json
 
       - name: Enable Pull Request Automerge
         if: steps.cpr.outputs.pull-request-operation == 'created'
