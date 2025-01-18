@@ -39,15 +39,15 @@ jobs:
           USER_NAME="${{ steps.generate-token.outputs.app-slug }}[bot]"
           USER_EMAIL="${{ steps.get-user-id.outputs.user-id }}+$USER_NAME@users.noreply.github.com"
           USER_ID=$(gh api "/users/$USER_NAME" --jq .id)
-          echo "user_name=$USER_NAME  >> "$GITHUB_OUTPUT"
-          echo "user_email=$USER_EMAIL  >> "$GITHUB_OUTPUT"
-          echo "user-id=$USER_ID" >> $GITHUB_OUTPUT
+          echo "user_name=$USER_NAME" >> "$GITHUB_OUTPUT"
+          echo "user_email=$USER_EMAIL" >> "$GITHUB_OUTPUT"
+          echo "user-id=$USER_ID" >> "$GITHUB_OUTPUT"
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
 
       - id: comitter
         run: |
-          COMMITTER="$USER_NAME <$USER_EMAIL>"
+          COMMITTER="${{ steps.get-user-id.outputs.user_name }} <${{ steps.get-user-id.outputs.user_email }}>"
           echo "committer=$COMMITTER  >> "$GITHUB_OUTPUT"
 
   sync-files:
