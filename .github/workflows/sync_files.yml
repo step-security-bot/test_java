@@ -50,19 +50,8 @@ jobs:
           COMMITTER="${{ steps.get-user-id.outputs.user_name }} <${{ steps.get-user-id.outputs.user_email }}>"
           echo "committer=$COMMITTER" >> "$GITHUB_OUTPUT"
 
-  set-git:
-    needs: ["read_bot_entries"]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Set up git config
-        run: |
-          git config --global user.name ${{ needs.read_bot_entries.outputs.userName }}
-          git config --global user.email ${{ needs.read_bot_entries.outputs.userEmail }}
-
   sync-files:
-    needs: ["set-git", "read_bot_entries"]
+    needs: ["read_bot_entries"]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -76,13 +65,17 @@ jobs:
       - name: Sync translation property files
         run: |
           python .github/scripts/check_language_properties.py --reference-file "src/main/resources/messages_en_GB.properties" --branch main
+      - name: Set up git config
+        run: |
+          git config --global user.name ${{ needs.read_bot_entries.outputs.userName }}
+          git config --global user.email ${{ needs.read_bot_entries.outputs.userEmail }}
       - name: Run git add
         run: |
           git add .
           git diff --staged --quiet || git commit -m ":memo: Sync translation files" || echo "no changes"
 
   sync-readme:
-    needs: ["set-git", "sync-files"]
+    needs: ["sync-files"]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -105,6 +98,10 @@ jobs:
       - name: Sync README
         run: |
           python scripts/counter_translation.py
+      - name: Set up git config
+        run: |
+          git config --global user.name ${{ needs.read_bot_entries.outputs.userName }}
+          git config --global user.email ${{ needs.read_bot_entries.outputs.userEmail }}
       - name: Run git add
         run: |
           git add .
