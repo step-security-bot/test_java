@@ -53,8 +53,6 @@ jobs:
   sync-files:
     needs: ["read_bot_entries"]
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@c95a14d0e5bab51a9f56296a4eb0e416910cd350 # v2.10.3
@@ -101,7 +99,7 @@ jobs:
         run: |
           git add .
           git diff --staged --quiet || git commit -m ":memo: Sync README.md" || echo "no changes"
-          
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@67ccf781d68cd99b580ae25a5c18a1cc84ffff1f # v7.0.6
         with:
