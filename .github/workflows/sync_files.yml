@@ -94,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull_request: write
+      pull_requests: write
     steps:
       - name: Set up git config
         run: |
