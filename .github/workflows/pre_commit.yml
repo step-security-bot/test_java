@@ -56,7 +56,7 @@ jobs:
       - name: git add
         run: |
           git add .
-          git diff --staged --exit-code || echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
+          git diff --staged --quiet || echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
       - name: Create Pull Request
         if: env.CHANGES_DETECTED == 'true'
         uses: peter-evans/create-pull-request@67ccf781d68cd99b580ae25a5c18a1cc84ffff1f # v7.0.6
