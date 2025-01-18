@@ -20,7 +20,6 @@ jobs:
       userName: ${{ steps.get-user-id.outputs.user_name }}
       userEmail: ${{ steps.get-user-id.outputs.user_email }}
       committer: ${{ steps.committer.outputs.committer }}
-      token: ${{ steps.generate-token.outputs.token }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@c95a14d0e5bab51a9f56296a4eb0e416910cd350 # v2.10.3
@@ -61,11 +60,13 @@ jobs:
         uses: step-security/harden-runner@c95a14d0e5bab51a9f56296a4eb0e416910cd350 # v2.10.3
         with:
           egress-policy: audit
-      - name: Use Token
-        run: |
-          echo "Using token in this step"
-        env:
-          GH_TOKEN: ${{ needs.read_bot_entries.outputs.token }}
+
+      - name: Generate GitHub App Token
+        id: generate-token
+        uses: actions/create-github-app-token@c1a285145b9d317df6ced56c09f525b5c2b6f755 # v1.11.1
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Sync translation property files
@@ -82,7 +83,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@67ccf781d68cd99b580ae25a5c18a1cc84ffff1f # v7.0.6
         with:
-          token: ${{ needs.read_bot_entries.outputs.token }}
+          token: ${{ steps.generate-token.outputs.token }}
           commit-message: Update files
           committer: ${{ needs.read_bot_entries.outputs.committer }}
           author: ${{ needs.read_bot_entries.outputs.committer }}
@@ -109,6 +110,13 @@ jobs:
         with:
           egress-policy: audit
 
+      - name: Generate GitHub App Token
+        id: generate-token
+        uses: actions/create-github-app-token@c1a285145b9d317df6ced56c09f525b5c2b6f755 # v1.11.1
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
@@ -133,7 +141,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@67ccf781d68cd99b580ae25a5c18a1cc84ffff1f # v7.0.6
         with:
-          token: ${{ needs.read_bot_entries.outputs.token }}
+          token: ${{ steps.generate-token.outputs.token }}
           commit-message: Update files
           committer: ${{ needs.read_bot_entries.outputs.committer }}
           author: ${{ needs.read_bot_entries.outputs.committer }}
