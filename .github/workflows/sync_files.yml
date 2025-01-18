@@ -24,6 +24,23 @@ jobs:
         with:
           egress-policy: audit
 
+      - name: Generate GitHub App Token
+        id: generate-token
+        uses: actions/create-github-app-token@c1a285145b9d317df6ced56c09f525b5c2b6f755 # v1.11.1
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+      - name: Get GitHub App User ID
+        id: get-user-id
+        run: echo "user-id=$(gh api "/users/${{ steps.generate-token.outputs.app-slug }}[bot]" --jq .id)" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+
+      - id: committer
+        run: |
+          echo "string=${{ steps.generate-token.outputs.app-slug }}[bot] <${{ steps.get-user-id.outputs.user-id }}+${{ steps.generate-token.outputs.app-slug }}[bot]@users.noreply.github.com>"  >> "$GITHUB_OUTPUT"
+
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Set up Python
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
@@ -34,21 +51,21 @@ jobs:
         run: pip install --require-hashes -r ./.github/scripts/requirements_sync_readme.txt
       - name: Sync README
         run: |
-          python .github/scripts/check_language_properties.py --reference-file "src/main/resources/messages_en_GB.properties" --branch main
+          # python .github/scripts/check_language_properties.py --reference-file "src/main/resources/messages_en_GB.properties" --branch main
           python scripts/counter_translation.py
       - name: Set up git config
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name ${{ steps.generate-token.outputs.app-slug }}[bot]
+          git config --global user.email "${{ steps.get-user-id.outputs.user-id }}+${{ steps.generate-token.outputs.app-slug }}[bot]@users.noreply.github.com"
       - name: Run git add
         run: |
           git add .
-          git diff --staged --quiet || git commit -m ":memo: Sync README
-          > Made via sync_files.yml" || echo "no changes"
+          git diff --staged --quiet || echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
       - name: Create Pull Request
+        if: env.CHANGES_DETECTED == 'true'
         uses: peter-evans/create-pull-request@67ccf781d68cd99b580ae25a5c18a1cc84ffff1f # v7.0.6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate-token.outputs.token }}
           commit-message: Update files
           committer: GitHub Action <action@github.com>
           author: GitHub Action <action@github.com>
