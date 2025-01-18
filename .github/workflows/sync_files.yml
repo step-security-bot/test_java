@@ -50,8 +50,19 @@ jobs:
           COMMITTER="${{ steps.get-user-id.outputs.user_name }} <${{ steps.get-user-id.outputs.user_email }}>"
           echo "committer=$COMMITTER" >> "$GITHUB_OUTPUT"
 
-  sync-files:
+  set-git:
     needs: ["read_bot_entries"]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Set up git config
+        run: |
+          git config --global user.name ${{ needs.read_bot_entries.outputs.userName }}
+          git config --global user.email ${{ needs.read_bot_entries.outputs.userEmail }}
+
+  sync-files:
+    needs: ["set-git", "read_bot_entries"]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -65,9 +76,13 @@ jobs:
       - name: Sync translation property files
         run: |
           python .github/scripts/check_language_properties.py --reference-file "src/main/resources/messages_en_GB.properties" --branch main
+      - name: Run git add
+        run: |
+          git add .
+          git diff --staged --quiet || git commit -m ":memo: Sync translation files" || echo "no changes"
 
   sync-readme:
-    needs: ["sync-files"]
+    needs: ["set-git", "sync-files"]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -88,6 +103,10 @@ jobs:
       - name: Sync README
         run: |
           python scripts/counter_translation.py
+      - name: Run git add
+        run: |
+          git add .
+          git diff --staged --quiet || git commit -m ":memo: Sync README.md" || echo "no changes"
 
   create-pull:
     needs: ["read_bot_entries", "sync-files", "sync-readme"]
@@ -96,16 +115,13 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - name: Set up git config
-        run: |
-          git config --global user.name ${{ needs.read_bot_entries.outputs.userName }}
-          git config --global user.email ${{ needs.read_bot_entries.outputs.userEmail }}
-      - name: Run git add
-        run: |
-          git add .
-          git diff --staged --quiet || echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
+      - name: Harden Runner
+        uses: step-security/harden-runner@c95a14d0e5bab51a9f56296a4eb0e416910cd350 # v2.10.3
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Create Pull Request
-        if: env.CHANGES_DETECTED == 'true'
         uses: peter-evans/create-pull-request@67ccf781d68cd99b580ae25a5c18a1cc84ffff1f # v7.0.6
         with:
           token: ${{ steps.generate-token.outputs.token }}
