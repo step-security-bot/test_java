@@ -58,9 +58,6 @@ repos:
       - id: run-python-script
         name: Update Translations Python script
         entry: |
-          python .github/scripts/check_language_properties.py \
-            --branch ""
-            --reference-file src/main/resources/messages_en_GB.properties \
+          python .github/scripts/check_language_properties.py --reference-file "src/main/resources/messages_en_GB.properties" --branch \"\"
         language: python
-        files: src/main/resources/messages_[a-zA-Z_]{2}_[a-zA-Z_]{2,7}.properties
-        types: [file]
+        pass_filenames: false
