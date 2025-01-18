@@ -64,7 +64,7 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           commit-message: "ci: 🤖 format everything with pre-commit"
           committer: ${{ steps.committer.outputs.string }}
-          author: ${{ steps.generate-token.outputs.app-slug }}[bot]
+          author: ${{ steps.committer.outputs.string }}
           signoff: true
           branch: pre-commit
           title: "🤖 format everything with pre-commit by <${{ steps.generate-token.outputs.app-slug }}[bot]>"
