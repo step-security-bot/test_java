@@ -51,7 +51,7 @@ jobs:
         continue-on-error: true
       - name: Set up git config
         run: |
-          git config --global user.name ${{ steps.generate-token.outputs.app-slug }}
+          git config --global user.name ${{ steps.generate-token.outputs.app-slug }}[bot]
           git config --global user.email "${{ steps.get-user-id.outputs.user-id }}+${{ steps.generate-token.outputs.app-slug }}[bot]@users.noreply.github.com"
       - name: git add
         run: |
@@ -64,7 +64,7 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           commit-message: "ci: 🤖 format everything with pre-commit"
           committer: ${{ steps.committer.outputs.string }}
-          author: ${{ steps.committer.outputs.string }}
+          author: ${{ steps.generate-token.outputs.app-slug }}[bot]
           signoff: true
           branch: pre-commit
           title: "🤖 format everything with pre-commit by <github-actions[bot]>"
@@ -75,4 +75,4 @@ jobs:
           draft: false
           delete-branch: true
           labels: github-actions
-          sign-commits: true
+          sign-commits: true 
