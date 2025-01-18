@@ -118,3 +118,6 @@ jobs:
           delete-branch: true
           labels: Documentation,Translation,github-actions
           sign-commits: true
+          add-paths: |
+            README.md
+            src/main/resources/messages_*.properties
