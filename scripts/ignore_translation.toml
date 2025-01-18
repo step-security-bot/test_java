@@ -266,4 +266,5 @@ ignore = [
 [zh_TW]
 ignore = [
     'language.direction',
+    'showJS.tags',
 ]
