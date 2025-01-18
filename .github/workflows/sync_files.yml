@@ -73,6 +73,11 @@ jobs:
         run: |
           git add .
           git diff --staged --quiet || git commit -m ":memo: Sync translation files" || echo "no changes"
+      - name: Push changes
+        if: always() # Push, falls Änderungen existieren
+        run: |
+          git branch sync_readme
+          git push origin sync_readme
 
   sync-readme:
     needs: ["sync-files"]
