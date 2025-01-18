@@ -67,7 +67,7 @@ jobs:
       - name: Run git add
         run: |
           git add src/main/resources/static/3rdPartyLicenses.json
-          git diff --staged --quiet || echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
+          git diff --staged --exit-code || echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
 
       - name: Create Pull Request
         id: cpr
