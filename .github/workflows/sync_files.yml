@@ -16,7 +16,6 @@ jobs:
   read_bot_entries:
     runs-on: ubuntu-latest
     outputs:
-      userID: ${{ steps.get-user-id.outputs.user-id }}
       userName: ${{ steps.get-user-id.outputs.user_name }}
       userEmail: ${{ steps.get-user-id.outputs.user_email }}
       committer: ${{ steps.committer.outputs.committer }}
@@ -112,7 +111,7 @@ jobs:
           title: ":memo: Sync translation files + Update README.md (Translation Progress Table)"
           body: |
             #### Description
-            
+
             This Pull Request was automatically generated to synchronize updates to translation files and documentation. The changes include:
 
             1. **Synchronization of Translation Files:**
