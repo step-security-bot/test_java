@@ -21,6 +21,32 @@ import argparse
 import re
 
 
+def find_duplicate_keys(file_path):
+    keys = {}
+    duplicates = []
+
+    with open(file_path, "r", encoding="utf-8") as file:
+        for line_number, line in enumerate(file, start=1):
+            stripped_line = line.strip()
+
+            # Überspringe leere Zeilen und Kommentare
+            if not stripped_line or stripped_line.startswith("#"):
+                continue
+
+            # Teile die Zeile in Schlüssel und Wert
+            if "=" in stripped_line:
+                key, _ = stripped_line.split("=", 1)
+                key = key.strip()
+
+                # Prüfe, ob der Schlüssel bereits existiert
+                if key in keys:
+                    duplicates.append((key, keys[key], line_number))
+                else:
+                    keys[key] = line_number
+
+    return duplicates
+
+
 # Maximum size for properties files (e.g., 200 KB)
 MAX_FILE_SIZE = 200 * 1024
 
@@ -245,6 +271,17 @@ def check_for_differences(reference_file, file_list, branch, actor):
                 )
         else:
             report.append("2. **Test Status:** ✅ **_Passed_**")
+
+        if find_duplicate_keys(file_path):
+            print(find_duplicate_keys(file_path))
+            output = ", ".join([f"'{key}': first at line {first}, duplicate at line {duplicate}" for key, first, duplicate in find_duplicate_keys(file_path)])
+            has_differences = True
+            report.append("3. **Test Status:** ❌ **_Failed_**")
+            report.append("  - **Issue:**")
+            report.append("    - duplicate entries were found " + output)
+        else:
+            report.append("3. **Test Status:** ✅ **_Passed_**")
+
         report.append("")
         report.append("---")
         report.append("")
