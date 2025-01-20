@@ -166,7 +166,7 @@ jobs:
         shell: pwsh
 
       - run: |
-          wix --version
+          dotnet tool install --global wix
         shell: pwsh
 
       - name: Display current directory
