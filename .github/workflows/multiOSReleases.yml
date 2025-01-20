@@ -165,6 +165,10 @@ jobs:
           .\wix.exe /install /quiet
         shell: pwsh
 
+      - run: |
+          wix --version
+        shell: pwsh
+
       - name: Display current directory
         run: |
           echo "Current Directory: $(Get-Location)"
