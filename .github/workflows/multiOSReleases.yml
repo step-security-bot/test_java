@@ -163,6 +163,7 @@ jobs:
           .\wix.exe /install /quiet
           where wix
 
+      - run: where wix
       - run: exit 1
 
       # # Build installer
