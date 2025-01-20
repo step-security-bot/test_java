@@ -160,7 +160,10 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           curl -L -o wix.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
+
+      - run: |
           .\wix.exe /install /quiet
+        shell: pwsh
 
       - name: Display current directory
         run: |
