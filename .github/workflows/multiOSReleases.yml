@@ -167,6 +167,10 @@ jobs:
           echo "Current Directory: $(Get-Location)"
         shell: pwsh
 
+      - name: Display current directory using CMD
+        run: |
+          cmd /c where wix
+
       - run: exit 1
 
       # # Build installer
