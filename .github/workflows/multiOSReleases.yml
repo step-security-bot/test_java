@@ -161,28 +161,31 @@ jobs:
         run: |
           curl -L -o wix.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
           .\wix.exe /install /quiet
+          where wix
 
-      # Build installer
-      - name: Build Installer
-        run: ./gradlew build jpackage -x test --info
-        env:
-          DOCKER_ENABLE_SECURITY: false
-          STIRLING_PDF_DESKTOP_UI: true
-          BROWSER_OPEN: true
+      - run: exit 1
 
-      # Rename and collect artifacts based on OS
-      - name: Prepare artifacts
-        id: prepare
-        shell: bash
-        run: |
-          mkdir ./binaries
-          if [ "${{ matrix.os }}" = "windows-latest" ]; then
-            mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.version }}.exe" "./binaries/Stirling-PDF-win-installer.exe"
-          elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-            mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.versionMac }}.dmg" "./binaries/Stirling-PDF-mac-installer.dmg"
-          else
-            mv "./build/jpackage/stirling-pdf_${{ needs.read_versions.outputs.version }}-1_amd64.deb" "./binaries/Stirling-PDF-linux-installer.deb"
-          fi
+      # # Build installer
+      # - name: Build Installer
+      #   run: ./gradlew build jpackage -x test --info
+      #   env:
+      #     DOCKER_ENABLE_SECURITY: false
+      #     STIRLING_PDF_DESKTOP_UI: true
+      #     BROWSER_OPEN: true
+
+      # # Rename and collect artifacts based on OS
+      # - name: Prepare artifacts
+      #   id: prepare
+      #   shell: bash
+      #   run: |
+      #     mkdir ./binaries
+      #     if [ "${{ matrix.os }}" = "windows-latest" ]; then
+      #       mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.version }}.exe" "./binaries/Stirling-PDF-win-installer.exe"
+      #     elif [ "${{ matrix.os }}" = "macos-latest" ]; then
+      #       mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.versionMac }}.dmg" "./binaries/Stirling-PDF-mac-installer.dmg"
+      #     else
+      #       mv "./build/jpackage/stirling-pdf_${{ needs.read_versions.outputs.version }}-1_amd64.deb" "./binaries/Stirling-PDF-linux-installer.deb"
+      #     fi
 
       - name: Display structure of downloaded files
         run: ls -R ./binaries
