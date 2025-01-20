@@ -162,9 +162,10 @@ jobs:
           curl -L -o wix.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
           .\wix.exe /install /quiet
 
-      - run: echo %cd%
-
-      - run: ls -la
+      - name: Display current directory
+        run: |
+          echo "Current Directory: $(Get-Location)"
+        shell: pwsh
 
       - run: exit 1
 
