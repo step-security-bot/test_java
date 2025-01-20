@@ -130,8 +130,8 @@ jobs:
         include:
           - os: windows-latest
             platform: win-
-          # - os: macos-latest
-          #   platform: mac-
+          - os: macos-latest
+            platform: mac-
           # - os: ubuntu-latest
           #   platform: linux-
     runs-on: ${{ matrix.os }}
@@ -145,74 +145,57 @@ jobs:
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      # - name: Set up JDK 21
-      #   uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4.6.0
-      #   with:
-      #     java-version: "21"
-      #     distribution: "temurin"
-
-      # - uses: gradle/actions/setup-gradle@0bdd871935719febd78681f197cd39af5b6e16a6 # v4.2.2
-      #   with:
-      #     gradle-version: 8.12
-
-      - name: Cache WiX Toolset
-        if: matrix.os == 'windows-latest'
-        id: cache
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+      - name: Set up JDK 21
+        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4.6.0
         with:
-          path: D:\a\test_java\test_java
-          key: wix-cache-${{ runner.os }}-${{ hashFiles('wix.exe') }}
-          restore-keys: |
-            wix-cache-${{ runner.os }}-
+          java-version: "21"
+          distribution: "temurin"
+
+      - uses: gradle/actions/setup-gradle@0bdd871935719febd78681f197cd39af5b6e16a6 # v4.2.2
+        with:
+          gradle-version: 8.12
 
       # Install Windows dependencies
       - name: Retry WiX Download
-        if: matrix.os == 'windows-latest' && steps.cache.outputs.cache-hit != 'true'
+        if: matrix.os == 'windows-latest'
         run: |
           for ($i = 1; $i -le 3; $i++) {
             Write-Host "Attempt $i to download WiX Toolset..."
             curl -L -o wix.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
             if (Test-Path ./wix.exe) {
-              Write-Host "Download succeeded."
+              Write-Host "WiX Toolset downloaded successfully."
               break
             }
             Write-Host "Download failed. Retrying in 5 seconds..."
             Start-Sleep -Seconds 5
           }
 
-      - name: Verify Download
+      - name: Install WiX Toolset
         if: matrix.os == 'windows-latest'
         run: |
-          if (Test-Path ./wix.exe) {
-            Write-Host "WiX Toolset downloaded successfully."
-          } else {
-            Write-Host "WiX Toolset download failed after multiple attempts."
-            exit 1
-          }
+          .\wix.exe /install /quiet
 
-      - run: exit 1
+      # Build installer
+      - name: Build Installer
+        run: ./gradlew build jpackage -x test --info
+        env:
+          DOCKER_ENABLE_SECURITY: false
+          STIRLING_PDF_DESKTOP_UI: true
+          BROWSER_OPEN: true
 
-      # # Build installer
-      # - name: Build Installer
-      #   run: ./gradlew build jpackage -x test --info
-      #   env:
-      #     DOCKER_ENABLE_SECURITY: false
-      #     STIRLING_PDF_DESKTOP_UI: true
-      #     BROWSER_OPEN: true
-
-      # # Rename and collect artifacts based on OS
-      # - name: Prepare artifacts
-      #   id: prepare
-      #   shell: bash
-      #   run: |
-      #     mkdir ./binaries
-      #     if [ "${{ matrix.os }}" = "windows-latest" ]; then
-      #       mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.version }}.exe" "./binaries/Stirling-PDF-win-installer.exe"
-      #     elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-      #       mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.versionMac }}.dmg" "./binaries/Stirling-PDF-mac-installer.dmg"
-      #     else
-      #       mv "./build/jpackage/stirling-pdf_${{ needs.read_versions.outputs.version }}-1_amd64.deb" "./binaries/Stirling-PDF-linux-installer.deb"
-      #     fi
+      # Rename and collect artifacts based on OS
+      - name: Prepare artifacts
+        id: prepare
+        shell: bash
+        run: |
+          mkdir ./binaries
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.version }}.exe" "./binaries/Stirling-PDF-win-installer.exe"
+          elif [ "${{ matrix.os }}" = "macos-latest" ]; then
+            mv "./build/jpackage/Stirling-PDF-${{ needs.read_versions.outputs.versionMac }}.dmg" "./binaries/Stirling-PDF-mac-installer.dmg"
+          else
+            mv "./build/jpackage/stirling-pdf_${{ needs.read_versions.outputs.version }}-1_amd64.deb" "./binaries/Stirling-PDF-linux-installer.deb"
+          fi
 
       - name: Display structure of downloaded files
         run: ls -R ./binaries
