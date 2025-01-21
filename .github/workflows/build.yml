@@ -41,10 +41,7 @@ jobs:
 
       - run: |
           # Generate verification metadata with signatures and checksums
-          ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp
-
-          # Export the .keys file
-          ./gradlew --export-keys
+          ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --export-keys build
 
       - name: Build with Gradle and no spring security
         run: ./gradlew clean build
