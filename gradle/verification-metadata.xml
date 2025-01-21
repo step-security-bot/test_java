@@ -40,7 +40,6 @@
          <trusted-key id="19BEAB2D799C020F17C69126B16698A4ADF4D638" group="org.checkerframework" name="checker-qual"/>
          <trusted-key id="1AA8CF92D409A73393D0B736BFF2EE42C8282E76" group="org.apache.activemq" name="activemq-bom" version="6.1.4"/>
          <trusted-key id="1D04A424F505394DBED15D451D0690E353BE126D" group="net.minidev"/>
-         <trusted-key id="1D2C7EF8ADA0F794B58C7C63436902AF59EDF60E" group="dev.equo.ide" name="solstice" version="1.8.1"/>
          <trusted-key id="20FC6EC5F628F0EB66F157B8DC97B815CAC4E847" group="io.github.pixee" name="java-security-toolkit" version="1.2.1"/>
          <trusted-key id="2518174F4111F02779592A6F9757D7E7E06DD2AC" group="io.prometheus"/>
          <trusted-key id="2655176F748FD83725B4805FF2A01147D830C125" group="org.testcontainers" name="testcontainers-bom"/>
