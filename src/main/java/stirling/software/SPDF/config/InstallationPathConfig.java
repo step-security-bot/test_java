@@ -22,6 +22,7 @@ public class InstallationPathConfig {
     // Pipeline paths
     private static final String PIPELINE_WATCHED_FOLDERS_PATH;
     private static final String PIPELINE_FINISHED_FOLDERS_PATH;
+    private static final String PIPELINE_DEFAULT_WEB_UI_CONFIGS;
 
     // Custom file paths
     private static final String STATIC_PATH;
@@ -45,6 +46,7 @@ public class InstallationPathConfig {
         // Initialize pipeline paths
         PIPELINE_WATCHED_FOLDERS_PATH = PIPELINE_PATH + "watchedFolders" + File.separator;
         PIPELINE_FINISHED_FOLDERS_PATH = PIPELINE_PATH + "finishedFolders" + File.separator;
+        PIPELINE_DEFAULT_WEB_UI_CONFIGS = PIPELINE_PATH + "defaultWebUIConfigs" + File.separator;
 
         // Initialize custom file paths
         STATIC_PATH = CUSTOM_FILES_PATH + "static" + File.separator;
@@ -116,6 +118,10 @@ public class InstallationPathConfig {
 
     public static String getPipelineFinishedFoldersDir() {
         return PIPELINE_FINISHED_FOLDERS_PATH;
+    }
+
+    public static String getPipelineDefaultWebUIConfigsDir() {
+        return PIPELINE_DEFAULT_WEB_UI_CONFIGS;
     }
 
     public static String getStaticPath() {
