@@ -29,6 +29,7 @@ updates:
       interval: daily
       time: "19:45"
       timezone: "Europe/Berlin"
+    rebase-strategy: "auto"
   - package-ecosystem: "maven" # See documentation for possible values
     directory: "/" # Location of package manifests
     labels:
