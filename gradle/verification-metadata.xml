@@ -1,0 +1,1690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<verification-metadata xmlns="https://schema.gradle.org/dependency-verification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://schema.gradle.org/dependency-verification https://schema.gradle.org/dependency-verification/dependency-verification-1.3.xsd">
+   <configuration>
+      <verify-metadata>true</verify-metadata>
+      <verify-signatures>true</verify-signatures>
+      <ignored-keys>
+         <ignored-key id="02DE09238A0E4D34" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="0459A2B383ED8C11" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="0AA3E5C3D232E79B" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="0E325BECB6962A24" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="15C71C0A4E0B8EDD" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="1CF0293FA53CA458" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="21871D2A9AB66A31" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="2A742740E08E7F8D" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="2C7B12F2A511E325" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="2D0E1FB8FE4B68B4" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="2E2010F8A7FF4A41" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="3595395EB3D8E1BA" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="3684155E9365C30E" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="378B845402277962" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="3FFE64C7506FCCC9" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="436902AF59EDF60E" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="4A6CE7EBC7F4F54B" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="56E73BA9A0B592D0" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="6425559C47CC79C4" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="66B50994442D2D40" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="66D68DAA073BE985" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="689CBE64F4BC997F" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="6B1B008864323B92" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="72D1B04BC7E6AA04" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="7A3C9FE21DFDBF44" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="7C25280EAE63EBE5" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="84E913A8E3A748C0" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="8AC0378EC753063D" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="8C77ED250E495230" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="9549F6CB1E679A56" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="991EFB94DB91127D" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="9A0B94DEC0FFA7EE" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="9A2C7A98E457C53D" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="A2115AE15F6B8B72" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="A388C395AAFB80F8" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="A41F13C999945293" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="ABE9F3126BB741C1" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="AECDB81D38EA9C89" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="B95BBD3FA43C4492" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="BCF4173966770193" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="BFFC9B54721244AD" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="C809CA3C41BA6E96" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="D364ABAA39A47320" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="D3FA67D522C55256" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="D433B437192A0FD1" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="D56C721C1CFF1424" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="DF3CC7C64D56297B" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="ECEAC3B11AD0E0A0" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="F2A01147D830C125" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="F3D1600878E85A3D" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="F5C81DE10A0B8ECC" reason="Key couldn't be downloaded from any key server"/>
+         <ignored-key id="F6D4A1D411E9D1AE" reason="Key couldn't be downloaded from any key server"/>
+      </ignored-keys>
+      <trusted-keys>
+         <trusted-key id="015479E1055341431B4545AB72475FD306B9CAB7" group="com.googlecode.javaewah" name="JavaEWAH" version="1.2.3"/>
+         <trusted-key id="042B29E928995B9DB963C636C7CA19B7B620D787" group="com.github.stephenc.jcip" name="jcip-annotations" version="1.0-1"/>
+         <trusted-key id="04543577D6A9CC626239C50C7ECBD740FF06AEB5">
+            <trusting group="org.glassfish.jaxb"/>
+            <trusting group="^com[.]sun($|([.].*))" regex="true"/>
+         </trusted-key>
+         <trusted-key id="050A37A2E0577F4BAA095B52602EC18D20C4661C">
+            <trusting group="com.thoughtworks.xstream"/>
+            <trusting group="io.github.x-stream"/>
+         </trusted-key>
+         <trusted-key id="07E20F0103D9DFC697C490D0368557390486F2C5">
+            <trusting group="io.rest-assured"/>
+            <trusting group="org.awaitility"/>
+         </trusted-key>
+         <trusted-key id="08F0AAB4D0C1A4BDDE340765B341DDB020FCB6AB" group="org.bouncycastle"/>
+         <trusted-key id="0A60B3F1FCB211175300EC206E50BB68CC1699A6" group="com.github.jai-imageio"/>
+         <trusted-key id="0B1B71E813C226033B16D8C5F0D228D8FF31B515" group="^io[.]zipkin($|([.].*))" regex="true"/>
+         <trusted-key id="0B743A794876D3C78AB542A118D239B1CBCD2236" group="org.glassfish.jersey" name="jersey-bom"/>
+         <trusted-key id="0CDE80149711EB46DFF17AE421A24B3F8B0F594A" group="org.apache" name="apache" version="16"/>
+         <trusted-key id="0CFA413799E2464C7D7E26220A4B343F2A55FDAE" group="com.h2database" name="h2" version="2.3.232"/>
+         <trusted-key id="0E0CA56D354132B5E646C25F49A1796B9B494CB8" group="org.opensaml"/>
+         <trusted-key id="1452F35849B50750F6A3BBB4B54011358B352F85" group="org.hibernate.orm" name="hibernate-core" version="6.6.4.Final"/>
+         <trusted-key id="190D5A957FF22273E601F7A7C92C5FEC70161C62" group="org.apache" name="apache" version="18"/>
+         <trusted-key id="19BEAB2D799C020F17C69126B16698A4ADF4D638" group="org.checkerframework" name="checker-qual"/>
+         <trusted-key id="1AA8CF92D409A73393D0B736BFF2EE42C8282E76" group="org.apache.activemq" name="activemq-bom" version="6.1.4"/>
+         <trusted-key id="1D04A424F505394DBED15D451D0690E353BE126D" group="net.minidev"/>
+         <trusted-key id="20FC6EC5F628F0EB66F157B8DC97B815CAC4E847" group="io.github.pixee" name="java-security-toolkit" version="1.2.1"/>
+         <trusted-key id="2518174F4111F02779592A6F9757D7E7E06DD2AC" group="io.prometheus"/>
+         <trusted-key id="28118C070CB22A0175A2E8D43D12CA2AC19F3181" group="^com[.]fasterxml($|([.].*))" regex="true"/>
+         <trusted-key id="28417C95E8906D108392822354A43F3254868410" group="org.apache.activemq"/>
+         <trusted-key id="2B1DD4CE9223D4E19C73531E5657B51F13E59DBE" group="com.unboundid.product.scim2"/>
+         <trusted-key id="2B34821418CF19CF1F2A8352953E02E4F573B46F" group="jakarta.platform"/>
+         <trusted-key id="2BCBDD0F23EA1CAFCC11D4860374CF2E8DD1BDFD" group="net.java"/>
+         <trusted-key id="2DB4F1EF0FA761ECC4EA935C86FDC7E2A11262CB">
+            <trusting group="commons-beanutils"/>
+            <trusting group="commons-codec"/>
+            <trusting group="commons-io"/>
+            <trusting group="commons-logging"/>
+            <trusting group="org.apache.commons"/>
+            <trusting group="xml-apis"/>
+         </trusted-key>
+         <trusted-key id="33FD4BFD33554634053D73C0C2148900BCD3C2AF" group="org.jetbrains" name="annotations" version="24.0.1"/>
+         <trusted-key id="34441E504A937F43EB0DAEF96A65176A0FB1CD0B" group="org.apache.groovy" name="groovy-bom"/>
+         <trusted-key id="3690C240CE51B4670D30AD1C38EE757D69184620" group="org.tukaani" name="xz" version="1.9"/>
+         <trusted-key id="3750777B9C4B7D233B9D0C40307A96FBA0292109" group="org.postgresql" name="postgresql" version="42.7.4"/>
+         <trusted-key id="38319E05F62674572CDF886170B2EBE96C112CC9" group="org.cryptacular" name="cryptacular" version="1.2.5"/>
+         <trusted-key id="3E61D8C230332482009D7F0EDB901B24CAD38BC4" group="io.swagger.core.v3"/>
+         <trusted-key id="3F05DDA9F317301E927136D417A27CE7A60FF5F0" group="io.opentelemetry" name="opentelemetry-bom"/>
+         <trusted-key id="4008F9DFF7DBC968F35F9E712642156411CCE8B3" group="com.vladsch.flexmark"/>
+         <trusted-key id="44FBDBBC1A00FE414F1C1873586654072EAD6677" group="org.sonatype.oss" name="oss-parent" version="9"/>
+         <trusted-key id="4797B4F5DCC46CEA61059071A1AE06236CA2BA62" group="^com[.]diffplug($|([.].*))" regex="true"/>
+         <trusted-key id="47EF0EC60C210BC6DFAA5819B7AE15C15C321C44" group="jakarta.transaction" name="jakarta.transaction-api" version="2.0.1"/>
+         <trusted-key id="482C52BC305FB31063CD19D67BEFA2F0A9C24E7D" group="net.sf.launch4j" name="launch4j" version="3.50"/>
+         <trusted-key id="48B086A7D843CFA258E83286928FBF39003C0425">
+            <trusting group="io.micrometer"/>
+            <trusting group="io.projectreactor"/>
+            <trusting group="io.spring.gradle"/>
+            <trusting group="^org[.]springframework($|([.].*))" regex="true"/>
+         </trusted-key>
+         <trusted-key id="498AAC354AA5CB36FAAB7608B6E83A2D2E447E56" group="org.apache.cassandra" name="java-driver-bom" version="4.18.1"/>
+         <trusted-key id="57312C37B064EE0FDAB0130490D5CE79E1DE6A2C" group="com.querydsl" name="querydsl-bom"/>
+         <trusted-key id="5C9A30FF22B2C02F30261C305B93F1DF7CDB6DEA" group="org.apache.xmlgraphics"/>
+         <trusted-key id="6DD3B8C64EF75253BEB2C53AD908A43FB7EC07AC" group="jakarta.activation" name="jakarta.activation-api" version="2.1.3"/>
+         <trusted-key id="6F538074CCEBF35F28AF9B066A0975F8B1127B83" group="org.jetbrains.kotlin"/>
+         <trusted-key id="70CD19BFD9F6C330027D6F260315BFB7970A144F" group="javax.xml.bind"/>
+         <trusted-key id="71EBF1CA4125B10AAB1E17CDB7DC526C17E3608B" group="jakarta.persistence" name="jakarta.persistence-api" version="3.1.0"/>
+         <trusted-key id="7464550A61C90BA385FC97A76D9567281201E5E3" group="jakarta.servlet" name="jakarta.servlet-api" version="6.0.0"/>
+         <trusted-key id="7616EB882DAF57A11477AAF559A252FB1199D873" group="com.google.code.findbugs" name="jsr305" version="3.0.2"/>
+         <trusted-key id="7A1D848E7C2AF85EEBA69C99E7BF252CF360097E" group="org.latencyutils" name="LatencyUtils" version="2.0.3"/>
+         <trusted-key id="7C669810892CBD3148FA92995B05CCDE140C2876" group="org.eclipse.jgit"/>
+         <trusted-key id="80F6D6B0D90C6747753344CAB5A9E81B565E89E0" group="org.tomlj" name="tomlj" version="1.0.0"/>
+         <trusted-key id="81BE0C38ACE8AEDC7735A05F4C2AFF633F3A7223" group="org.seleniumhq.selenium" name="selenium-bom"/>
+         <trusted-key id="81CCDC71C7D61C179B27002D6A9FBE152D4C64D1" group="org.openjfx"/>
+         <trusted-key id="82F0964816AD7319CB0CCCF93EFD9D223D715E9A" group="com.nimbusds"/>
+         <trusted-key id="839323A4780D5BF9A6978970152888E10EF880B3">
+            <trusting group="org.attoparser"/>
+            <trusting group="org.unbescape"/>
+            <trusting group="^org[.]thymeleaf($|([.].*))" regex="true"/>
+         </trusted-key>
+         <trusted-key id="84789D24DF77A32433CE1F079EB80E92EB2135B1" group="org.apache" name="apache"/>
+         <trusted-key id="8756C4F765C9AC3CB6B85D62379CE192D401AB61" group="com.diffplug.durian"/>
+         <trusted-key id="894F14D98D7F20D5E82645E3DFE102108BF9381F" group="org.hibernate.search" name="hibernate-search-bom" version="7.1.2.Final"/>
+         <trusted-key id="94976E17E18DD3201447286954963C3E875A56AE" group="io.smallrye"/>
+         <trusted-key id="9579802DC3E15DE9C389239FC0D48A119CE7EE7B" group="com.zaxxer" name="HikariCP" version="5.1.0"/>
+         <trusted-key id="982C26A0C156D986CC2AD19E3FBA8E8E719022D7" group="org.jboss" name="jboss-parent" version="39"/>
+         <trusted-key id="9E3044071B758EBCB7E45673700E4F39BC05364B" group="org.eclipse.platform" name="org.eclipse.osgi" version="3.18.500"/>
+         <trusted-key id="A41A5960555F8CBBC7D8B2D7787F3A057B828D36" group="org.springdoc"/>
+         <trusted-key id="A5BD02B93E7A40482EB1D66A5F69AD087600B22C" group="org.ow2.asm"/>
+         <trusted-key id="A654E2E6D97BE4219A4909415B15A33991BEA5A8" group="me.friwi"/>
+         <trusted-key id="A6D6C97108B8585F91B158748671A8DF71296252" group="com.squareup.okhttp3" name="okhttp-bom" version="4.10.0"/>
+         <trusted-key id="A7892505CF1A58076453E52D7999BEFBA1039E8B" group="net.bytebuddy"/>
+         <trusted-key id="A9789342F598AD5B1175EF357EB97D110DFADD60" group="com.googlecode.concurrent-trees" name="concurrent-trees" version="2.6.1"/>
+         <trusted-key id="AA70C7C433D501636392EC02153E7A3C2B4E5118" group="org.eclipse.ee4j" name="project"/>
+         <trusted-key id="AB1DC33940689C44669107094989E0E939C2999B" group="com.opencsv" name="opencsv" version="5.10"/>
+         <trusted-key id="B1F250C1F371EBF0E31E86E30E31BBB30C940D01" group="com.posthog.java" name="posthog" version="1.1.1"/>
+         <trusted-key id="B6E73D84EA4FCC47166087253FAAD2CD5ECBB314" group="org.apache.commons" name="commons-parent"/>
+         <trusted-key id="BE685132AFD2740D9095F9040CC0B712FEE75827" group="org.assertj"/>
+         <trusted-key id="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7" group="com.google.code.gson"/>
+         <trusted-key id="C89074FC8BE681B7C7EAAB6E4C5EED3C53B75933" group="org.skyscreamer" name="jsonassert" version="1.5.3"/>
+         <trusted-key id="CA62ED130E4053944406DF640181B45EA58677BC" group="org.apache.logging" name="logging-parent" version="7"/>
+         <trusted-key id="CC57399D74CD7E4768ED6FA4CA62973FBF0451C0" group="com.vaadin.external.google" name="android-json" version="0.0.20131108.vaadin1"/>
+         <trusted-key id="CD5464315F0B98C77E6E8ECD9DAADC1C9FCC82D0" group="commons-cli" name="commons-cli" version="1.4"/>
+         <trusted-key id="CE3285F320685193D11FEA01F6CE9695C9318406" group="com.google.zxing"/>
+         <trusted-key id="CE4439C1BEF3DA83B1832F9DBEFEEF227A98B809" group="org.apache.velocity"/>
+         <trusted-key id="D421D1DF4570BFB13E485D0BF95ADD0A28D2F139" group="org.projectlombok" name="lombok" version="1.18.36"/>
+         <trusted-key id="DB45ECD19B97514F727105AE67BF80B10AD53983" group="org.apache.santuario" name="xmlsec" version="2.3.4"/>
+         <trusted-key id="DBFBFF8DA2F1571ACC6F63AB905CF8FC70CC1444" group="org.aspectj" name="aspectjweaver" version="1.9.22.1"/>
+         <trusted-key id="E113159331A1F87BFC2A93D0960D2E8635A91268" group="org.hdrhistogram" name="HdrHistogram" version="2.2.2"/>
+         <trusted-key id="E3A9F95079E84CE201F7CF60BEDE11EAF1164480" group="org.hamcrest" name="hamcrest"/>
+         <trusted-key id="E7DC75FC24FB3C8DFE8086AD3D5839A2262CBBFB" group="org.jetbrains.kotlinx"/>
+         <trusted-key id="E85AED155021AF8A6C6B7A4A7C7D8456294423BA" group="org.objenesis"/>
+         <trusted-key id="F046369B06B761AC86D9849F71B329993BFFCFDD" group="com.oracle.database.jdbc" name="ojdbc-bom" version="21.9.0.0"/>
+         <trusted-key id="F1232CDCD94176E7FBA9CFE289A2C76A5EE16E57" group="technology.tabula" name="tabula" version="1.0.5"/>
+         <trusted-key id="F3184BCD55F4D016E30D4C9BF42E87F9665015C9" group="org.jsoup" name="jsoup" version="1.15.4"/>
+         <trusted-key id="F55EF5BB19F52A250FEDC0DF39450183608E49D4" group="com.googlecode.owasp-java-html-sanitizer"/>
+         <trusted-key id="F5FEBA84EB26C56457B2CF819E31AB27445478DB" group="org.infinispan"/>
+         <trusted-key id="F674EBA7B6EC777BDB58942DE0E92C40A43A012A" group="jakarta.websocket"/>
+         <trusted-key id="FA77DCFEF2EE6EB2DEBEDD2C012579464D01C06A" group="org.apache" name="apache"/>
+         <trusted-key id="FC411CD3CB7DCB0ABC9801058118B3BCDB1A5000" group="jakarta.xml.bind"/>
+         <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51">
+            <trusting group="org.apiguardian"/>
+            <trusting group="org.opentest4j"/>
+            <trusting group="^org[.]junit($|([.].*))" regex="true"/>
+         </trusted-key>
+      </trusted-keys>
+   </configuration>
+   <components>
+      <component group="ch.qos.logback" name="logback-classic" version="1.5.12">
+         <artifact name="logback-classic-1.5.12.jar">
+            <sha256 value="ebe1a2ce1072b365090d58af40fcb7482d7864a31cd2b1c62c9b1d13f9a80c09" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="logback-classic-1.5.12.pom">
+            <sha256 value="edd540e1a8a2b015a13812867a04f22e8b1ec808e9289b6b9199df5dea489688" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="ch.qos.logback" name="logback-core" version="1.5.12">
+         <artifact name="logback-core-1.5.12.jar">
+            <sha256 value="3f35b41621c2cbf72a9d9f3ce2270ba2040e4808bd6befdd720866e926d3e84a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="logback-core-1.5.12.pom">
+            <sha256 value="abdb6e589878db68c9ad8612cadf0a2109b785877c64666705a7f16a24e5a2e0" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="ch.qos.logback" name="logback-parent" version="1.5.12">
+         <artifact name="logback-parent-1.5.12.pom">
+            <sha256 value="e660e1f070d503850ae0752170e055ce02eb6f82956f4c2af35e8014c3ee5ad5" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.adobe.xmp" name="xmpcore" version="6.1.11">
+         <artifact name="xmpcore-6.1.11.jar">
+            <sha256 value="8f7033c579b99fa0d9d6ddcb9448875b5e4b577c350002278ce46997d678b737" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="xmpcore-6.1.11.pom">
+            <sha256 value="719118182102c2533e92a2f67c03510264e6160571a738ac863e75712417323d" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.bucket4j" name="bucket4j_jdk17-core" version="8.14.0">
+         <artifact name="bucket4j_jdk17-core-8.14.0.jar">
+            <sha256 value="6cd5536842973be991f27cc5adcbcaf3bf94a8d542a4a7d28aa82ef6e9d7924e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="bucket4j_jdk17-core-8.14.0.pom">
+            <sha256 value="0bb87fac8353e4cb02e8f6786aa6535f222ae22bdb6a3b8e0ca6b34a066e4f78" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.coveo" name="saml-client" version="5.0.0">
+         <artifact name="saml-client-5.0.0.jar">
+            <sha256 value="72023850f382b49d856dfbca6c12b29bcee5ea0989404425786e146e4b945c8a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="saml-client-5.0.0.pom">
+            <sha256 value="ac65737cbdc9caa8e84d76780354d51d43c0b15ea817b1ce5c096bff8c0c47b4" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.datastax.oss" name="java-driver-bom" version="4.15.0">
+         <artifact name="java-driver-bom-4.15.0.pom">
+            <sha256 value="5c9e31eff95cf375c5bdfff85ce28287d59afcf5134b4e6a24a763db171a5e67" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.diffplug.spotless" name="com.diffplug.spotless.gradle.plugin" version="7.0.2">
+         <artifact name="com.diffplug.spotless.gradle.plugin-7.0.2.pom">
+            <sha256 value="ed1ded77a296a6fe21a50279c926c07be14af7c08c2437d3685c70fcf6bba02d" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.drewnoakes" name="metadata-extractor" version="2.19.0">
+         <artifact name="metadata-extractor-2.19.0.jar">
+            <sha256 value="e51bb454ed08ea2bfcc3ad147d088ad1aa73a999e0072563f8ae50021a2fcadb" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="metadata-extractor-2.19.0.pom">
+            <sha256 value="7ea5c3c4fb65d84441bdeda832c0e9ae04e8a33bab11caf827ab4e597b63b2ed" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.fathzer" name="javaluator" version="3.0.5">
+         <artifact name="javaluator-3.0.5.jar">
+            <sha256 value="9117f3dc610fe73ee87bb62d4118f18e92b8fa57e3e94fac6bebc354bdda4c99" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="javaluator-3.0.5.pom">
+            <sha256 value="cb54b7facd62e2dbc5852da0c7bef7b859cc78afb94379534620b66f1ccba6bd" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.fathzer" name="javaluator-parent-pom" version="1.0.1">
+         <artifact name="javaluator-parent-pom-1.0.1.pom">
+            <sha256 value="611574a85c0653dbf0a034bb889f4bac266bd28673e84676c36a3a4cda962df8" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.fathzer" name="parent-pom" version="1.0.8">
+         <artifact name="parent-pom-1.0.8.pom">
+            <sha256 value="cd143ab5264e9c73b1d204264f518a55a019a6681d57f2790beb3db3dd2c3c20" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.github.Carleslc.Simple-YAML" name="Simple-Configuration" version="1.8.4">
+         <artifact name="Simple-Configuration-1.8.4.jar">
+            <sha256 value="2b960f4840ac68bb1815d937ca2d58eb9b04c05e6a9b769a4e870c52a4728156" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="Simple-Configuration-1.8.4.pom">
+            <sha256 value="698e378e816a220edfcb754fd4c4f7d9a8fd38716b9081f63f9878d4bbf3cdd5" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.github.Carleslc.Simple-YAML" name="Simple-YAML-Parent" version="1.8.4">
+         <artifact name="Simple-YAML-Parent-1.8.4.pom">
+            <sha256 value="b9298b875185bd13b4e301187eeb234d3a1a4b1a871dd4a7461f2e7775121357" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.github.Carleslc.Simple-YAML" name="Simple-Yaml" version="1.8.4">
+         <artifact name="Simple-Yaml-1.8.4.jar">
+            <sha256 value="d558ca57927d4bc393e9522aac0cf60cc632a9f6f60cd6724aa94b7005e1fd18" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="Simple-Yaml-1.8.4.pom">
+            <sha256 value="47f1003cd91eb6c11b2c941bf89e72428aed92e6bfef327b18935dda28eb4072" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.github.jk1" name="gradle-license-report" version="2.9">
+         <artifact name="gradle-license-report-2.9.jar">
+            <sha256 value="ebfd6da851654c53216eea9eda1485c12e0cd6de5a9919bf5da9735a021f32af" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="gradle-license-report-2.9.module">
+            <sha256 value="4139a508481c369ae0f2627fa8387f1e20e58600f2037cdc1cdaa164e056f235" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.github.jk1.dependency-license-report" name="com.github.jk1.dependency-license-report.gradle.plugin" version="2.9">
+         <artifact name="com.github.jk1.dependency-license-report.gradle.plugin-2.9.pom">
+            <sha256 value="a79ca4dfe069d737faf075c8f4b6c6471c2e5cea8e1546946ae333d747fddf02" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.github.psxpaul" name="gradle-execfork-plugin" version="0.2.0">
+         <artifact name="gradle-execfork-plugin-0.2.0.jar">
+            <sha256 value="eb4f73df13ee24fb1952e0a9054c5618ef07f0d62386bfad1a04990df0cb3a65" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="gradle-execfork-plugin-0.2.0.module">
+            <sha256 value="7b239eb029b2e4cab00dddf1df204ef4bbf88e78a43619c26fbb1e49bc53c642" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.google.errorprone" name="error_prone_annotations" version="2.27.0">
+         <artifact name="error_prone_annotations-2.27.0.pom">
+            <sha256 value="4ca5a35d61235e16549ac346d1e34551cdf0fe27e84aa57e03cbeb255ea4e5da" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.errorprone" name="error_prone_annotations" version="2.28.0">
+         <artifact name="error_prone_annotations-2.28.0.jar">
+            <sha256 value="f3fc8a3a0a4020706a373b00e7f57c2512dd26d1f83d28c7d38768f8682b231e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="error_prone_annotations-2.28.0.pom">
+            <sha256 value="0ce909f13a568148476e5ee200f380f98c75ba08971aaf15db295eb77598ef3a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.errorprone" name="error_prone_parent" version="2.27.0">
+         <artifact name="error_prone_parent-2.27.0.pom">
+            <sha256 value="fa81829d049559df6927f9c9a6fd6bbd09f8b50e6d4736ae72c8300b6c3d7654" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.errorprone" name="error_prone_parent" version="2.28.0">
+         <artifact name="error_prone_parent-2.28.0.pom">
+            <sha256 value="accefdbb5416cef5fcd2ddc37db4f1fcb34a2193cc1a55dfe5970a131b3e7683" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.googlejavaformat" name="google-java-format" version="1.25.2">
+         <artifact name="google-java-format-1.25.2.jar">
+            <sha256 value="938d0321c3aadc8e45a51e4334f61ca9f71137908e0fe8853925ee2125e98c6f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="google-java-format-1.25.2.pom">
+            <sha256 value="59685c6e06b70bae2c596dc50660e4a9c32c9700eb8475da3cfcc9a5589d4704" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.googlejavaformat" name="google-java-format-parent" version="1.25.2">
+         <artifact name="google-java-format-parent-1.25.2.pom">
+            <sha256 value="25500efa1ef711ed9137d90906b133868ba068beec48af94090bf14c12969066" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.guava" name="failureaccess" version="1.0.2">
+         <artifact name="failureaccess-1.0.2.jar">
+            <sha256 value="8a8f81cf9b359e3f6dfa691a1e776985c061ef2f223c9b2c80753e1b458e8064" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="failureaccess-1.0.2.pom">
+            <sha256 value="19ebc6f4bdb4edbb3d07b6ee994f846b54ef295582a9b5634719ffa9f31d03b2" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.guava" name="guava" version="33.3.1-jre">
+         <artifact name="guava-33.3.1-jre.jar">
+            <sha256 value="4bf0e2c5af8e4525c96e8fde17a4f7307f97f8478f11c4c8e35a0e3298ae4e90" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="guava-33.3.1-jre.module">
+            <sha256 value="41858c84753fd96a6b7c51122fccef39558c91cc08264e08506bcf20e0e63733" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="guava-33.3.1-jre.pom">
+            <sha256 value="313b67fc13eb3b0634eda715a1229971f5de9b8188bc280762815b83a275f193" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.guava" name="guava-parent" version="26.0-android">
+         <artifact name="guava-parent-26.0-android.pom">
+            <sha256 value="f8698ab46ca996ce889c1afc8ca4f25eb8ac6b034dc898d4583742360016cc04" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.guava" name="guava-parent" version="33.3.1-jre">
+         <artifact name="guava-parent-33.3.1-jre.pom">
+            <sha256 value="55441db27e8869dfefe053059bdf478bdc7e95585642bf391f0023345fd56287" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.guava" name="listenablefuture" version="9999.0-empty-to-avoid-conflict-with-guava">
+         <artifact name="listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar">
+            <sha256 value="b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.pom">
+            <sha256 value="18d4b1db26153d4e55079ce1f76bb1fe05cdb862ef9954a88cbcc4ff38b8679b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.google.j2objc" name="j2objc-annotations" version="3.0.0">
+         <artifact name="j2objc-annotations-3.0.0.jar">
+            <sha256 value="88241573467ddca44ffd4d74aa04c2bbfd11bf7c17e0c342c94c9de7a70a7c64" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="j2objc-annotations-3.0.0.pom">
+            <sha256 value="23b3d039e168ad89dd114698e6dd7be383f4a2c577b8877d82c73a6515e74a17" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.jayway.jsonpath" name="json-path" version="2.9.0">
+         <artifact name="json-path-2.9.0.jar">
+            <sha256 value="11a9ee6f88bb31f1450108d1cf6441377dec84aca075eb6bb2343be157575bea" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="json-path-2.9.0.module">
+            <sha256 value="e6290043dae93a70d9ab3fa1beb879e8cf5ed5a8e0a90183fb96c2515a97083e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="json-path-2.9.0.pom">
+            <sha256 value="0c2537dde9bf9dc2a2c7967300fc13bc5229d192677fcb88b6fd89966936643f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.martiansoftware" name="jsap" version="2.1">
+         <artifact name="jsap-2.1.jar">
+            <sha256 value="331746fa62cfbc3368260c5a2e660936ad11be612308c120a044e120361d474e" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="jsap-2.1.pom">
+            <sha256 value="9acf56a8579c05bedd819d99232363e2bf327e8f73c67598dbd9885a845a3c69" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.squareup.okhttp3" name="okhttp" version="4.12.0">
+         <artifact name="okhttp-4.12.0.jar">
+            <sha256 value="b1050081b14bb7a3a7e55a4d3ef01b5dcfabc453b4573a4fc019767191d5f4e0" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="okhttp-4.12.0.module">
+            <sha256 value="607e220ff8215b929d829bbf54f332894f1459b4d795979aeafcbcc1cea54cf3" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.squareup.okio" name="okio" version="3.6.0">
+         <artifact name="okio-3.6.0.module">
+            <sha256 value="6a47ac50364e6598459401fb86f9b6cfcdf637b9b3a3045b1cc33cbf4c408218" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.squareup.okio" name="okio-jvm" version="3.6.0">
+         <artifact name="okio-jvm-3.6.0.jar">
+            <sha256 value="67543f0736fc422ae927ed0e504b98bc5e269fda0d3500579337cb713da28412" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="okio-jvm-3.6.0.module">
+            <sha256 value="b1c2199e1c0cc969ef61cbbe4af2ecaf9b06411bdde01cbaf6fc9134dfe04e8a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.sun.activation" name="all" version="1.2.0">
+         <artifact name="all-1.2.0.pom">
+            <sha256 value="1d8518e3ac7532a104e4f7be77def37c982e530723c6bdb3d67708cce2b0c2c4" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys" name="twelvemonkeys" version="3.12.0">
+         <artifact name="twelvemonkeys-3.12.0.pom">
+            <sha256 value="b6d09874fbddd9bb250d17817a931ef8e093bc18e74286ff06b040541980c730" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.common" name="common" version="3.12.0">
+         <artifact name="common-3.12.0.pom">
+            <sha256 value="da9ac9958bb74efa47d0402e8631c0c38763874a9530370ff57f073132c956ff" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.common" name="common-image" version="3.12.0">
+         <artifact name="common-image-3.12.0.jar">
+            <sha256 value="62a3821c724fadfda346c1e2d83b0c506a0c4074be269a52bf4e3192c7dd92bc" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="common-image-3.12.0.pom">
+            <sha256 value="32fc63d184a5b14033ed9eae28f4c7f7570be8850c67ef34ab50c8a5bdea957f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.common" name="common-io" version="3.12.0">
+         <artifact name="common-io-3.12.0.jar">
+            <sha256 value="bfacfeb02acac47dbfd1fab0002eaeca65547d04249498b654320c9e0fdf6647" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="common-io-3.12.0.pom">
+            <sha256 value="5fb1b7a60aed026bfe16c2bbbb43039547dedd0d4e613e80127b93b4a2c56359" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.common" name="common-lang" version="3.12.0">
+         <artifact name="common-lang-3.12.0.jar">
+            <sha256 value="5c65e504b5b64d80683e0fa70a1dd154dd83d4de7da37f21e950f5a9c03bc66d" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="common-lang-3.12.0.pom">
+            <sha256 value="9c515229cf4a4e5ef721da6347ffa19b9c027ad5de10799059405d7fa32d8d52" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.imageio" name="imageio" version="3.12.0">
+         <artifact name="imageio-3.12.0.pom">
+            <sha256 value="648eb6abdae996e5e1d248eacb51a4dcb603e2ec271cae8c8e1f0f9cba4af8f9" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.imageio" name="imageio-batik" version="3.12.0">
+         <artifact name="imageio-batik-3.12.0.jar">
+            <sha256 value="ee6fe4f01dc558748aecdcd9454b83c252071df807e88addb948c33c376918d2" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="imageio-batik-3.12.0.pom">
+            <sha256 value="e63d908a33938b8856f60b1cf8c0c4a99b027ecf9e4fe54d2bbc5b95b051e39f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.imageio" name="imageio-bmp" version="3.12.0">
+         <artifact name="imageio-bmp-3.12.0.jar">
+            <sha256 value="c82ee1c28cd0f2e9712257c942e9966e924a8844eb434734d11e2ac844b137df" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="imageio-bmp-3.12.0.pom">
+            <sha256 value="7f96e8dd06fcd6b1549326a5db5852cf64bed261695edecfcd7951fc0147dce6" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.imageio" name="imageio-core" version="3.12.0">
+         <artifact name="imageio-core-3.12.0.jar">
+            <sha256 value="34c6f91bf3b217ed0115bce8283238fbd0264562aa682b4226a3960d0ede9815" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="imageio-core-3.12.0.pom">
+            <sha256 value="37d6adb7cd291e6f67f629f36bc6e91a257a5458e3ee581fec127f6992181b78" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.imageio" name="imageio-jpeg" version="3.12.0">
+         <artifact name="imageio-jpeg-3.12.0.jar">
+            <sha256 value="fc62f5d7df04d1af27dc7e5b74ea5f93c23b1013064ddd4e74879d709a9d859e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="imageio-jpeg-3.12.0.pom">
+            <sha256 value="c2f529afb4414f992c372ec89d4c11b9c62a96ec3a8de811805a2cd72d643ffe" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.imageio" name="imageio-metadata" version="3.12.0">
+         <artifact name="imageio-metadata-3.12.0.jar">
+            <sha256 value="797d026b67d07e6d5eb00a1ab53a55acaab6f80a71c5ee325572093eb90c0caa" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="imageio-metadata-3.12.0.pom">
+            <sha256 value="90852a8f3cf891906a8d28700bcfc443f1197758846e6ee5651d691c1342ae9c" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.imageio" name="imageio-tiff" version="3.12.0">
+         <artifact name="imageio-tiff-3.12.0.jar">
+            <sha256 value="01ac6381de2c95603cb3c15c3b1396e28f7c3df10a9ff55b017c36663a9db455" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="imageio-tiff-3.12.0.pom">
+            <sha256 value="6af8550d48c85794fa856d0bc5e15b2e907c97a874615fadf2a210ff24451de4" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="com.twelvemonkeys.imageio" name="imageio-webp" version="3.12.0">
+         <artifact name="imageio-webp-3.12.0.jar">
+            <sha256 value="43dc447ccfe34c5c5c6f5d31190270e1f9bf65f60375d697ae2a8ff433468526" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="imageio-webp-3.12.0.pom">
+            <sha256 value="61c886c1bed9998e70e3a243f70d75b1657b0880207fe15d3a06c487b2e141f8" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="commons-collections" name="commons-collections" version="3.2.2">
+         <artifact name="commons-collections-3.2.2.jar">
+            <sha256 value="eeeae917917144a68a741d4c0dff66aa5c5c5fd85593ff217bced3fc8ca783b8" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="commons-collections-3.2.2.pom">
+            <sha256 value="d5d81fcc288c0d8c711c302007cada4aa9a226ed1a112d4baa64cb1d6322170b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="commons-logging" name="commons-logging" version="1.0.4">
+         <artifact name="commons-logging-1.0.4.pom">
+            <sha256 value="65d310509352b5425118225ee600a01f83ba72142d035014b5d164bc04b2d284" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="dev.equo.ide" name="solstice" version="1.8.1">
+         <artifact name="solstice-1.8.1.jar">
+            <sha256 value="6e5ba2cce813be1d71ccdc2ecf3e49271b14e691bfbbb1a114cf3a30e773b10d" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="solstice-1.8.1.module">
+            <sha256 value="a676039ea6af08f257b46e07c2bf1571a46a4d4b5b9ccb86c3fc98d07fafea1b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="edu.sc.seis.launch4j" name="edu.sc.seis.launch4j.gradle.plugin" version="3.0.6">
+         <artifact name="edu.sc.seis.launch4j.gradle.plugin-3.0.6.pom">
+            <sha256 value="62a4f6752190b9ebf30869e092e4154e41a2c5cd96048ae98a01916f2684465a" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="edu.sc.seis.launch4j" name="launch4j" version="3.0.6">
+         <artifact name="launch4j-3.0.6.jar">
+            <sha256 value="6a8f000c6fda2eb17406b516ec0be28cdac900cbba03319e57bd3c2f1b1afa02" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="launch4j-3.0.6.module">
+            <sha256 value="0a38e1daab79a32b56790db458088148c97be021764e2d2dce259b9a87fec048" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="io.dropwizard.metrics" name="metrics-bom" version="4.2.15">
+         <artifact name="metrics-bom-4.2.15.pom">
+            <sha256 value="8de0aae8abd6a6b875c77249a02da81d514e4da288046ffaf8e15811a3f2c29f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.dropwizard.metrics" name="metrics-bom" version="4.2.19">
+         <artifact name="metrics-bom-4.2.19.pom">
+            <sha256 value="f86f7f55ebff1f034e4d51dbca94e1d7c17292890cefd19d0430ee823ac5c43a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.dropwizard.metrics" name="metrics-bom" version="4.2.25">
+         <artifact name="metrics-bom-4.2.25.pom">
+            <sha256 value="825ad37b8380f992b515050bbd95452f85466feae7b856d5c150d4e5f716a8e9" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="io.dropwizard.metrics" name="metrics-core" version="4.2.25">
+         <artifact name="metrics-core-4.2.25.jar">
+            <sha256 value="8bc7de609a2816b78a7a5009bddf11be560ba527d44db74a0a31a6f44fdb5b5f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="metrics-core-4.2.25.pom">
+            <sha256 value="c4866ca28d1be8f59e8a664efb492e24e873a516f56dc21203e056c810228ce6" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.dropwizard.metrics" name="metrics-parent" version="4.2.15">
+         <artifact name="metrics-parent-4.2.15.pom">
+            <sha256 value="479258c4ef00a648235ffc55c25f8a1d23b877aa57f5d3923b57d4677e4028a7" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.dropwizard.metrics" name="metrics-parent" version="4.2.19">
+         <artifact name="metrics-parent-4.2.19.pom">
+            <sha256 value="966ee10cc30c93650296c8a98e416cd75229123d5622d3dc1ea57e5208d580b6" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.dropwizard.metrics" name="metrics-parent" version="4.2.25">
+         <artifact name="metrics-parent-4.2.25.pom">
+            <sha256 value="df7b6371f9b15698e123d9861f2099ca32c9ec966d9f0c60755a2a34ccbfabc2" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="io.netty" name="netty-bom" version="4.1.115.Final">
+         <artifact name="netty-bom-4.1.115.Final.pom">
+            <sha256 value="25dc8bb8337dfc186c49fc8cf4f6a5b6c7cf4146362f5f440dacadcd0df9761b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.netty" name="netty-bom" version="4.1.116.Final">
+         <artifact name="netty-bom-4.1.116.Final.pom">
+            <sha256 value="f06521f4ac88da351ab49a969e1948bb11489ae51712bab3acf5a782a3108603" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.netty" name="netty-bom" version="4.1.94.Final">
+         <artifact name="netty-bom-4.1.94.Final.pom">
+            <sha256 value="14bb043edf771ef693d5ff5ecc1466f75dc91698f04a7fa822b3093d3d0239d1" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.projectreactor" name="reactor-bom" version="2022.0.9">
+         <artifact name="reactor-bom-2022.0.9.module">
+            <sha256 value="05f23c001bd12359699ea7be63a6d18b4dd85a8a9167f3f17a1911af023db7b9" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="reactor-bom-2022.0.9.pom">
+            <sha256 value="6a023f3df139c9aa7a816511d584929ddd0f5eb84879bfa2e3a5514c5b176092" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.prometheus" name="client_java" version="1.3.5">
+         <artifact name="client_java-1.3.5.pom">
+            <sha256 value="9798404cc4dc70d792af1e4f0441cd29a1de7ad4e00407ca40036983b26ed662" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.prometheus" name="prometheus-metrics-bom" version="1.3.5">
+         <artifact name="prometheus-metrics-bom-1.3.5.pom">
+            <sha256 value="7ed9772d6079e32446fe1de8840424c2ae0d1d9b9a0ed771cec508049eca4120" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.rsocket" name="rsocket-bom" version="1.1.3">
+         <artifact name="rsocket-bom-1.1.3.pom">
+            <sha256 value="e5ccd8fed3415bb4385e4d0787e3e33624cb2c7c002d2550c39788f2bb9b0fae" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="io.spring.dependency-management" name="io.spring.dependency-management.gradle.plugin" version="1.1.7">
+         <artifact name="io.spring.dependency-management.gradle.plugin-1.1.7.pom">
+            <sha256 value="19bb16ab5d6359bff88ce95c80b01e7e3445157faa1d74ae5cf03a467cea1e04" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="io.swagger" name="swaggerhub" version="1.3.2">
+         <artifact name="swaggerhub-1.3.2.jar">
+            <sha256 value="703a61e96b23af81b2ceeba4a081bb3212ec00211ae300748b3e7ccb1f33bd32" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="swaggerhub-1.3.2.module">
+            <sha256 value="bd5ccd6e48224cab88bbd79e880ff011ee4fa711490f410f7810b75a2cb9c3c0" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="io.swagger.swaggerhub" name="io.swagger.swaggerhub.gradle.plugin" version="1.3.2">
+         <artifact name="io.swagger.swaggerhub.gradle.plugin-1.3.2.pom">
+            <sha256 value="69069eee12440c521662057334ac4acaea0ce6534ca4fd8b1bc264de930ad2d0" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="jakarta.annotation" name="jakarta.annotation-api" version="2.1.1">
+         <artifact name="jakarta.annotation-api-2.1.1.jar">
+            <sha256 value="5f65fdaf424eee2b55e1d882ba9bb376be93fb09b37b808be6e22e8851c909fe" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jakarta.annotation-api-2.1.1.pom">
+            <sha256 value="af650eca1de1b98741006acd82507e4408cffedd2fee33a0ea463d61508db7ec" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="jakarta.enterprise" name="jakarta.enterprise.cdi-api" version="4.0.1">
+         <artifact name="jakarta.enterprise.cdi-api-4.0.1.jar">
+            <sha256 value="beaf74c4f2618189309e3f4a09c43effab633dd96aa1f6dc58a6ba7ee0042717" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jakarta.enterprise.cdi-api-4.0.1.pom">
+            <sha256 value="8b41e1d3551058f7be0360a1ae57e932502e16a0e388a025bad8705b81635146" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="jakarta.enterprise" name="jakarta.enterprise.cdi-parent" version="4.0.1">
+         <artifact name="jakarta.enterprise.cdi-parent-4.0.1.pom">
+            <sha256 value="5f490b74f63dbd6cbfd15a55796491cc03f4b5aa52979a89331c10abf6b5dc17" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="jakarta.enterprise" name="jakarta.enterprise.lang-model" version="4.0.1">
+         <artifact name="jakarta.enterprise.lang-model-4.0.1.jar">
+            <sha256 value="53acafe65b6ef0195fa1b8a0ef2650e5aa024c32cb4059c4df372d6b32089cd3" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jakarta.enterprise.lang-model-4.0.1.pom">
+            <sha256 value="1c8c574b7df5e3494084d24717994eefdf26d2b9e1e83a6941b5096f4eca89c1" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="jakarta.inject" name="jakarta.inject-api" version="2.0.1">
+         <artifact name="jakarta.inject-api-2.0.1.jar">
+            <sha256 value="f7dc98062fccf14126abb751b64fab12c312566e8cbdc8483598bffcea93af7c" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jakarta.inject-api-2.0.1.pom">
+            <sha256 value="e7fd7232e96307a575b2494c9367d68cf43ec98244aace3ccc23e1773ffa6fda" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="jakarta.interceptor" name="jakarta.interceptor-api" version="2.1.0">
+         <artifact name="jakarta.interceptor-api-2.1.0.jar">
+            <sha256 value="ef787d3f713fc6ff4f02cd4b0dbed08f93d8af3400c90cbb43fb4b5c0583710b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jakarta.interceptor-api-2.1.0.pom">
+            <sha256 value="d114da63b2093f0bd9c2a9657a016ce70feba376050806a5c5995d8913df7d5f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="jakarta.validation" name="jakarta.validation-api" version="3.0.2">
+         <artifact name="jakarta.validation-api-3.0.2.jar">
+            <sha256 value="291c25e6910cc6a7ebd96d4c6baebf6d7c37676c5482c2d96146e901b62c1fc9" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jakarta.validation-api-3.0.2.pom">
+            <sha256 value="0a7b9c6327968afe0d82f7cf4facbda7e157968c5808d69bcb8019863b298dc4" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="javax.activation" name="javax.activation-api" version="1.2.0">
+         <artifact name="javax.activation-api-1.2.0.jar">
+            <sha256 value="43fdef0b5b6ceb31b0424b208b930c74ab58fac2ceeb7b3f6fd3aeb8b5ca4393" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="javax.activation-api-1.2.0.pom">
+            <sha256 value="da2926f3c8be898643cc10acdec6de0b0351a57fb2735770fa0177b06ade71b9" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="me.friwi" name="jcef-api" version="jcef-99c2f7a+cef-127.3.1+g6cbb30e+chromium-127.0.6533.100">
+         <artifact name="jcef-api-jcef-99c2f7a+cef-127.3.1+g6cbb30e+chromium-127.0.6533.100.jar">
+            <sha256 value="13f8afcaa1943791a4e47065b580474c4b7a5cb5fb187c2693067a83a4397cb6" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jcef-api-jcef-99c2f7a+cef-127.3.1+g6cbb30e+chromium-127.0.6533.100.pom">
+            <sha256 value="665a1e928a97f205403466e27fa3c527c62fb0e6f151971393bbbc296243bc4f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="me.friwi" name="jcefmaven" version="127.3.1">
+         <artifact name="jcefmaven-127.3.1.jar">
+            <sha256 value="b5a306da02e81b7b6c10d1bb7053aefc8203933fd1e4318994829c4e007ec8af" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jcefmaven-127.3.1.pom">
+            <sha256 value="a50629a107177ea6b684c8fb4ed061d71fc10eae1e42d4f73cfcc89ec1cca137" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="net.java" name="jvnet-parent" version="5">
+         <artifact name="jvnet-parent-5.pom">
+            <sha256 value="1af699f8d9ddab67f9a0d202fbd7915eb0362a5a6dfd5ffc54cafa3465c9cb0a" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="net.java.dev.jna" name="jna" version="5.13.0">
+         <artifact name="jna-5.13.0.jar">
+            <sha256 value="66d4f819a062a51a1d5627bffc23fac55d1677f0e0a1feba144aabdd670a64bb" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jna-5.13.0.pom">
+            <sha256 value="f515c2578178f45247ecca7a9e1db109531b1c42f2424e253ceeb0f6b8d42374" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="net.java.dev.jna" name="jna-platform" version="5.13.0">
+         <artifact name="jna-platform-5.13.0.jar">
+            <sha256 value="474d7b88f6e97009b6ec1d98c3024dd95c23187c65dabfbc35331bcac3d173dd" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jna-platform-5.13.0.pom">
+            <sha256 value="63b20c8af057c98196f8789e1a21a6dddf02aa8f385e6b04b4b4f9f0df257066" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="net.shibboleth" name="parent" version="11.3.5">
+         <artifact name="parent-11.3.5.pom">
+            <pgp value="0E0CA56D354132B5E646C25F49A1796B9B494CB8"/>
+            <sha256 value="7a24e2700485eea087370f1dca6fe0291d7893d38c11aabfe977784fd93b808c" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="net.shibboleth" name="parent" version="11.3.7">
+         <artifact name="parent-11.3.7.pom">
+            <sha256 value="61170f43020f178b85dfe0d65294b84e4332f7fb6651889a3bca7fe1a6f0eb7e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="net.shibboleth.utilities" name="java-support" version="8.4.2">
+         <artifact name="java-support-8.4.2.jar">
+            <sha256 value="cae3a8a79c878a5d6c5b49a5fd3cea94c4d7f98621b5f0d9aa9fb75da5c5231b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="java-support-8.4.2.pom">
+            <sha256 value="e72769a4ab78636ff1c0db7708f77ba35ca2910e89ac40ce0a48b804de74894d" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.antlr" name="antlr4-master" version="4.13.0">
+         <artifact name="antlr4-master-4.13.0.pom">
+            <sha256 value="22206fd7ba495152e526f50efec9fc8f4dd05fcb43dfcf8f264e837df6b6424f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.antlr" name="antlr4-master" version="4.7.2">
+         <artifact name="antlr4-master-4.7.2.pom">
+            <sha256 value="ba99cb25d2390f38680c7502842a0ee0959d1e6403e013ccff698fd5856eead1" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.antlr" name="antlr4-runtime" version="4.13.0">
+         <artifact name="antlr4-runtime-4.13.0.jar">
+            <sha256 value="bd7f7b5d07bc0b047f10915b32ca4bb1de9e57d8049098882e4453c88c076a5d" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="antlr4-runtime-4.13.0.pom">
+            <sha256 value="198e34fb5ac7597b1a3c31930301e08ce941e5ca504116dd54a3a75378914a7f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.antlr" name="antlr4-runtime" version="4.7.2">
+         <artifact name="antlr4-runtime-4.7.2.jar">
+            <sha256 value="4c518b87d4bdff8b44cd8cbc1af816e944b62a3fe5b80b781501cf1f4759bbc4" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="antlr4-runtime-4.7.2.pom">
+            <sha256 value="dc09cba98c25d3c06e4aec516885d4c3af03062ba55f4fe6283fc9cf176a60fb" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache" name="apache" version="3">
+         <artifact name="apache-3.pom">
+            <sha256 value="393c50afb4b7aa6eb57e5377a55a1a0610b19f75b52ece01308db04a1187a20e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache" name="apache" version="7">
+         <artifact name="apache-7.pom">
+            <sha256 value="1397ce1db433adc9f223dbf07496d133681448751f4ae29e58f68e78fb4b6c25" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.commons" name="commons-compress" version="1.21">
+         <artifact name="commons-compress-1.21.jar">
+            <sha256 value="6aecfd5459728a595601cfa07258d131972ffc39b492eb48bdd596577a2f244a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="commons-compress-1.21.pom">
+            <sha256 value="675bb023c9beedde3232949979b9742a5fea946280a55a1b462d4ca7801088cd" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.commons" name="commons-parent" version="39">
+         <artifact name="commons-parent-39.pom">
+            <sha256 value="87cd27e1a02a5c3eb6d85059ce98696bb1b44c2b8b650f0567c86df60fa61da7" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.commons" name="commons-parent" version="42">
+         <artifact name="commons-parent-42.pom">
+            <sha256 value="cd313494c670b483ec256972af1698b330e598f807002354eb765479f604b09c" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents" name="httpclient" version="4.5.14">
+         <artifact name="httpclient-4.5.14.jar">
+            <sha256 value="c8bc7e1c51a6d4ce72f40d2ebbabf1c4b68bfe76e732104b04381b493478e9d6" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="httpclient-4.5.14.pom">
+            <sha256 value="f18355af4cf80a8a4ef04ebd742a47e90a7eaf080c725b2095dbc4fc5dbdefb7" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents" name="httpcomponents-client" version="4.5.14">
+         <artifact name="httpcomponents-client-4.5.14.pom">
+            <sha256 value="5bad1de4f101447659f89d089868ccbad64a68cc503d2d65410b51f6904aa061" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents" name="httpcomponents-core" version="4.4.16">
+         <artifact name="httpcomponents-core-4.4.16.pom">
+            <sha256 value="f2d75a2c2d423ad18539bf21656d56f88a4091944a662fcaf159d5ae283db7f7" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents" name="httpcomponents-parent" version="11">
+         <artifact name="httpcomponents-parent-11.pom">
+            <sha256 value="a901f87b115c55070c7ee43efff63e20e7b02d30af2443ae292bf1f4e532d3aa" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents" name="httpcomponents-parent" version="13">
+         <artifact name="httpcomponents-parent-13.pom">
+            <sha256 value="e4287867035856c737420368dd586e5e57e702098135840cf3d73e9c8363d7b3" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents" name="httpcore" version="4.4.16">
+         <artifact name="httpcore-4.4.16.jar">
+            <sha256 value="6c9b3dd142a09dc468e23ad39aad6f75a0f2b85125104469f026e52a474e464f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="httpcore-4.4.16.pom">
+            <sha256 value="3cbad849b35dacfe6cec31adada2c623c026c3261141b0d26eec7e399c6cd7fa" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents.client5" name="httpclient5" version="5.4.1">
+         <artifact name="httpclient5-5.4.1.jar">
+            <sha256 value="c6c6fc60cbb3edd9e823d9226d608ff3135eb48bd2049bb83bdbc3ef4a911138" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="httpclient5-5.4.1.pom">
+            <sha256 value="02b0f78b4afbc36c422b8679d425ac3c21f98aeecedcea21a02fa94e04d7c13d" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents.client5" name="httpclient5-parent" version="5.4.1">
+         <artifact name="httpclient5-parent-5.4.1.pom">
+            <sha256 value="2fa5da0f588b887fde3abaec77dde9ee716e98db2e145270223b5b547e70a054" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents.core5" name="httpcore5" version="5.3.1">
+         <artifact name="httpcore5-5.3.1.jar">
+            <sha256 value="83f559ad1ee723c1ab3e80b040551cfacb2e5a52bdf04dcdd35419a6760d81b3" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="httpcore5-5.3.1.pom">
+            <sha256 value="00b0412dd2ebd2ce9d96d2839f14d3fd732300b0b5a340ab08d937d017271b71" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents.core5" name="httpcore5-h2" version="5.3.1">
+         <artifact name="httpcore5-h2-5.3.1.jar">
+            <sha256 value="963e194a972aa3daf09287c921ed5a2dd4c3985c44185b0138002943025bed6a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="httpcore5-h2-5.3.1.pom">
+            <sha256 value="e6dbe744577044ba15bf08ba5623f914170547c4ded63738d9e403ccb8ae5c82" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.httpcomponents.core5" name="httpcore5-parent" version="5.3.1">
+         <artifact name="httpcore5-parent-5.3.1.pom">
+            <sha256 value="f5f840bef0f53c1792c7520d1aad4339215f28ee44ce30b7ad6d0d29294008f9" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.logging" name="logging-parent" version="11.3.0">
+         <artifact name="logging-parent-11.3.0.pom">
+            <sha256 value="a5c985b56fe1c58433393b5091a6f39e5b9f78518dd8fc92134690599b64d7d0" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.logging.log4j" name="log4j" version="2.24.3">
+         <artifact name="log4j-2.24.3.pom">
+            <sha256 value="c141b4863fc0ceab583894a13e1f9e52c01fc2d758727d6747f6b99d5040f3b1" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.logging.log4j" name="log4j-api" version="2.24.3">
+         <artifact name="log4j-api-2.24.3.jar">
+            <sha256 value="5b4a0a0cd0e751ded431c162442bdbdd53328d1f8bb2bae5fc1bbeee0f66d80f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="log4j-api-2.24.3.pom">
+            <sha256 value="bc05de33533a1259adbacbfcc826cd66376a2d9c4ee53fb836009f44a45b8239" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.logging.log4j" name="log4j-bom" version="2.20.0">
+         <artifact name="log4j-bom-2.20.0.pom">
+            <sha256 value="f8bb692e95a6b7bda601e87100958e83d0061b7f123250b68128943a195e9da1" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.logging.log4j" name="log4j-bom" version="2.24.2">
+         <artifact name="log4j-bom-2.24.2.pom">
+            <sha256 value="3502889427b26f17ef4ad816802c49b4943f0c939726861d1263e57a72a23046" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.logging.log4j" name="log4j-bom" version="2.24.3">
+         <artifact name="log4j-bom-2.24.3.pom">
+            <sha256 value="b17ab7f328f4586b7e71f8c94fc35a5da2bce80705a5d63004022c1928833558" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.logging.log4j" name="log4j-to-slf4j" version="2.24.3">
+         <artifact name="log4j-to-slf4j-2.24.3.jar">
+            <sha256 value="c7f2b0c612a4eb05b1587d1c880eb4cf5f4f53850676a8ede8da2b8fabb4f73f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="log4j-to-slf4j-2.24.3.pom">
+            <sha256 value="635e52e3474e7f4dc30d2ccbcb68a163888395e3c252961275d04e3db5f6e230" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.pdfbox" name="fontbox" version="3.0.3">
+         <artifact name="fontbox-3.0.3.jar">
+            <sha256 value="65690c3f39b04a14d12c17f4998c15186ce877d3e2ec222c708577e3cc028030" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="fontbox-3.0.3.pom">
+            <sha256 value="b2293e503aa77043061150f884683d7f614ccf5163be2d0f052ca29f3c7677e2" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.pdfbox" name="jbig2-imageio" version="3.0.4">
+         <artifact name="jbig2-imageio-3.0.4.jar">
+            <sha256 value="29cb2951622f10acf61fd0656c4e6fa5562194a9095f7a1d26aa426e2f6b17eb" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jbig2-imageio-3.0.4.pom">
+            <sha256 value="28ea7c4ac92e0985f796a8bc6890a7bef8926707adadfd1e2c856c9b0be1a38b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.pdfbox" name="pdfbox" version="3.0.3">
+         <artifact name="pdfbox-3.0.3.jar">
+            <sha256 value="5be38d2ec81691b05d535eb720de4dc566c5d07e5a04731fa00668d153a8b4a6" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="pdfbox-3.0.3.pom">
+            <sha256 value="be0895f6b2c20f311d6235c96a6fd2aac102b31904d3f4c39ea5259775b07008" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.pdfbox" name="pdfbox-io" version="3.0.3">
+         <artifact name="pdfbox-io-3.0.3.jar">
+            <sha256 value="123ea3187b497c54e661d50c3c867479bf77668ff450e50710c658f2bb4687ba" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="pdfbox-io-3.0.3.pom">
+            <sha256 value="11701bb8c5a735a4b3140f73ae833a281cea09e3bc3f9f3791b9a97a745e90d4" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.pdfbox" name="pdfbox-parent" version="3.0.3">
+         <artifact name="pdfbox-parent-3.0.3.pom">
+            <sha256 value="c865e1ceff09ab52b087e7260c4f15d36e5b5b8be4ffe20446faa40a2ca0bdcc" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.pdfbox" name="xmpbox" version="3.0.3">
+         <artifact name="xmpbox-3.0.3.jar">
+            <sha256 value="5fba39b3388ce4a3a77fa00b09c42963e670e08204faa7ecbf361e56b43f4c08" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="xmpbox-3.0.3.pom">
+            <sha256 value="d10a16e7c44ac4c74ac9d9b580f073f9576ce43c579f24b4550716d076b60a17" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.pulsar" name="pulsar-bom" version="3.3.3">
+         <artifact name="pulsar-bom-3.3.3.pom">
+            <sha256 value="10714e27be04509ca839dae123f36b4918b2ad5cc4700a744fab5a460b5494d3" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.tomcat.embed" name="tomcat-embed-core" version="10.1.34">
+         <artifact name="tomcat-embed-core-10.1.34.pom">
+            <sha256 value="3060e52742ede7b581acc13c7d9ef252371be626bf0daec2d17a49cac0f65521" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.tomcat.embed" name="tomcat-embed-el" version="10.1.34">
+         <artifact name="tomcat-embed-el-10.1.34.jar">
+            <sha256 value="54f10ed773387621f5c4fb7e526c2d1674f5d72fc4d86ed87238a750b7fdbfa0" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="tomcat-embed-el-10.1.34.pom">
+            <sha256 value="28f9e265f61cf8cb29f4086e361016e00acd16c14fddd05d44718afe6f557362" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.apache.tomcat.embed" name="tomcat-embed-websocket" version="10.1.34">
+         <artifact name="tomcat-embed-websocket-10.1.34.pom">
+            <sha256 value="1f29f991310280f434edb47cdc209357800e8586cc9f269fa3d639dccd33ae26" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.bouncycastle" name="bcpkix-jdk18on" version="1.79">
+         <artifact name="bcpkix-jdk18on-1.79.jar">
+            <sha256 value="3639a24ddf9ba4b7eba0659b44770e91eba816421888e571f285aadefe532cd6" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="bcpkix-jdk18on-1.79.pom">
+            <sha256 value="35e49f4134de2ac326c3a50a25762cbb4db56f3802fa3f730cc85b653ad0987b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.bouncycastle" name="bcprov-jdk18on" version="1.79">
+         <artifact name="bcprov-jdk18on-1.79.jar">
+            <sha256 value="0d81ecc3124536b539bce9aa3fe9621b7f84c9cee371b635a5b31c78b79ab1da" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="bcprov-jdk18on-1.79.pom">
+            <sha256 value="d8f1a06b149d746e9d98de54e2f7aa9b2eb613fb35ca67d8ae396ceaac661ee4" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.bouncycastle" name="bcutil-jdk18on" version="1.79">
+         <artifact name="bcutil-jdk18on-1.79.jar">
+            <sha256 value="c70b88ada58938cbc2f005d40329054078bcfa1149e6ffc03e9242eb6ab21836" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="bcutil-jdk18on-1.79.pom">
+            <sha256 value="e24c1fb4cf1605405a6988e9e4d6e4b2e1f4393fc73a89a9452ae625ee311d02" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.commonmark" name="commonmark" version="0.24.0">
+         <artifact name="commonmark-0.24.0.jar">
+            <sha256 value="679338e0b7fc15c02d275d598654b01a149893bc28a87992e90123c8d06af25b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="commonmark-0.24.0.pom">
+            <sha256 value="0df7cf980531424c1ce8f38849cdd8b6a1c6d102393e6d1f5dc12b56a0d22f26" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.commonmark" name="commonmark-ext-gfm-tables" version="0.24.0">
+         <artifact name="commonmark-ext-gfm-tables-0.24.0.jar">
+            <sha256 value="b54dc332f931e6d07c2766144c087b08f3693677e368151a67020b4e95bb4b99" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="commonmark-ext-gfm-tables-0.24.0.pom">
+            <sha256 value="bf2be71bffe02324efd53f045e188a697954409089436b5aa65148841f7d0db2" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.commonmark" name="commonmark-parent" version="0.24.0">
+         <artifact name="commonmark-parent-0.24.0.pom">
+            <sha256 value="3de689b14f6fbd80b70deace59e8724f35f35e1429c716fdf0f368a036b3d348" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.angus" name="angus-activation" version="2.0.2">
+         <artifact name="angus-activation-2.0.2.jar">
+            <sha256 value="6dd3bcffc22bce83b07376a0e2e094e4964a3195d4118fb43e380ef35436cc1e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="angus-activation-2.0.2.pom">
+            <sha256 value="75e5621a7dc858c996ee70c6b4d884d901d187836ce6c67120caf9547e6fc571" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.angus" name="angus-activation-project" version="2.0.2">
+         <artifact name="angus-activation-project-2.0.2.pom">
+            <sha256 value="af9188a10cb8aa4eb5ffe6d391f1ee2159f1ea4a7fd890ee698623e6f379d8f6" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-alpn" version="12.0.16">
+         <artifact name="jetty-alpn-12.0.16.pom">
+            <sha256 value="eb803e7b64dfdf06f3362d820610d0d99bbd4f5be8b997293a91af00ef5a6064" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-alpn-client" version="12.0.16">
+         <artifact name="jetty-alpn-client-12.0.16.jar">
+            <sha256 value="28ff9568536483af9844b06a840af90ff21ad4549aee284070ec614060305531" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-alpn-client-12.0.16.pom">
+            <sha256 value="e0ba646222f8e3516a293d9a5d69c55706efc332a8403c447c09644665533e1e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-bom" version="11.0.15">
+         <artifact name="jetty-bom-11.0.15.pom">
+            <sha256 value="fa4b0d0debafc91f50fbec08efe4642270334f378e839eb6a35fa376aa1a2cf8" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-bom" version="12.0.16">
+         <artifact name="jetty-bom-12.0.16.pom">
+            <sha256 value="dcd720fe0bfb042e5df99887732d27d83151c5ee06ec99c0d4002050c114284e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-client" version="12.0.16">
+         <artifact name="jetty-client-12.0.16.jar">
+            <sha256 value="0d5375c83a60362f2225ae06d4837463942f39c5bc6bd83172b4ad2aef28df29" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-client-12.0.16.pom">
+            <sha256 value="bf3046c6d042910f326d5c8a1cdc8922dcd5e59ecc275df75437a2e985e87d94" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-core" version="12.0.16">
+         <artifact name="jetty-core-12.0.16.pom">
+            <sha256 value="94179bda5682cdc7c94471f588dbaed4db1aabc0b10d0c2c64b10645a1a715d9" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-ee" version="12.0.16">
+         <artifact name="jetty-ee-12.0.16.jar">
+            <sha256 value="1b795f43e0c28b4d6979572a1b0a719ed560052bea20a3e3dc52cc75e4561f7f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee-12.0.16.pom">
+            <sha256 value="80505776eda2423fb75ef3dfa745e132e46ba5b33c727ba14c86991d9d05e935" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-http" version="12.0.16">
+         <artifact name="jetty-http-12.0.16.jar">
+            <sha256 value="b0751b3dd9a8abc79ba0c5061613843dba1d2ce231057f53ad3d038ca888dfb0" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-http-12.0.16.pom">
+            <sha256 value="1721b6cd4b528935d4842f3cff7c4acd16650a1f83f7ac1dc667116302efb57b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-io" version="12.0.16">
+         <artifact name="jetty-io-12.0.16.jar">
+            <sha256 value="c8dfd2d88d34be5461417f2256be0cc868865c45815f7ee0e409ddd872f0e84f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-io-12.0.16.pom">
+            <sha256 value="524e1362f53bf24d9e97b8bddb5677dea3da5872d46948b34d8fc30cdbed6863" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-plus" version="12.0.16">
+         <artifact name="jetty-plus-12.0.16.jar">
+            <sha256 value="9cdc3f050a92af8aa2a601fa846e649b3b60e81a3450e970a7ccc2da6f64bf8a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-plus-12.0.16.pom">
+            <sha256 value="ceccdab939a1b123a3141ecb17e8a139a86924c8c8a26dc1973017b9adc13712" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-project" version="12.0.16">
+         <artifact name="jetty-project-12.0.16.pom">
+            <sha256 value="6714ab37c67c70c0b27c5ad895c58cb6f06e1144f191b5b0aafd056705af4641" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-security" version="12.0.16">
+         <artifact name="jetty-security-12.0.16.jar">
+            <sha256 value="7a6d5b2d0edb1b5012b5510a80411c7fb4b9844b3879938d3b6e9ace3b9b6876" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-security-12.0.16.pom">
+            <sha256 value="bffc9235638b4d6a71449e7c8c524ed6d0a7177c5eca47d178f829689e50f3c7" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-server" version="12.0.16">
+         <artifact name="jetty-server-12.0.16.jar">
+            <sha256 value="9e3f17ca732154ee2c67cc2bc340f322b29335f74d65f7cc0104c2e9cdc6640e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-server-12.0.16.pom">
+            <sha256 value="0b2d10b1d4ea07b616c5f39a5e90adfc87576652992f3c848cbf4507c5ce1d23" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-session" version="12.0.16">
+         <artifact name="jetty-session-12.0.16.jar">
+            <sha256 value="5d7dfd24c94472c368441488791412a31ea476ad4f1d9286b4f5802c5d85514b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-session-12.0.16.pom">
+            <sha256 value="23a07996969912ca6fed9439e67be50b4546c6c7d76902e75d14bb8dba948cd3" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-util" version="12.0.16">
+         <artifact name="jetty-util-12.0.16.jar">
+            <sha256 value="a03d43c194993ebb4d51fbfe7fe29134d7863b28708380eeedd11797c83543cf" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-util-12.0.16.pom">
+            <sha256 value="6e5ed617cde1b69c48811cc9361ec0dff7a54131df016223f1b392d31e862459" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty" name="jetty-xml" version="12.0.16">
+         <artifact name="jetty-xml-12.0.16.jar">
+            <sha256 value="a834f40e17c783a9f59bb7ee0a280626c7dacf6e7ee3e93dc0b6927a6aabdfd9" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-xml-12.0.16.pom">
+            <sha256 value="ceeffe4b370f67fbfac57103108699aaa0109cc4a3f6e59a3f86c82f92b0fa25" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10" name="jetty-ee10" version="12.0.16">
+         <artifact name="jetty-ee10-12.0.16.pom">
+            <sha256 value="f8ba79e58c1095d6c277ae98af7639292a3bb378559fe8a9b4ee0c14aafae0f3" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10" name="jetty-ee10-annotations" version="12.0.16">
+         <artifact name="jetty-ee10-annotations-12.0.16.jar">
+            <sha256 value="08ad96a3071d6161f23b5a00c76562ce4a34a83b3000ed6d572707879edb8b44" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee10-annotations-12.0.16.pom">
+            <sha256 value="f482b4aaa6576b7466285331cf1f4e19b54a029ffdf01abaffd69cd6fb0ec8b0" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10" name="jetty-ee10-bom" version="12.0.16">
+         <artifact name="jetty-ee10-bom-12.0.16.pom">
+            <sha256 value="39564e31ced77bb052117a9226c7dd7aaf9b663e3c870e8c86bad50bd125e6c7" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10" name="jetty-ee10-plus" version="12.0.16">
+         <artifact name="jetty-ee10-plus-12.0.16.jar">
+            <sha256 value="73e7441a24e2d7ab79ed0907b9ad73e4015a726e7f26a9b54c32b405415760e6" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee10-plus-12.0.16.pom">
+            <sha256 value="36c92345a766ccdfd9eac8b0d2f99b5cfa44e9dcd04d39c85aefb30aafd52816" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10" name="jetty-ee10-servlet" version="12.0.16">
+         <artifact name="jetty-ee10-servlet-12.0.16.jar">
+            <sha256 value="18a6c41074061a0ff440d618b43e7ab328e81226ec21c4d6a4d53b90b2c94a55" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee10-servlet-12.0.16.pom">
+            <sha256 value="e4e037b86a903a031b32a5383ca7aa50c3e8c8c97e127fd78c69e99c8bf5289c" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10" name="jetty-ee10-servlets" version="12.0.16">
+         <artifact name="jetty-ee10-servlets-12.0.16.jar">
+            <sha256 value="c5a750269f66300183dc4ea7ae158a20b933e7733f7718d4b3b7d037c08e56f1" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee10-servlets-12.0.16.pom">
+            <sha256 value="5fc9522b22126b21cacc9df2a88d3a6904d4c66785eebf478a756451fab278e9" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10" name="jetty-ee10-webapp" version="12.0.16">
+         <artifact name="jetty-ee10-webapp-12.0.16.jar">
+            <sha256 value="743dfe48056e6338171ca5ac05d79fde1389148368d9764e85dac1d1bca6ede2" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee10-webapp-12.0.16.pom">
+            <sha256 value="1a5a9a16de21f6321a591fc1f90c6267f79734dbf777ee51df78d95130b02cec" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10.websocket" name="jetty-ee10-websocket" version="12.0.16">
+         <artifact name="jetty-ee10-websocket-12.0.16.pom">
+            <sha256 value="7dc15632edf053490b7b078e49c0e26091f16c4b8da93be510e81871c4ca1394" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10.websocket" name="jetty-ee10-websocket-jakarta-client" version="12.0.16">
+         <artifact name="jetty-ee10-websocket-jakarta-client-12.0.16.jar">
+            <sha256 value="2cf2e4e450a28a64b496730bdc65ae6aad41407fb4ab1bf195c4b829d18b1dcd" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee10-websocket-jakarta-client-12.0.16.pom">
+            <sha256 value="80cfd5cc1130af467832e01ce6267e5fc2333d4cf8f37944678f8c9609df950d" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10.websocket" name="jetty-ee10-websocket-jakarta-common" version="12.0.16">
+         <artifact name="jetty-ee10-websocket-jakarta-common-12.0.16.jar">
+            <sha256 value="b015a32840876ab5a772c2db14bd6a6c7e568eebcefd3e0c6c5d84e6bf9a3ca2" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee10-websocket-jakarta-common-12.0.16.pom">
+            <sha256 value="c751f60817449ce93579ad5f84a18efa2fb74b94596bfdb6a604999e394d951c" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10.websocket" name="jetty-ee10-websocket-jakarta-server" version="12.0.16">
+         <artifact name="jetty-ee10-websocket-jakarta-server-12.0.16.jar">
+            <sha256 value="b9182cd571fcfa83e55c5c9ea2e95ec24472a3961bbeb530f03ccc28f4acd2ba" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee10-websocket-jakarta-server-12.0.16.pom">
+            <sha256 value="5424b3f8f247519bac8cbc86bc8397013cf356bfddb37784e6e842bac8c01ac7" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10.websocket" name="jetty-ee10-websocket-jetty-server" version="12.0.16">
+         <artifact name="jetty-ee10-websocket-jetty-server-12.0.16.jar">
+            <sha256 value="0b401f758638220ef1b7f898c5c8c8dc969ccc2bf3918e086b1cc9ae16bf7239" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee10-websocket-jetty-server-12.0.16.pom">
+            <sha256 value="dbae975c473df855afcea0b9a2f0e4c1a3ecbdec56710f08347192df6c8a2623" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.ee10.websocket" name="jetty-ee10-websocket-servlet" version="12.0.16">
+         <artifact name="jetty-ee10-websocket-servlet-12.0.16.jar">
+            <sha256 value="979376b6bc583fa670bd200be77f04f6bce0945d2e61378c04f4f9163624ede2" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-ee10-websocket-servlet-12.0.16.pom">
+            <sha256 value="4e6d0cda03bfa20655f08143dd6ce762aa9f329ff7a7451cbc192e3a8419ec91" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.websocket" name="jetty-websocket" version="12.0.16">
+         <artifact name="jetty-websocket-12.0.16.pom">
+            <sha256 value="598bbd05bc3576a4ff44722e94402f2229e6690db10e42d03ef2cf82034e69df" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.websocket" name="jetty-websocket-core-client" version="12.0.16">
+         <artifact name="jetty-websocket-core-client-12.0.16.jar">
+            <sha256 value="0ee04f306ac0759980f8b81e2585ad1caa4aead7df22f1a5277264b2d5ad6431" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-websocket-core-client-12.0.16.pom">
+            <sha256 value="e0fd3df40b3ca6d154d2e9a2a96c97f7addbcfb908cca6c18e821d8f80fc05d8" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.websocket" name="jetty-websocket-core-common" version="12.0.16">
+         <artifact name="jetty-websocket-core-common-12.0.16.jar">
+            <sha256 value="bebe6fac6ddd4047bd7334bf43362c7f5d1404282ef866ca6b092950f6c1fa91" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-websocket-core-common-12.0.16.pom">
+            <sha256 value="b052e3390890c4be291ec9a3edc719139020ce2498e2558e3ef711c8a05622f5" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.websocket" name="jetty-websocket-core-server" version="12.0.16">
+         <artifact name="jetty-websocket-core-server-12.0.16.jar">
+            <sha256 value="03ae2eef7ba6ddbc9906a570a7d6cbac9bf243aa189f0793ecf1dd42711b2c91" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-websocket-core-server-12.0.16.pom">
+            <sha256 value="a9a71a5370b6308963fea8476ee6aca1c256d807ec6f8eda10aad4fad6810d84" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.websocket" name="jetty-websocket-jetty-api" version="12.0.16">
+         <artifact name="jetty-websocket-jetty-api-12.0.16.jar">
+            <sha256 value="4d4b7f0a0848be5df55c99fec923202d5c117b60d7b9d9642b09534e3274477d" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-websocket-jetty-api-12.0.16.pom">
+            <sha256 value="87906d0bca9efc4f4afe89f1dfc2b04dc7f19d4a5fbc32f10907b1c0f9b9608c" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.eclipse.jetty.websocket" name="jetty-websocket-jetty-common" version="12.0.16">
+         <artifact name="jetty-websocket-jetty-common-12.0.16.jar">
+            <sha256 value="8bec40cb7b56b66a187029734f2884a419174aa1e33b0e8d78b82c981c6d459a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jetty-websocket-jetty-common-12.0.16.pom">
+            <sha256 value="923b5a5a1dbb770671c5d566ed1cf1047529e4fdd1911d58672fe59922e4e1a2" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.hibernate.common" name="hibernate-commons-annotations" version="7.0.3.Final">
+         <artifact name="hibernate-commons-annotations-7.0.3.Final.jar">
+            <sha256 value="0db2fd57d5e43688ac6ed5cdf36deaf05d84340dcc24c2dd2a2114de38e5175d" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="hibernate-commons-annotations-7.0.3.Final.module">
+            <sha256 value="b1aa7202fc3f67d22066903d3e1eb7052ee10f47322a1cb925fa2f449f25aee3" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="hibernate-commons-annotations-7.0.3.Final.pom">
+            <sha256 value="66f6e607b30740e391989825a5ae076a6c877a99b78eb054a8146650aaff72eb" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.jboss" name="jboss-parent" version="42">
+         <artifact name="jboss-parent-42.pom">
+            <sha256 value="e41276efe3509054cba4197b3d6360c51dd57bc640dde48cf37dafaa45a09c3b" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.jboss" name="jboss-parent" version="43">
+         <artifact name="jboss-parent-43.pom">
+            <sha256 value="3c3ade76fb883acdb9a8a03355d1df4066ffb9c8c78f09b219e9c0fc2a3f4317" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.jboss.logging" name="jboss-logging" version="3.6.1.Final">
+         <artifact name="jboss-logging-3.6.1.Final.jar">
+            <sha256 value="5e08a4b092dc85b337f0910a740571d8720cfa565fabd880a8caf94a657ca416" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="jboss-logging-3.6.1.Final.pom">
+            <sha256 value="27cd88ab8e5946b8a7aa92644eb3732e35be281439ab07af71f898453ee7540d" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.jboss.logging" name="logging-parent" version="1.0.3.Final">
+         <artifact name="logging-parent-1.0.3.Final.pom">
+            <sha256 value="9972c894749cda355766217d43ded7009b1eeb26e0301c30914a2db253dd685b" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.jetbrains" name="annotations" version="13.0">
+         <artifact name="annotations-13.0.jar">
+            <sha256 value="ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="annotations-13.0.pom">
+            <sha256 value="965aeb2bedff369819bdde1bf7a0b3b89b8247dd69c88b86375d76163bb8c397" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.locationtech.jts" name="jts" version="1.18.1">
+         <artifact name="jts-1.18.1.pom">
+            <sha256 value="e396da29470c41e1cb63d31f6f6d825c6028f3adc095b2a17def2502316e278f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.locationtech.jts" name="jts-core" version="1.18.1">
+         <artifact name="jts-core-1.18.1.jar">
+            <sha256 value="722ac3abeaea84a9496b632a227d09c612cf20069d31f8ebf25ff5810379d235" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jts-core-1.18.1.pom">
+            <sha256 value="9308c41f1d58816603a35b17708e404b420ec8fd0cce09e987d906ffc9109332" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.locationtech.jts" name="jts-modules" version="1.18.1">
+         <artifact name="jts-modules-1.18.1.pom">
+            <sha256 value="e720bffa549b51506124f8e6c8300ee447a33b30004452acbc2e3aa9ecc9e241" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.mockito" name="mockito-bom" version="4.11.0">
+         <artifact name="mockito-bom-4.11.0.pom">
+            <sha256 value="d8531a746c988f7f68ed5f188cdea945006aea993ec5df9e524e0d27d61491da" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.mockito" name="mockito-bom" version="5.14.2">
+         <artifact name="mockito-bom-5.14.2.pom">
+            <sha256 value="6fd3113613a972fcd1cfabbd96948fdce943607ecf9a9cc19758a603b9a6307e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.mockito" name="mockito-bom" version="5.3.1">
+         <artifact name="mockito-bom-5.3.1.pom">
+            <sha256 value="17c9609424a4c3305684e4e5652f55411032575c1a7ca3d785966210469f2535" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.mockito" name="mockito-core" version="5.14.2">
+         <artifact name="mockito-core-5.14.2.jar">
+            <sha256 value="2296141c1e1f2e1ae35c08d36a9ab4563ecd66e03533fe82630a764e7aa49182" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="mockito-core-5.14.2.pom">
+            <sha256 value="638e56a68f496879bc8a0f53cfbdf9c4cc39a45b6e438a333a5ea83c09ee9cfd" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.mockito" name="mockito-inline" version="5.2.0">
+         <artifact name="mockito-inline-5.2.0.jar">
+            <sha256 value="ee52e1c299a632184fba274a9370993e09140429f5e516e6c5570fd6574b297f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="mockito-inline-5.2.0.pom">
+            <sha256 value="706d3470e56d31a3b5630698d1079befdb983145b0184e4ba2b84da387a8f684" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.mockito" name="mockito-junit-jupiter" version="5.14.2">
+         <artifact name="mockito-junit-jupiter-5.14.2.jar">
+            <sha256 value="9a126e3bf6dd31826a138523c17f49de12b3243f3b5616b9ea977542e4a47a09" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="mockito-junit-jupiter-5.14.2.pom">
+            <sha256 value="20d6b23bf3d0bc666e240570062287d499471805762528abc50395e091c047df" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-bom" version="4.3.0">
+         <artifact name="opensaml-bom-4.3.0.pom">
+            <sha256 value="4dfcc7cd96a2645c6e28df9f166f0e5b2b1a44aa109b3100cdb0ee17e01e02d2" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-core" version="4.3.2">
+         <artifact name="opensaml-core-4.3.2.jar">
+            <sha256 value="42d8f10e3bfcd2ed736a37292303dc56b7676b723d0a574b5e15b461fade789f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-core-4.3.2.pom">
+            <sha256 value="bbd7986d61087b6b022947a101ec72c4cd50fd23129b8c2713e5afa50ef3439e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-messaging-api" version="4.3.2">
+         <artifact name="opensaml-messaging-api-4.3.2.jar">
+            <sha256 value="8003e5eb284a5fc9f923863e5b9e51e1510a4d9c953b7745fc6e4053044e6770" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-messaging-api-4.3.2.pom">
+            <sha256 value="d38a88c9bf92c0773874f88e23ea8b69e56df38dfbdd5ca2ab7b3ce7e8e8ce46" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-parent" version="4.3.0">
+         <artifact name="opensaml-parent-4.3.0.pom">
+            <sha256 value="5e9db2f2dc3938835a76f5334997d79c8781511c8b68c1f6df6b384306900319" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-parent" version="4.3.2">
+         <artifact name="opensaml-parent-4.3.2.pom">
+            <sha256 value="9b3803c88d2877bcd17daeb82fa100b9a43009a4329bd6407769d314521055ab" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-profile-api" version="4.3.2">
+         <artifact name="opensaml-profile-api-4.3.2.jar">
+            <sha256 value="caf3e95e1c1bf45cee10a240617d2ebc91c56bd6f83c4aa7fbe8c18a147ca293" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-profile-api-4.3.2.pom">
+            <sha256 value="8eefe43bcf675433b63efac8fc0c472026c08692f12894975f6fe17be7528958" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-saml-api" version="4.3.2">
+         <artifact name="opensaml-saml-api-4.3.2.jar">
+            <sha256 value="87a8ffe68947e4343506baf46cca0287fd441754509742a5d7d716e59a638fb0" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-saml-api-4.3.2.pom">
+            <sha256 value="362f7b90285c775740edc8e5886237a1f79d419e73f53b792e346b82e20fca94" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-saml-impl" version="4.3.2">
+         <artifact name="opensaml-saml-impl-4.3.2.jar">
+            <sha256 value="8ffad41f1ad0932358ddd55d9e29465ecae672e8443921670706cfaaf549ff43" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-saml-impl-4.3.2.pom">
+            <sha256 value="1aa42ff4613345cfa35b96c7a4b3fb9b309100154ea3ea800a070ab0158337e5" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-security-api" version="4.3.2">
+         <artifact name="opensaml-security-api-4.3.2.jar">
+            <sha256 value="4c9090fa11e98a984a802157dc640771d64b39171206e97ccb7ca1f6b7d38955" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-security-api-4.3.2.pom">
+            <sha256 value="1e1208cca39a3d038f9e1405a0ce910bf0d9f3c43bf6f263d3c7f44b256b94c2" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-security-impl" version="4.3.2">
+         <artifact name="opensaml-security-impl-4.3.2.jar">
+            <sha256 value="ef7fa881f553c25bc48eda69acc333e6f608b35dbec848e2e117c27a572c831c" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-security-impl-4.3.2.pom">
+            <sha256 value="d22a917d908ef603aca37048e338cb55adebe8fceccd35ee41ac04d70019f200" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-soap-api" version="4.3.2">
+         <artifact name="opensaml-soap-api-4.3.2.jar">
+            <sha256 value="ffed12485e2b0442ca15d2975e66cf8d902a7c823f8edd0d87f0de89466319ea" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-soap-api-4.3.2.pom">
+            <sha256 value="4c26b90ad72ee6b90191c7192a33810b2c84a353429ecf37ed15e6c66f91dc9f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-soap-impl" version="4.3.2">
+         <artifact name="opensaml-soap-impl-4.3.2.jar">
+            <sha256 value="2e03c66501b5851d1b68a4acfd8c86c98ee5c0d4f493054567d81bdaaca1ed52" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-soap-impl-4.3.2.pom">
+            <sha256 value="9204598c94dd67d6e56c5f93200b768ca813458da24668f5ac935d35964ff71a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-storage-api" version="4.3.2">
+         <artifact name="opensaml-storage-api-4.3.2.jar">
+            <sha256 value="93baf23ae5e1cdfe7898269f7971dc257fde7a86d571793cebe34534f82be682" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-storage-api-4.3.2.pom">
+            <sha256 value="64f848a18f46efa0d1ea45409aacb7c8f9258097e8fdb71d09bf9780cea267ab" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-xmlsec-api" version="4.3.2">
+         <artifact name="opensaml-xmlsec-api-4.3.2.jar">
+            <sha256 value="c2de5192c6bd075fe752b652c193fd4bfd3940443a567c56aeb2e598e9cc9027" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-xmlsec-api-4.3.2.pom">
+            <sha256 value="686c9244e86be67c813424dfe8cd019c0c5a205ec54e38078d75933bbf53b334" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.opensaml" name="opensaml-xmlsec-impl" version="4.3.2">
+         <artifact name="opensaml-xmlsec-impl-4.3.2.jar">
+            <sha256 value="7588d52167f1a321923529c702f71f9f0c781e7b29331d6e3397394b3a3ad167" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="opensaml-xmlsec-impl-4.3.2.pom">
+            <sha256 value="a7c42bf20bbd54a8627ec2b914f8fa7f68d0d5d3f825778d84d2a774264c744b" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.ow2" name="ow2" version="1.5.1">
+         <artifact name="ow2-1.5.1.pom">
+            <sha256 value="321ddbb7ee6fe4f53dea6b4cd6db74154d6bfa42391c1f763b361b9f485acf05" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.panteleyev" name="jpackage-gradle-plugin" version="1.6.0">
+         <artifact name="jpackage-gradle-plugin-1.6.0.jar">
+            <sha256 value="a8a588ff44a62db1aee62d3da117d2632a7f9a107709ca201da2a59dcb500175" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="jpackage-gradle-plugin-1.6.0.module">
+            <sha256 value="a572bc67a0bcce5eb8c50a0ae2659fba850dae5b0188f53045635c9276545179" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.panteleyev.jpackageplugin" name="org.panteleyev.jpackageplugin.gradle.plugin" version="1.6.0">
+         <artifact name="org.panteleyev.jpackageplugin.gradle.plugin-1.6.0.pom">
+            <sha256 value="82bff05e70c9f7f5c3d4a8c3958b3842dea970ac1378e306051e66cf98a8f340" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.slf4j" name="jul-to-slf4j" version="2.0.16">
+         <artifact name="jul-to-slf4j-2.0.16.jar">
+            <sha256 value="0f2ec396ea29c9a440890d1f09fdb82fdd574b47b298435764235451c193861d" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="jul-to-slf4j-2.0.16.pom">
+            <sha256 value="66b982a8f59d78ae3cd32e5468c1d48e7efcc1866bb883d8a98804d84deb667f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.slf4j" name="slf4j-api" version="1.7.36">
+         <artifact name="slf4j-api-1.7.36.jar">
+            <sha256 value="d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="slf4j-api-1.7.36.pom">
+            <sha256 value="fb046a9c229437928bb11c2d27c8b5d773eb8a25e60cbd253d985210dedc2684" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.slf4j" name="slf4j-api" version="2.0.16">
+         <artifact name="slf4j-api-2.0.16.jar">
+            <sha256 value="a12578dde1ba00bd9b816d388a0b879928d00bab3c83c240f7013bf4196c579a" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="slf4j-api-2.0.16.pom">
+            <sha256 value="b1a00f5b1c4dbe62b805d65d23911a6f77063889d7cb1e86fe8389d6190473f7" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.slf4j" name="slf4j-bom" version="2.0.16">
+         <artifact name="slf4j-bom-2.0.16.pom">
+            <sha256 value="0566048ec825cdf28758620af64d9e14ae38a9cd8748dd6fafa6df4a4194c279" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.slf4j" name="slf4j-parent" version="1.7.36">
+         <artifact name="slf4j-parent-1.7.36.pom">
+            <sha256 value="bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.slf4j" name="slf4j-parent" version="2.0.16">
+         <artifact name="slf4j-parent-2.0.16.pom">
+            <sha256 value="09a0b4cc814d7274616c9b16d4c0fd9aaf1ecc813334de5131e547271b1982e5" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.sonatype.oss" name="oss-parent" version="5">
+         <artifact name="oss-parent-5.pom">
+            <pgp value="2BCBDD0F23EA1CAFCC11D4860374CF2E8DD1BDFD"/>
+         </artifact>
+      </component>
+      <component group="org.sonatype.oss" name="oss-parent" version="7">
+         <artifact name="oss-parent-7.pom">
+            <sha256 value="b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.springdoc" name="springdoc-openapi-gradle-plugin" version="1.8.0">
+         <artifact name="springdoc-openapi-gradle-plugin-1.8.0.jar">
+            <sha256 value="94075aa01757a0c1d573ade9145c098963f084feefd31dc95d65606c503585f4" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="springdoc-openapi-gradle-plugin-1.8.0.module">
+            <sha256 value="6f2d828807961169293f4f5b897f7c3ee76da06dc6bb9d94acb3d5f2418e998c" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.springdoc.openapi-gradle-plugin" name="org.springdoc.openapi-gradle-plugin.gradle.plugin" version="1.8.0">
+         <artifact name="org.springdoc.openapi-gradle-plugin.gradle.plugin-1.8.0.pom">
+            <sha256 value="2d117343231e29be22e489bc1f4825e1d4bbef545905e793244e95221957154f" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.springframework" name="spring-framework-bom" version="5.3.25">
+         <artifact name="spring-framework-bom-5.3.25.module">
+            <sha256 value="6cf3c80f3b2bc553b42e9b720bff71fdb071526cb890c570933d9d780776250e" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="spring-framework-bom-5.3.25.pom">
+            <sha256 value="5cc036a616f2a0595966d3dbc99dae635ac9b18e1538b5fead7b2a3cbfe68288" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.springframework" name="spring-framework-bom" version="5.3.34">
+         <artifact name="spring-framework-bom-5.3.34.pom">
+            <sha256 value="6d0616e2544d7115dc249817dd758a34dfa677329182b42e17542e133e55732d" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.springframework.boot" name="org.springframework.boot.gradle.plugin" version="3.4.1">
+         <artifact name="org.springframework.boot.gradle.plugin-3.4.1.pom">
+            <sha256 value="f4d1acf98aa55a44b1a23b1c2b5c75aaa84c4408bea955bd81efb38acd68f38d" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.springframework.restdocs" name="spring-restdocs-bom" version="3.0.0">
+         <artifact name="spring-restdocs-bom-3.0.0.pom">
+            <sha256 value="ffc9c47be5a8eb488ede9268ce089a799c93e894fb1bd3f940f62c467a661323" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.testcontainers" name="testcontainers-bom" version="1.18.3">
+         <artifact name="testcontainers-bom-1.18.3.pom">
+            <sha256 value="97476d62cb8b5ccfcd1cbae69261c4937bf7e81b56530da82a6649e30dc31ccc" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.testcontainers" name="testcontainers-bom" version="1.20.4">
+         <artifact name="testcontainers-bom-1.20.4.pom">
+            <sha256 value="a15147c2da8edec13401d1d3e6a0a01b619e6b67b66c103592cef3a70cc1ec89" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.webjars" name="swagger-ui" version="5.2.0">
+         <artifact name="swagger-ui-5.2.0.jar">
+            <sha256 value="c7b8593b85bec88ba3aa8190b9db24d9aedaf02c959aa38c32edd6a643bc93d4" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="swagger-ui-5.2.0.pom">
+            <sha256 value="9f4889391c2d9065a34e973d09444c9ccc9c3cc01218336043c526baa7b90600" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.xmlunit" name="xmlunit-core" version="2.10.0">
+         <artifact name="xmlunit-core-2.10.0.jar">
+            <sha256 value="3f89b0a629d3d9cca66e15f8dde5e0947852fa44172bc77ea26edf96e3e4fcf8" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="xmlunit-core-2.10.0.pom">
+            <sha256 value="766da9bc0b42ad8124eaf270eb312044175a65609291cf1ca12c5783789e980d" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.xmlunit" name="xmlunit-parent" version="2.10.0">
+         <artifact name="xmlunit-parent-2.10.0.pom">
+            <sha256 value="5ce9c2916d50765409efc20a8107f98ef177040cebe0b1b8570488e21d0961c7" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="org.yaml" name="snakeyaml" version="2.3">
+         <artifact name="snakeyaml-2.3.jar">
+            <sha256 value="63a76fe66b652360bd4c2c107e6f0258daa7d4bb492008ba8c26fcd230ff9146" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+         <artifact name="snakeyaml-2.3.pom">
+            <sha256 value="0f5a265a06331b0049e352be32ca322de18b17f3d4dbb70635d40da692e3582f" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
+         </artifact>
+      </component>
+      <component group="xml-apis" name="xml-apis-ext" version="1.3.04">
+         <artifact name="xml-apis-ext-1.3.04.jar">
+            <sha256 value="d0b4887dc34d57de49074a58affad439a013d0baffa1a8034f8ef2a5ea191646" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="xml-apis-ext-1.3.04.pom">
+            <sha256 value="1b5939a9310a59c0df0c03726721d5fc9521e87d6c203bfa7220bae82a30d9e8" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="xmlpull" name="xmlpull" version="1.1.3.1">
+         <artifact name="xmlpull-1.1.3.1.jar">
+            <sha256 value="34e08ee62116071cbb69c0ed70d15a7a5b208d62798c59f2120bb8929324cb63" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="xmlpull-1.1.3.1.pom">
+            <sha256 value="8f10ffd8df0d3e9819c8cc8402709c6b248bc53a954ef6e45470d9ae3a5735fb" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+   </components>
+</verification-metadata>
