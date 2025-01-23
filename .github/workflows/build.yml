@@ -45,52 +45,60 @@ jobs:
           ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata pgp,sha256 --refresh-keys --export-keys --refresh-dependencies help
 
       - name: Build with Gradle and no spring security
-        run: ./gradlew clean build 2>gradle-error.log || echo $? > gradle-exit-code-false.txt
+        run: ./gradlew clean build # 2>gradle-error.log || echo $? > gradle-exit-code-false.txt
         env:
           DOCKER_ENABLE_SECURITY: false
 
-      - name: Check Gradle Build Status DOCKER_ENABLE_SECURITY - false
+      - if: failed()
         run: |
-          if [ -f gradle-exit-code-false.txt ] && [ -s gradle-exit-code-false.txt ]; then
-            # Lesen Sie den Fehlercode und die Fehlerausgabe
-            error_output_false=$(cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
-            cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r'
-            # Erstellen Sie eine Ausgabe für den nächsten Schritt
-            echo "error_output_false=$error_output_false" >> $GITHUB_ENV
-          else
-            echo "error_output_false=" >> $GITHUB_ENV
-          fi
+
+
+      # - name: Check Gradle Build Status DOCKER_ENABLE_SECURITY - false
+      #   run: |
+      #     if [ -f gradle-exit-code-false.txt ] && [ -s gradle-exit-code-false.txt ]; then
+      #       # Lesen Sie den Fehlercode und die Fehlerausgabe
+      #       error_output_false=$(cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
+      #       cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r'
+      #       # Erstellen Sie eine Ausgabe für den nächsten Schritt
+      #       echo "error_output_false=$error_output_false" >> $GITHUB_ENV
+      #     else
+      #       echo "error_output_false=" >> $GITHUB_ENV
+      #     fi
 
       - name: Build with Gradle and with spring security
-        run: ./gradlew clean build 2>gradle-error.log || echo $? > gradle-exit-code-true.txt
+        run: ./gradlew clean build # 2>gradle-error.log || echo $? > gradle-exit-code-true.txt
         env:
           DOCKER_ENABLE_SECURITY: true
 
-      - name: Check Gradle Build Status DOCKER_ENABLE_SECURITY - true
+      - if: failed()
         run: |
-          if [ -f gradle-exit-code-true.txt ] && [ -s gradle-exit-code-true.txt ]; then
-            # Lesen Sie den Fehlercode und die Fehlerausgabe
-            error_output_true=$(cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
-            cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r'
-            # Erstellen Sie eine Ausgabe für den nächsten Schritt
-            echo "error_output_true=$error_output_true" >> $GITHUB_ENV
-          else
-            echo "error_output_true=" >> $GITHUB_ENV
-          fi
 
-      - name: Check Dependency Verfication error
-        if: env.error_output_false || env.error_output_true
-        run: |
-          if echo "${{ env.error_output_false }}" | grep -q 'dependency-verification-report.html' || \
-            echo "${{ env.error_output_true }}" | grep -q 'dependency-verification-report.html'; then
-            echo "FAIL_JOB=true" >> $GITHUB_ENV
-          elif [ -n "${{ env.error_output_false }}" ] || [ -n "${{ env.error_output_true }}" ]; then
-            cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r'
-            echo "FAIL=true" >> $GITHUB_ENV
-          else
-            echo "FAIL_JOB=false" >> $GITHUB_ENV
-            echo "FAIL=false" >> $GITHUB_ENV
-          fi
+
+      # - name: Check Gradle Build Status DOCKER_ENABLE_SECURITY - true
+      #   run: |
+      #     if [ -f gradle-exit-code-true.txt ] && [ -s gradle-exit-code-true.txt ]; then
+      #       # Lesen Sie den Fehlercode und die Fehlerausgabe
+      #       error_output_true=$(cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
+      #       cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r'
+      #       # Erstellen Sie eine Ausgabe für den nächsten Schritt
+      #       echo "error_output_true=$error_output_true" >> $GITHUB_ENV
+      #     else
+      #       echo "error_output_true=" >> $GITHUB_ENV
+      #     fi
+
+      # - name: Check Dependency Verfication error
+      #   if: env.error_output_false || env.error_output_true
+      #   run: |
+      #     if echo "${{ env.error_output_false }}" | grep -q 'dependency-verification-report.html' || \
+      #       echo "${{ env.error_output_true }}" | grep -q 'dependency-verification-report.html'; then
+      #       echo "FAIL_JOB=true" >> $GITHUB_ENV
+      #     elif [ -n "${{ env.error_output_false }}" ] || [ -n "${{ env.error_output_true }}" ]; then
+      #       cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r'
+      #       echo "FAIL=true" >> $GITHUB_ENV
+      #     else
+      #       echo "FAIL_JOB=false" >> $GITHUB_ENV
+      #       echo "FAIL=false" >> $GITHUB_ENV
+      #     fi
 
       - name: Upload Test Reports
         if: always()
@@ -104,78 +112,78 @@ jobs:
             build/reports/problems/
           retention-days: 3
 
-      - name: PR | Post comment
-        if: env.FAIL_JOB == 'true' && github.event_name == 'pull_request'
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
-        with:
-          script: |
-            const { GITHUB_REPOSITORY, SCRIPT_OUTPUT } = process.env;
-            const [repoOwner, repoName] = GITHUB_REPOSITORY.split('/');
-            const prNumber = context.issue.number;
+      # - name: PR | Post comment
+      #   if: env.FAIL_JOB == 'true' && github.event_name == 'pull_request'
+      #   uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      #   with:
+      #     script: |
+      #       const { GITHUB_REPOSITORY, SCRIPT_OUTPUT } = process.env;
+      #       const [repoOwner, repoName] = GITHUB_REPOSITORY.split('/');
+      #       const prNumber = context.issue.number;
 
-            // Find existing comment
-            const comments = await github.rest.issues.listComments({
-              owner: repoOwner,
-              repo: repoName,
-              issue_number: prNumber
-            });
+      #       // Find existing comment
+      #       const comments = await github.rest.issues.listComments({
+      #         owner: repoOwner,
+      #         repo: repoName,
+      #         issue_number: prNumber
+      #       });
 
-            const comment = comments.data.find(c => c.body.includes("🚨 **Gradle Build Failed** 🚨"));
+      #       const comment = comments.data.find(c => c.body.includes("🚨 **Gradle Build Failed** 🚨"));
 
-            if (!comment) {
-              // Create new comment if no existing comment is found
-              await github.rest.issues.createComment({
-                owner: repoOwner,
-                repo: repoName,
-                issue_number: prNumber,
-                body: `🚨 **Gradle Build Failed** 🚨
+      #       if (!comment) {
+      #         // Create new comment if no existing comment is found
+      #         await github.rest.issues.createComment({
+      #           owner: repoOwner,
+      #           repo: repoName,
+      #           issue_number: prNumber,
+      #           body: `🚨 **Gradle Build Failed** 🚨
 
-                Check: https://github.com/Stirling-Tools/Stirling-PDF/blob/main/DeveloperGuide.md#managing-dependencies
-                `
-              });
-              console.log("Created new comment.");
-            } else {
-              console.log("Comment update attempt denied. Actor does not match.");
-            }
+      #           Check: https://github.com/Stirling-Tools/Stirling-PDF/blob/main/DeveloperGuide.md#managing-dependencies
+      #           `
+      #         });
+      #         console.log("Created new comment.");
+      #       } else {
+      #         console.log("Comment update attempt denied. Actor does not match.");
+      #       }
 
-      - name: PR | Delete comment
-        if: env.FAIL_JOB == 'false' && github.event_name == 'pull_request'
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
-        with:
-          script: |
-            const { GITHUB_REPOSITORY, SCRIPT_OUTPUT } = process.env;
-            const [repoOwner, repoName] = GITHUB_REPOSITORY.split('/');
-            const prNumber = context.issue.number;
+      # - name: PR | Delete comment
+      #   if: env.FAIL_JOB == 'false' && github.event_name == 'pull_request'
+      #   uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      #   with:
+      #     script: |
+      #       const { GITHUB_REPOSITORY, SCRIPT_OUTPUT } = process.env;
+      #       const [repoOwner, repoName] = GITHUB_REPOSITORY.split('/');
+      #       const prNumber = context.issue.number;
 
-            // Find existing comment
-            const comments = await github.rest.issues.listComments({
-              owner: repoOwner,
-              repo: repoName,
-              issue_number: prNumber
-            });
+      #       // Find existing comment
+      #       const comments = await github.rest.issues.listComments({
+      #         owner: repoOwner,
+      #         repo: repoName,
+      #         issue_number: prNumber
+      #       });
 
-            const comment = comments.data.find(c => c.body.includes("🚨 **Gradle Build Failed** 🚨"));
+      #       const comment = comments.data.find(c => c.body.includes("🚨 **Gradle Build Failed** 🚨"));
 
-            // Only allow the action user to update comments
-            const expectedActor = "github-actions[bot]";
+      #       // Only allow the action user to update comments
+      #       const expectedActor = "github-actions[bot]";
 
-            if (comment && comment.user.login === expectedActor) {
-              // deleted existing comment
-              await github.rest.issues.deleteComment({
-                owner: repoOwner,
-                repo: repoName,
-                comment_id: comment.id
-              });
-              console.log("Deleted existing comment.");
-            } else {
-              console.log("Comment deleted attempt denied. Actor does not match.");
-            }
+      #       if (comment && comment.user.login === expectedActor) {
+      #         // deleted existing comment
+      #         await github.rest.issues.deleteComment({
+      #           owner: repoOwner,
+      #           repo: repoName,
+      #           comment_id: comment.id
+      #         });
+      #         console.log("Deleted existing comment.");
+      #       } else {
+      #         console.log("Comment deleted attempt denied. Actor does not match.");
+      #       }
 
-      - name: Fail job if errors found
-        if: env.FAIL_JOB == 'true' || env.FAIL == 'true'
-        run: |
-          echo "Failing the job because errors were detected."
-          exit 1
+      # - name: Fail job if errors found
+      #   if: env.FAIL_JOB == 'true' || env.FAIL == 'true'
+      #   run: |
+      #     echo "Failing the job because errors were detected."
+      #     exit 1
 
   docker-compose-tests:
     # if: github.event_name == 'push' && github.ref == 'refs/heads/main' ||
