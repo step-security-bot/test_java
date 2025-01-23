@@ -69,7 +69,7 @@ jobs:
 
       - name: Build with Gradle and with spring security
         id: build_with_security
-        run: ./gradlew clean build # 2>gradle-error.log || echo $? > gradle-exit-code-true.txt
+        run: ./gradlew clean build 2>gradle-error.log || echo $? > gradle-exit-code-true.txt
         env:
           DOCKER_ENABLE_SECURITY: true
 
