@@ -166,6 +166,8 @@ jobs:
         run: |
           pip install --require-hashes -r ./cucumber/requirements.txt
 
+      - run: echo ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
+
       - name: Run Docker Compose Tests
         run: |
           # chmod +x ./cucumber/test_webpages.sh
