@@ -45,6 +45,7 @@ jobs:
           ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata pgp,sha256 --refresh-keys --export-keys --refresh-dependencies help
 
       - name: Build with Gradle and no spring security
+        id: build_without_security
         run: ./gradlew clean build # 2>gradle-error.log || echo $? > gradle-exit-code-false.txt
         env:
           DOCKER_ENABLE_SECURITY: false
@@ -61,7 +62,13 @@ jobs:
       #       echo "error_output_false=" >> $GITHUB_ENV
       #     fi
 
+      - name: failure
+        if: ${{ failure() }}
+        run: |
+          echo ${{ steps.build_without_security.conclusion  }}
+
       - name: Build with Gradle and with spring security
+        id: build_with_security
         run: ./gradlew clean build # 2>gradle-error.log || echo $? > gradle-exit-code-true.txt
         env:
           DOCKER_ENABLE_SECURITY: true
@@ -77,6 +84,11 @@ jobs:
       #     else
       #       echo "error_output_true=" >> $GITHUB_ENV
       #     fi
+
+      - name: failure
+        if: ${{ failure() }}
+        run: |
+          echo ${{ steps.build_with_security.conclusion  }}
 
       # - name: Check Dependency Verfication error
       #   if: env.error_output_false || env.error_output_true
