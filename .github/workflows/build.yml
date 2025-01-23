@@ -49,10 +49,6 @@ jobs:
         env:
           DOCKER_ENABLE_SECURITY: false
 
-      - if: failed()
-        run: |
-
-
       # - name: Check Gradle Build Status DOCKER_ENABLE_SECURITY - false
       #   run: |
       #     if [ -f gradle-exit-code-false.txt ] && [ -s gradle-exit-code-false.txt ]; then
@@ -69,10 +65,6 @@ jobs:
         run: ./gradlew clean build # 2>gradle-error.log || echo $? > gradle-exit-code-true.txt
         env:
           DOCKER_ENABLE_SECURITY: true
-
-      - if: failed()
-        run: |
-
 
       # - name: Check Gradle Build Status DOCKER_ENABLE_SECURITY - true
       #   run: |
