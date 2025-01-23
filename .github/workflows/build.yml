@@ -54,7 +54,7 @@ jobs:
           if [ -f gradle-exit-code-false.txt ] && [ -s gradle-exit-code-false.txt ]; then
             # Lesen Sie den Fehlercode und die Fehlerausgabe
             error_output_false=$(cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
-            cat error_output_false
+            echo error_output_false
             # Erstellen Sie eine Ausgabe für den nächsten Schritt
             echo "error_output_false=$error_output_false" >> $GITHUB_ENV
           else
@@ -71,7 +71,7 @@ jobs:
           if [ -f gradle-exit-code-true.txt ] && [ -s gradle-exit-code-true.txt ]; then
             # Lesen Sie den Fehlercode und die Fehlerausgabe
             error_output_true=$(cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
-            cat error_output_true
+            echo error_output_true
             # Erstellen Sie eine Ausgabe für den nächsten Schritt
             echo "error_output_true=$error_output_true" >> $GITHUB_ENV
           else
