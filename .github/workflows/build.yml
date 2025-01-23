@@ -82,7 +82,7 @@ jobs:
             echo "error_output_true=" >> $GITHUB_ENV
           fi
 
-      - name: Post Comment to PR
+      - name: Check Dependency Verfication error to PR
         if: (env.error_output_false || env.error_output_true) && github.event_name == 'pull_request'
         run: |
           if echo "${{ env.error_output_false }}" | grep -q 'dependency-verification-report.html' || \
