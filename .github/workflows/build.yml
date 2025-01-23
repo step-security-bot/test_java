@@ -46,7 +46,7 @@ jobs:
 
       - name: Build with Gradle and no spring security
         id: build_without_security
-        run: ./gradlew clean build # 2>gradle-error.log || echo $? > gradle-exit-code-false.txt
+        run: ./gradlew clean build 2>gradle-error.log || echo $? > gradle-exit-code-false.txt
         env:
           DOCKER_ENABLE_SECURITY: false
 
