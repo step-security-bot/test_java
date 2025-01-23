@@ -47,25 +47,26 @@ jobs:
       - name: Build with Gradle and no spring security
         id: build_without_security
         run: |
-          ./gradlew clean build || echo $? > gradle-exit-code.txt # 2>gradle-error.log || echo $? > gradle-exit-code-false.txt
+          ./gradlew clean build || echo $? > gradle-exit-code-false.txt
         env:
           DOCKER_ENABLE_SECURITY: false
 
-      - name: Check Gradle Build Exit Code
-        if: always()
+      - name: Check Gradle Build Exit Code (no spring security)
+        if: ${{ always() && steps.build_without_security.conclusion }}
         run: |
-          if [ -f gradle-exit-code.txt ]; then
-            exit_code=$(cat gradle-exit-code.txt)
+          if [ -f gradle-exit-code-false.txt ]; then
+            cat gradle-exit-code-false.txt 2>/dev/null | tr '\n' ' ' | tr -d '\r'
+            exit_code=$(cat gradle-exit-code-false.txt)
             echo "The Gradle build failed with exit code $exit_code"
-            echo "exit_code=$exit_code" >> $GITHUB_ENV
+            echo "exit_code_false=$exit_code" >> $GITHUB_ENV
           else
-            echo "exit_code=0" >> $GITHUB_ENV
+            echo "exit_code_false=0" >> $GITHUB_ENV
           fi
 
-      - name: Failure Handling
-        if: ${{ env.exit_code != '0' }}
+      - name: Failure Handling (no spring security)
+        if: ${{ env.exit_code_false != '0' }}
         run: |
-          echo "The Gradle build step failed with exit code ${{ env.exit_code }}"
+          echo "The Gradle build step failed with exit code ${{ env.exit_code_false }}"
 
       - name: failure
         run: |
@@ -74,25 +75,26 @@ jobs:
       - name: Build with Gradle and with spring security
         id: build_with_security
         run: |
-          ./gradlew clean build || echo $? > gradle-exit-code.txt # 2>gradle-error.log || echo $? > gradle-exit-code-true.txt
+          ./gradlew clean build || echo $? > gradle-exit-code-true.txt
         env:
           DOCKER_ENABLE_SECURITY: true
 
       - name: Check Gradle Build Exit Code
-        if: always() # Wird immer ausgeführt, unabhängig vom vorherigen Schritt
+        if: ${{ always() && steps.build_with_security.conclusion }}
         run: |
-          if [ -f gradle-exit-code.txt ]; then
-            exit_code=$(cat gradle-exit-code.txt)
+          if [ -f gradle-exit-code-true.txt ]; then
+            cat gradle-exit-code-true.txt 2>/dev/null | tr '\n' ' ' | tr -d '\r'
+            exit_code=$(cat gradle-exit-code-true.txt)
             echo "The Gradle build failed with exit code $exit_code"
-            echo "exit_code=$exit_code" >> $GITHUB_ENV
+            echo "exit_code_true=$exit_code" >> $GITHUB_ENV
           else
-            echo "exit_code=0" >> $GITHUB_ENV
+            echo "exit_code_true=0" >> $GITHUB_ENV
           fi
 
       - name: Failure Handling
-        if: ${{ env.exit_code != '0' }}
+        if: ${{ env.exit_code_true != '0' }}
         run: |
-          echo "The Gradle build step failed with exit code ${{ env.exit_code }}"
+          echo "The Gradle build step failed with exit code ${{ env.exit_code_true }}"
 
       # - name: Check Gradle Build Status DOCKER_ENABLE_SECURITY - true
       #   run: |
