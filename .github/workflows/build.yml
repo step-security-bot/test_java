@@ -86,6 +86,9 @@ jobs:
             echo "FAIL_JOB=false" >> $GITHUB_ENV
           fi
 
+      - name: failure PR
+        if: failure()
+
       - name: Upload Test Reports
         if: always()
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
@@ -132,7 +135,7 @@ jobs:
               console.log("Comment update attempt denied. Actor does not match.");
             }
 
-      - name: Post comment on PR
+      - name: Delete comment on PR
         if: env.FAIL_JOB == 'false'
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
