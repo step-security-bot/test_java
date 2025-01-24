@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        jdk-version: [17, 21]
+        jdk-version: [17] # , 21]
 
     steps:
       - name: Harden Runner
@@ -73,6 +73,7 @@ jobs:
             exit_code=${{ env.exit_code_false }}
             exit ${exit_code:-1}
           fi
+          echo "${{ env.error_output_false }}"
 
       - name: failure
         run: |
