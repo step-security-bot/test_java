@@ -8,6 +8,7 @@ on:
     paths:
       - "build.gradle"
       - "src/main/resources/messages_*.properties"
+      - "src/main/resources/static/3rdPartyLicenses.json"
       - "scripts/ignore_translation.toml"
 
 permissions:
