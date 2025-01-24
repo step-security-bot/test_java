@@ -104,6 +104,7 @@ jobs:
         run: |
           ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies help
           ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata pgp,sha256 --refresh-keys --export-keys --refresh-dependencies help
+          ./gradlew clean build
 
       - name: Run git add
         run: |
