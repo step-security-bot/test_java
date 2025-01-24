@@ -62,6 +62,7 @@ jobs:
             echo "error_output_false=$error_output" >> $GITHUB_ENV
           else
             echo "exit_code_false=0" >> $GITHUB_ENV
+            echo "error_output_false=" >> $GITHUB_ENV
           fi
 
       - name: Failure Handling (no spring security)
@@ -69,7 +70,8 @@ jobs:
         run: |
           echo "The Gradle build step failed with exit code ${{ env.exit_code_false }}"
           if echo "${{ env.error_output_false }}" | grep -q 'dependency-verification-report.html'; then
-            exit ${{ env.exit_code_false }}
+            exit_code=${{ env.exit_code_false }}
+            exit ${exit_code:-1}
           fi
 
       - name: failure
@@ -94,6 +96,7 @@ jobs:
             echo "error_output_true=$error_output" >> $GITHUB_ENV
           else
             echo "exit_code_true=0" >> $GITHUB_ENV
+            echo "error_output_true=" >> $GITHUB_ENV
           fi
 
       - name: Failure Handling
@@ -101,7 +104,8 @@ jobs:
         run: |
           echo "The Gradle build step failed with exit code ${{ env.exit_code_true }}"
           if echo "${{ env.error_output_true }}" | grep -q 'dependency-verification-report.html'; then
-            exit(${{ env.exit_code_true }})
+            exit_code=${{ env.exit_code_true }}
+            exit ${exit_code:-1}
           fi
 
       # - name: Check Gradle Build Status DOCKER_ENABLE_SECURITY - true
