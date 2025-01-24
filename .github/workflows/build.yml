@@ -69,7 +69,7 @@ jobs:
         run: |
           echo "The Gradle build step failed with exit code ${{ env.exit_code_false }}"
           if echo "${{ env.error_output_false }}" | grep -q 'dependency-verification-report.html'; then
-            exit(${{ env.exit_code_false }})
+            exit ${{ env.exit_code_false }}
           fi
 
       - name: failure
