@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - "build.gradle"
+      - "README.md"
       - "src/main/resources/messages_*.properties"
       - "src/main/resources/static/3rdPartyLicenses.json"
       - "scripts/ignore_translation.toml"
@@ -86,19 +87,19 @@ jobs:
 
       - name: Run git add
         run: |
-          git add .
+          git add src/main/resources/messages_*.properties
           git diff --staged --quiet || git commit -m ":memo: Sync translation files" || echo "no changes"
 
       - name: Install dependencies
         run: pip install --require-hashes -r ./.github/scripts/requirements_sync_readme.txt
 
-      - name: Sync README
+      - name: Sync README.md
         run: |
           python scripts/counter_translation.py
 
       - name: Run git add
         run: |
-          git add .
+          git add README.md
           git diff --staged --quiet || git commit -m ":memo: Sync README.md" || echo "no changes"
 
       - name: Generate verification metadata with signatures and checksums
@@ -109,7 +110,8 @@ jobs:
 
       - name: Run git add
         run: |
-          git add .
+          git add verification-keyring.keys
+          git add verification-metadata.xml
           git diff --staged --quiet || git commit -m ":memo: Generate verification metadata with signatures and checksums" || echo "no changes"
 
       - name: Create Pull Request
