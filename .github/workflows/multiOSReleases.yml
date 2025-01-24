@@ -67,6 +67,11 @@ jobs:
         with:
           gradle-version: 8.12
 
+      - name: Generate verification metadata with signatures and checksums
+        run: |
+          ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies help
+          ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --refresh-keys --export-keys --refresh-dependencies help
+
       - name: Generate jar (With Security=${{ matrix.enable_security }})
         run: ./gradlew clean createExe
         env:
@@ -174,6 +179,11 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           .\wix.exe /install /quiet
+
+      - name: Generate verification metadata with signatures and checksums
+        run: |
+          ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies help
+          ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --refresh-keys --export-keys --refresh-dependencies help
 
       # Build installer
       - name: Build Installer
