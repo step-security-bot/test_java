@@ -54,6 +54,7 @@ jobs:
       - name: Check Gradle Build Exit Code (no spring security)
         if: ${{ always() && steps.build_without_security.conclusion }}
         run: |
+          cat gradle-error.log
           if [ -f gradle-exit-code-false.txt ]; then
             error_output=$(cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
             exit_code=$(cat gradle-exit-code-false.txt)
@@ -76,6 +77,7 @@ jobs:
           echo "${{ env.error_output_false }}"
 
       - name: failure
+        if: ${{ always() && steps.build_without_security.conclusion }}
         run: |
           echo ${{ steps.build_without_security.conclusion }}
 
@@ -89,6 +91,7 @@ jobs:
       - name: Check Gradle Build Exit Code
         if: ${{ always() && steps.build_with_security.conclusion }}
         run: |
+          cat gradle-error.log
           if [ -f gradle-exit-code-true.txt ]; then
             error_output=$(cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
             exit_code=$(cat gradle-exit-code-true.txt)
@@ -122,6 +125,7 @@ jobs:
       #     fi
 
       - name: failure
+        if: ${{ always() && steps.build_with_security.conclusion }}
         run: |
           echo ${{ steps.build_with_security.conclusion  }}
 
