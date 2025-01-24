@@ -57,6 +57,9 @@ jobs:
           cat gradle-error.log
           if [ -f gradle-exit-code-false.txt ]; then
             error_output=$(cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
+            if echo $error_output | grep -q 'dependency-verification-report.html'; then
+              echo "schreib einen Kommentar"
+            fi
             exit_code=$(cat gradle-exit-code-false.txt)
             echo "The Gradle build failed with exit code $exit_code"
             echo "exit_code_false=$exit_code" >> $GITHUB_ENV
@@ -94,6 +97,9 @@ jobs:
           cat gradle-error.log
           if [ -f gradle-exit-code-true.txt ]; then
             error_output=$(cat gradle-error.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
+            if echo $error_output | grep -q 'dependency-verification-report.html'; then
+              echo "schreib einen Kommentar"
+            fi
             exit_code=$(cat gradle-exit-code-true.txt)
             echo "The Gradle build failed with exit code $exit_code"
             echo "exit_code_true=$exit_code" >> $GITHUB_ENV
