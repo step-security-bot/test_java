@@ -6,6 +6,7 @@ on:
     branches:
       - main
     paths:
+      - ".github/workflows/sync_files.yml"
       - "build.gradle"
       - "README.md"
       - "gradle/verification-keyring.keys"
@@ -125,7 +126,7 @@ jobs:
           author: ${{ needs.read_bot_entries.outputs.committer }}
           signoff: true
           branch: sync_readme
-          title: ":globe_with_meridians: Sync Translations + Update README Progress Table"
+          title: ":globe_with_meridians: Sync Translations + Update README Progress Table + Update Verification Metadata"
           body: |
             ### Description of Changes
 
