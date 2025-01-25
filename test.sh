@@ -69,10 +69,6 @@ main() {
 
     # Run the gradlew build command and check if it fails
     if [[ "$BOOLEAN_PARAM" == "true" ]]; then
-        set -e
-        if [ -f ./gradle/verification-metadata.xml ]; then
-        rm ./gradle/verification-metadata.xml
-        fi
         ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies help
         ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --refresh-keys --export-keys --refresh-dependencies help
     fi
