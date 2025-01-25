@@ -70,10 +70,8 @@ jobs:
         if: ${{ always() && steps.build_without_security_exit_code.conclusion == 'failure' }}
         run: |
           if echo "${{ env.error_output_false }}" | grep -q 'dependency-verification-report.html'; then
-            echo "write_comment_without_security=true"
             echo "write_comment_without_security=true" >> $GITHUB_ENV
           else
-            echo "write_comment_without_security=false"
             echo "write_comment_without_security=false" >> $GITHUB_ENV
           fi
 
@@ -103,15 +101,13 @@ jobs:
         if: ${{ always() && steps.build_with_security_exit_code.conclusion == 'failure' }}
         run: |
           if echo "${{ env.error_output_true }}" | grep -q 'dependency-verification-report.html'; then
-            echo "write_comment_with_security=true"
             echo "write_comment_with_security=true" >> $GITHUB_ENV
           else
-            echo "write_comment_with_security=false"
             echo "write_comment_with_security=false" >> $GITHUB_ENV
           fi
 
       - name: PR | Delete comment
-        if: ${{ always() && github.event_name == 'pull_request' && env.write_comment_with_security == 'false' && env.write_comment_without_security == 'false' }}
+        if: ${{ always() && github.event_name == 'pull_request' && steps.build_with_security_exit_code.conclusion == 'success' && steps.build_without_security_exit_code.conclusion == 'success' }}
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
