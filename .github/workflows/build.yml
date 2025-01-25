@@ -125,6 +125,8 @@ jobs:
               issue_number: prNumber
             });
 
+            echo comments;
+
             const comment = comments.data.find(c => c.body.includes("🚨 **Gradle Build Failed** 🚨"));
 
             // Only allow the action user to update comments
