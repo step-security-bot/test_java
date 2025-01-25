@@ -149,8 +149,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - jdk-version: [17]
+          - jdk-version: 17
             docker_enable_security: [true, false]
+          # - jdk-version: 21
+          #   docker_enable_security: [true, false]
 
     steps:
       - name: Harden Runner
