@@ -172,7 +172,7 @@ jobs:
       - name: PR | Post comment
         if: ${{ always() && github.event_name == 'pull_request' && steps.build_with_security_exit_code.conclusion == 'failure' && env.write_comment_with_security == 'true' }}
         run: |
-          echo ${{ steps.bbuild_with_security_exit_code.conclusion }}
+          echo ${{ steps.build_with_security_exit_code.conclusion }}
 
       - name: Upload Test Reports
         if: always()
