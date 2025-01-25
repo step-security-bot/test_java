@@ -57,9 +57,6 @@ jobs:
           if [ -f ./gradle/verification-metadata.xml ]; then
             rm ./gradle/verification-metadata.xml
           fi
-          if [ -f ./gradle/verification-keyring.keys ]; then
-            rm ./gradle/verification-keyring.keys
-          fi
           ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies help
           ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --refresh-keys --export-keys --refresh-dependencies help
 
