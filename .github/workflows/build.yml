@@ -164,10 +164,13 @@ jobs:
 
             // Build the comment content
             let bodyComment = "🚨 **Gradle Build Failed** 🚨\n\n";
-            bodyComment +=  "```bash\n./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies help\n" +
-                            "./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --refresh-keys --export-keys --refresh-dependencies help\n```\n\n";
+            bodyComment += "To resolve the dependency verification issue, execute the following commands step by step to update the dependency metadata and push the changes to this pull request:\n\n";
+            bodyComment += "```bash\n";
+            bodyComment += "./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies help\n\n";
+            bodyComment += "./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --refresh-keys --export-keys --refresh-dependencies help\n";
+            bodyComment += "```\n\n";
+            bodyComment += "For further details, refer to the [Dependency Management Guide](https://github.com/Stirling-Tools/Stirling-PDF/blob/main/DeveloperGuide.md#managing-dependencies).\n";
 
-            bodyComment += "For more details, refer to the [Dependency Management Guide](https://github.com/Stirling-Tools/Stirling-PDF/blob/main/DeveloperGuide.md#managing-dependencies).\n";
 
             if (!comment && (process.env.error_output_true || process.env.error_output_false)) {
               // Create new comment if no existing comment is found
@@ -178,6 +181,15 @@ jobs:
                 body: bodyComment
               });
               console.log("Created new comment.");
+            } else if (comment && comment.user.login === expectedActor) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: repoOwner,
+                repo: repoName,
+                comment_id: comment.id,
+                body: bodyComment
+              });
+              console.log("Updated existing comment.");
             } else {
               console.log("Comment update attempt denied. Actor does not match.");
             }
