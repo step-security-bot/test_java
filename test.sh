@@ -69,8 +69,9 @@ main() {
 
     # Run the gradlew build command and check if it fails
     if [[ "$BOOLEAN_PARAM" == "true" ]]; then
-        ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies help
-        ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --refresh-keys --export-keys --refresh-dependencies help
+        ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies --dry-run help
+        ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --refresh-keys --export-keys --refresh-dependencies --dry-run help
+        mv gradle/verification-metadata.dryrun.xml gradle/verification-metadata.xml
     fi
 
     export DOCKER_ENABLE_SECURITY=false
