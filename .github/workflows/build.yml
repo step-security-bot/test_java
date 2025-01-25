@@ -150,7 +150,9 @@ jobs:
       matrix:
         include:
           - jdk-version: 17
-            docker_enable_security: [true, false]
+            docker_enable_security: true
+          - jdk-version: 17
+            docker_enable_security: false
           # - jdk-version: 21
           #   docker_enable_security: [true, false]
 
