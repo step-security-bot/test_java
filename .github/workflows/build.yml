@@ -47,7 +47,7 @@ jobs:
       - name: Build with Gradle and no spring security
         id: build_without_security
         run: |
-          ./gradlew clean build 2> >(tee gradle-error-${{ matrix.jdk-version }}-false.log >&2) || echo $? > gradle-exit-code-false.txt
+          ./gradlew clean build 2> >(tee gradle-error-${{ matrix.jdk-version }}-false.log >&2) || echo $? > gradle-exit-code-${{ matrix.jdk-version }}-false.txt
         env:
           DOCKER_ENABLE_SECURITY: false
 
@@ -55,12 +55,12 @@ jobs:
         if: ${{ always() && steps.build_without_security.conclusion }}
         run: |
           cat gradle-error-${{ matrix.jdk-version }}-false.log
-          if [ -f gradle-exit-code-false.txt ]; then
+          if [ -f gradle-exit-code-${{ matrix.jdk-version }}-false.txt ]; then
             error_output=$(cat gradle-error-${{ matrix.jdk-version }}-false.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
             if echo $error_output | grep -q 'dependency-verification-report.html'; then
               echo "schreib einen Kommentar"
             fi
-            exit_code=$(cat gradle-exit-code-false.txt)
+            exit_code=$(cat gradle-exit-code-${{ matrix.jdk-version }}-false.txt)
             echo "The Gradle build failed with exit code $exit_code"
             echo "exit_code_false=$exit_code" >> $GITHUB_ENV
             echo "error_output_false=$error_output" >> $GITHUB_ENV
@@ -88,7 +88,7 @@ jobs:
       - name: Build with Gradle and with spring security
         id: build_with_security
         run: |
-          ./gradlew clean build 2> >(tee gradle-error-${{ matrix.jdk-version }}-true.log >&2) || echo $? > gradle-exit-code-true.txt
+          ./gradlew clean build 2> >(tee gradle-error-${{ matrix.jdk-version }}-true.log >&2) || echo $? > gradle-exit-code-${{ matrix.jdk-version }}-true.txt
         env:
           DOCKER_ENABLE_SECURITY: true
 
@@ -96,12 +96,12 @@ jobs:
         if: ${{ always() && steps.build_with_security.conclusion }}
         run: |
           cat gradle-error-${{ matrix.jdk-version }}-true.log
-          if [ -f gradle-exit-code-true.txt ]; then
+          if [ -f gradle-exit-code-${{ matrix.jdk-version }}-true.txt ]; then
             error_output=$(cat gradle-error-${{ matrix.jdk-version }}-true.log 2>/dev/null | tr '\n' ' ' | tr -d '\r' || echo "No error output captured.")
             if echo $error_output | grep -q 'dependency-verification-report.html'; then
               echo "schreib einen Kommentar"
             fi
-            exit_code=$(cat gradle-exit-code-true.txt)
+            exit_code=$(cat gradle-exit-code-${{ matrix.jdk-version }}-true.txt)
             echo "The Gradle build failed with exit code $exit_code"
             echo "exit_code_true=$exit_code" >> $GITHUB_ENV
             echo "error_output_true=$error_output" >> $GITHUB_ENV
@@ -134,6 +134,8 @@ jobs:
           path: |
             gradle-error-${{ matrix.jdk-version }}-true.log
             gradle-error-${{ matrix.jdk-version }}-false.log
+            gradle-exit-code-${{ matrix.jdk-version }}-true.txt
+            gradle-exit-code-${{ matrix.jdk-version }}-false.txt
             build/reports/tests/
             build/test-results/
             build/reports/problems/
@@ -167,11 +169,18 @@ jobs:
         with:
           name: test-reports-jdk-${{ matrix.jdk-version }}
 
-      - run: |
-          cat gradle-error-${{ matrix.jdk-version }}-${{ matrix.docker_enable_security}}.log
+      - id: error
+        run: |
+          if [ -f gradle-exit-code-${{ matrix.jdk-version }}-${{ matrix.docker_enable_security}}.txt ]; then
+            cat gradle-error-${{ matrix.jdk-version }}-${{ matrix.docker_enable_security}}.log
+            exit_code=$(cat gradle-exit-code-${{ matrix.jdk-version }}-${{ matrix.docker_enable_security}}.txt)
+            exit ${exit_code:-1}
+          fi
 
-      # - name: PR | Post comment
-      #   if: env.FAIL_JOB == 'true' && github.event_name == 'pull_request'
+      - name: PR | Post comment
+        if: ${{ always() && github.event_name == 'pull_request' && steps.error.conclusion }}
+        run: |
+          echo ${{ steps.error.conclusion }}
       #   uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
       #   with:
       #     script: |
