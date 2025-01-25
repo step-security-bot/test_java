@@ -148,7 +148,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        jdk-version: [17] # , 21]
+        include:
+          - jdk-version: [17]
+            docker_enable_security: [true, false]
 
     steps:
       - name: Harden Runner
@@ -162,7 +164,7 @@ jobs:
           name: test-reports-jdk-${{ matrix.jdk-version }}
 
       - run: |
-          cat gradle-error-${{ matrix.jdk-version }}-true.log
+          cat gradle-error-${{ matrix.jdk-version }}-${{ matrix.docker_enable_security}}.log
 
       # - name: PR | Post comment
       #   if: env.FAIL_JOB == 'true' && github.event_name == 'pull_request'
