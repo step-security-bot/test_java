@@ -8,7 +8,7 @@ Feature: API Validation
     Then the response content type should be "application/pdf"
     And the response file should have size greater than 0
 	And the response status code should be 200
-	
+
 
   @ocr @positive
   Scenario: Process PDF with OCR
@@ -46,8 +46,8 @@ Feature: API Validation
 	And the response ZIP should contain 2 files
     And the response file should have size greater than 0
 	And the response status code should be 200
-	
-	
+
+
   @ocr @positive
   Scenario: Process PDF with OCR
     Given I generate a PDF file as "fileInput"
@@ -87,7 +87,7 @@ Feature: API Validation
 
   @ocr @pdfa1
   Scenario: PDFA
-    Given I use an example file at "exampleFiles/pdfa2.pdf" as parameter "fileInput"
+    Given I use an example file at "testing/cucumber/exampleFiles/pdfa2.pdf" as parameter "fileInput"
 	And the request data includes
       | parameter        | value     |
       | outputFormat     | pdfa       |
@@ -95,10 +95,10 @@ Feature: API Validation
 	Then the response status code should be 200
     And the response file should have extension ".pdf"
     And the response file should have size greater than 100
-	
+
   @ocr @pdfa2
   Scenario: PDFA1
-    Given I use an example file at "exampleFiles/pdfa1.pdf" as parameter "fileInput"
+    Given I use an example file at "testing/cucumber/exampleFiles/pdfa1.pdf" as parameter "fileInput"
 	And the request data includes
       | parameter        | value     |
       | outputFormat     | pdfa-1       |
@@ -106,10 +106,10 @@ Feature: API Validation
 	Then the response status code should be 200
     And the response file should have extension ".pdf"
     And the response file should have size greater than 100
-	
+
   @compress @qpdf @positive
   Scenario: Compress
-    Given I use an example file at "exampleFiles/ghost3.pdf" as parameter "fileInput"
+    Given I use an example file at "testing/cucumber/exampleFiles/ghost3.pdf" as parameter "fileInput"
 	And the request data includes
       | parameter        | value     |
       | optimizeLevel     | 4       |
@@ -117,10 +117,10 @@ Feature: API Validation
 	Then the response status code should be 200
     And the response file should have extension ".pdf"
     And the response file should have size greater than 100
-	
+
   @compress @qpdf @positive
   Scenario: Compress
-    Given I use an example file at "exampleFiles/ghost2.pdf" as parameter "fileInput"
+    Given I use an example file at "testing/cucumber/exampleFiles/ghost2.pdf" as parameter "fileInput"
 	And the request data includes
       | parameter        | value     |
       | optimizeLevel     | 1       |
@@ -129,11 +129,11 @@ Feature: API Validation
 	Then the response status code should be 200
     And the response file should have extension ".pdf"
     And the response file should have size greater than 100
-	
-	
+
+
   @compress @qpdf @positive
   Scenario: Compress
-    Given I use an example file at "exampleFiles/ghost1.pdf" as parameter "fileInput"
+    Given I use an example file at "testing/cucumber/exampleFiles/ghost1.pdf" as parameter "fileInput"
 	And the request data includes
       | parameter        | value     |
       | optimizeLevel     | 1       |
@@ -141,8 +141,8 @@ Feature: API Validation
     When I send the API request to the endpoint "/api/v1/misc/compress-pdf"
 	Then the response status code should be 200
     And the response file should have extension ".pdf"
-    And the response file should have size greater than 100	
-	
+    And the response file should have size greater than 100
+
   @libre @positive
   Scenario Outline: Convert PDF to various types
   Given I generate a PDF file as "fileInput"
@@ -164,47 +164,47 @@ Feature: API Validation
    |  presentation   | odp   | .odp     |
    |  html   | html    | .zip      |
 
-	
+
   @libre @positive @topdf
   Scenario Outline: Convert PDF to various types
-  Given I use an example file at "exampleFiles/example<extension>" as parameter "fileInput"
+  Given I use an example file at "testing/cucumber/exampleFiles/example<extension>" as parameter "fileInput"
   When I send the API request to the endpoint "/api/v1/convert/file/pdf"
   Then the response status code should be 200
   And the response file should have size greater than 100
   And the response file should have extension ".pdf"
 
   Examples:
-   | extension | 
+   | extension |
    |   .docx  |
    |  .odp   |
-   |  .odt   | 
-   |  .pptx   | 
-   |  .rtf   | 
-		
+   |  .odt   |
+   |  .pptx   |
+   |  .rtf   |
+
   @calibre @positive @htmltopdf
   Scenario: Convert HTML to PDF
-  Given I use an example file at "exampleFiles/example.html" as parameter "fileInput"
+  Given I use an example file at "testing/cucumber/exampleFiles/example.html" as parameter "fileInput"
   When I send the API request to the endpoint "/api/v1/convert/html/pdf"
   Then the response status code should be 200
   And the response file should have size greater than 100
   And the response file should have extension ".pdf"
-  
+
   @calibre @positive @zippedhtmltopdf
   Scenario: Convert zipped HTML to PDF
-  Given I use an example file at "exampleFiles/example_html.zip" as parameter "fileInput"
+  Given I use an example file at "testing/cucumber/exampleFiles/example_html.zip" as parameter "fileInput"
   When I send the API request to the endpoint "/api/v1/convert/html/pdf"
   Then the response status code should be 200
   And the response file should have size greater than 100
   And the response file should have extension ".pdf"
-  
+
   @calibre @positive @markdowntopdf
   Scenario: Convert Markdown to PDF
-  Given I use an example file at "exampleFiles/example.md" as parameter "fileInput"
+  Given I use an example file at "testing/cucumber/exampleFiles/example.md" as parameter "fileInput"
   When I send the API request to the endpoint "/api/v1/convert/markdown/pdf"
   Then the response status code should be 200
   And the response file should have size greater than 100
   And the response file should have extension ".pdf"
-  
+
   Scenario: Convert PDF to Markdown format
   Given I generate a PDF file as "fileInput"
   And the pdf contains 3 pages with random text
@@ -212,4 +212,3 @@ Feature: API Validation
   Then the response status code should be 200
   And the response file should have size greater than 100
   And the response file should have extension ".md"
-  
