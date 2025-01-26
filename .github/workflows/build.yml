@@ -256,7 +256,7 @@ jobs:
 
       - name: Pip requirements
         run: |
-          pip install --require-hashes -r ./cucumber/requirements.txt
+          pip install --require-hashes -r ./testing/cucumber/requirements.txt
 
       - run: echo ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
 
