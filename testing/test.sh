@@ -154,7 +154,7 @@ main() {
     run_tests "Stirling-PDF-Security-Fat-with-login" "./exampleYmlFiles/test_cicd.yml"
 
     if [ $? -eq 0 ]; then
-        cd "testing/cucumber"
+        cd "./testing/cucumber"
         if python -m behave; then
             passed_tests+=("Stirling-PDF-Regression")
         else
