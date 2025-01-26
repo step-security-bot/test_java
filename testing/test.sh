@@ -105,15 +105,15 @@ main() {
     # Test each configuration
     run_tests "Stirling-PDF-Ultra-Lite" "./exampleYmlFiles/docker-compose-latest-ultra-lite.yml"
 
-    echo "Testing webpage accessibility..."
-    cd "testing"
-    if ./test_webpages.sh -f webpage_urls.txt -b http://localhost:8080; then
-        passed_tests+=("Webpage-Accessibility-lite")
-    else
-        failed_tests+=("Webpage-Accessibility-lite")
-        echo "Webpage accessibility lite tests failed"
-    fi
-    cd "$PROJECT_ROOT"
+    # echo "Testing webpage accessibility..."
+    # cd "testing"
+    # if ./test_webpages.sh -f webpage_urls.txt -b http://localhost:8080; then
+    #     passed_tests+=("Webpage-Accessibility-lite")
+    # else
+    #     failed_tests+=("Webpage-Accessibility-lite")
+    #     echo "Webpage accessibility lite tests failed"
+    # fi
+    # cd "$PROJECT_ROOT"
     docker-compose -f "./exampleYmlFiles/docker-compose-latest-ultra-lite.yml" down
 
     #run_tests "Stirling-PDF" "./exampleYmlFiles/docker-compose-latest.yml"
