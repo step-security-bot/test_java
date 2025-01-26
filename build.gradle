@@ -291,9 +291,6 @@ dependencies {
     // CWE-835 | CWE-770 | CWE-770
     implementation("org.apache.commons:commons-compress:1.26.0")
     // CWE-121 | CWE-502
-    implementation ('edu.sc.seis.launch4j:launch4j:3.0.6') {
-        exclude group: 'com.thoughtworks.xstream', module: 'xstream'
-    }
     implementation 'com.thoughtworks.xstream:xstream:1.4.21'
 
     if (System.getenv("STIRLING_PDF_DESKTOP_UI") != "false") {
