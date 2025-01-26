@@ -1,3 +1,12 @@
+buildscript {
+  repositories {
+    maven { url 'https://boegl.jfrog.io/artifactory/snapshots-gradle-dev-local/' }
+  }
+  dependencies {
+    classpath 'edu.sc.seis.launch4j:launch4j:latest.integration'
+  }
+}
+
 plugins {
     id "java"
     id "org.springframework.boot" version "3.4.2"
@@ -291,7 +300,7 @@ dependencies {
     // CWE-835 | CWE-770 | CWE-770
     implementation("org.apache.commons:commons-compress:1.26.0")
     // CWE-121 | CWE-502
-    implementation 'com.thoughtworks.xstream:xstream:1.4.21'
+    // implementation 'com.thoughtworks.xstream:xstream:1.4.21'
 
     if (System.getenv("STIRLING_PDF_DESKTOP_UI") != "false") {
         implementation "me.friwi:jcefmaven:127.3.1"
