@@ -10,9 +10,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen import canvas
 import mimetypes
-import requests
 import zipfile
-import shutil
 import re
 from PIL import Image, ImageDraw
 
