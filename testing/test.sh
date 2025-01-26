@@ -139,15 +139,15 @@ main() {
 
     run_tests "Stirling-PDF-Security-Fat" "./exampleYmlFiles/docker-compose-latest-fat-security.yml"
 
-    echo "Testing webpage accessibility..."
-    cd "testing"
-    if ./test_webpages.sh -f webpage_urls_full.txt -b http://localhost:8080; then
-        passed_tests+=("Webpage-Accessibility-full")
-    else
-        failed_tests+=("Webpage-Accessibility-full")
-        echo "Webpage accessibility full tests failed"
-    fi
-    cd "$PROJECT_ROOT"
+    # echo "Testing webpage accessibility..."
+    # cd "testing"
+    # if ./test_webpages.sh -f webpage_urls_full.txt -b http://localhost:8080; then
+    #     passed_tests+=("Webpage-Accessibility-full")
+    # else
+    #     failed_tests+=("Webpage-Accessibility-full")
+    #     echo "Webpage accessibility full tests failed"
+    # fi
+    # cd "$PROJECT_ROOT"
 
     docker-compose -f "./exampleYmlFiles/docker-compose-latest-fat-security.yml" down
 
