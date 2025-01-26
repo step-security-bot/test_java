@@ -281,6 +281,10 @@ tasks.wrapper {
 //}
 configurations.all {
     exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+
+    resolutionStrategy {
+        force 'com.thoughtworks.xstream:xstream:1.4.21'
+    }
 }
 dependencies {
 
