@@ -96,7 +96,7 @@ Feature: API Validation
 
   @extract-images
   Scenario Outline: Extract Image Scans duplicates
-    Given I use an example file at "exampleFiles/images.pdf" as parameter "fileInput"
+    Given I use an example file at "testing/cucumber/exampleFiles/images.pdf" as parameter "fileInput"
     And the request data includes
       | parameter        | value       |
       | format        | <format>         |
