@@ -1,7 +1,23 @@
 #!/bin/bash
 
-# Standardwert für den Boolean-Parameter
-BOOLEAN_PARAM=${1:-false}  # Standard ist "false", falls kein Parameter übergeben wird
+# Default value for the Boolean parameter
+VERIFICATION=${1:-false}  # Default is "false" if no parameter is passed
+
+# Find project root by locating build.gradle
+find_root() {
+    local dir="$PWD"
+    while [[ "$dir" != "/" ]]; do
+        if [[ -f "$dir/build.gradle" ]]; then
+            echo "$dir"
+            return 0
+        fi
+        dir="$(dirname "$dir")"
+    done
+    echo "Error: build.gradle not found" >&2
+    exit 1
+}
+
+PROJECT_ROOT=$(find_root)
 
 # Function to check the health of the service with a timeout of 80 seconds
 check_health() {
@@ -10,18 +26,18 @@ check_health() {
     local end=$((SECONDS+60))
 
     echo -n "Waiting for $service_name to become healthy..."
-	until [ "$(docker inspect --format='{{json .State.Health.Status}}' "$service_name")" == '"healthy"' ] || [ $SECONDS -ge $end ]; do
-		sleep 3
-		echo -n "."
-		if [ $SECONDS -ge $end ]; then
-			echo -e "\n$service_name health check timed out after 80 seconds."
-			echo "Printing logs for $service_name:"
+    until [ "$(docker inspect --format='{{json .State.Health.Status}}' "$service_name")" == '"healthy"' ] || [ $SECONDS -ge $end ]; do
+        sleep 3
+        echo -n "."
+        if [ $SECONDS -ge $end ]; then
+            echo -e "\n$service_name health check timed out after 80 seconds."
+            echo "Printing logs for $service_name:"
             docker logs "$service_name"
-			return 1
-		fi
-	done
-	echo -e "\n$service_name is healthy!"
-	echo "Printing logs for $service_name:"
+            return 1
+        fi
+    done
+    echo -e "\n$service_name is healthy!"
+    echo "Printing logs for $service_name:"
     docker logs "$service_name"
     return 0
 }
@@ -65,20 +81,22 @@ run_tests() {
 
 # Main testing routine
 main() {
-	SECONDS=0
+    SECONDS=0
+
+    cd "$PROJECT_ROOT"
 
     # Run the gradlew build command and check if it fails
-    if [[ "$BOOLEAN_PARAM" == "true" ]]; then
+    if [[ "$VERIFICATION" == "true" ]]; then
         ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies help
         ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --refresh-keys --export-keys --refresh-dependencies help
     fi
 
     export DOCKER_ENABLE_SECURITY=false
+    # Run the gradlew build command and check if it fails
     if ! ./gradlew clean build; then
         echo "Gradle build failed with security disabled, exiting script."
         exit 1
     fi
-
 
     # Building Docker images
     # docker build --no-cache --pull --build-arg VERSION_TAG=alpha -t ludy87/s-pdf:latest -f ./Dockerfile .
@@ -87,19 +105,19 @@ main() {
     # Test each configuration
     run_tests "Stirling-PDF-Ultra-Lite" "./exampleYmlFiles/docker-compose-latest-ultra-lite.yml"
 
-	echo "Testing webpage accessibility..."
-	if ./cucumber/test_webpages.sh; then
-		passed_tests+=("Webpage-Accessibility")
-	else
-		# failed_tests+=("Webpage-Accessibility") Ludy disabled
-		echo "Webpage accessibility tests failed"
-	fi
-
-	docker-compose -f "./exampleYmlFiles/docker-compose-latest-ultra-lite.yml" down
-
+    echo "Testing webpage accessibility..."
+    cd "testing"
+    if ./test_webpages.sh -f webpage_urls.txt -b http://localhost:8080; then
+        passed_tests+=("Webpage-Accessibility-lite")
+    else
+        failed_tests+=("Webpage-Accessibility-lite")
+        echo "Webpage accessibility lite tests failed"
+    fi
+    cd "$PROJECT_ROOT"
+    docker-compose -f "./exampleYmlFiles/docker-compose-latest-ultra-lite.yml" down
 
     #run_tests "Stirling-PDF" "./exampleYmlFiles/docker-compose-latest.yml"
-	#docker-compose -f "./exampleYmlFiles/docker-compose-latest.yml" down
+    #docker-compose -f "./exampleYmlFiles/docker-compose-latest.yml" down
 
     export DOCKER_ENABLE_SECURITY=true
     # Run the gradlew build command and check if it fails
@@ -113,42 +131,56 @@ main() {
     # docker build --no-cache --pull --build-arg VERSION_TAG=alpha -t ludy87/s-pdf:latest-ultra-lite -f ./Dockerfile.ultra-lite .
     docker build --no-cache --pull --build-arg VERSION_TAG=alpha -t ludy87/s-pdf:latest-fat -f ./Dockerfile.fat .
 
-
     # Test each configuration with security
     # run_tests "Stirling-PDF-Ultra-Lite-Security" "./exampleYmlFiles/docker-compose-latest-ultra-lite-security.yml"
-	# docker-compose -f "./exampleYmlFiles/docker-compose-latest-ultra-lite-security.yml" down
+    # docker-compose -f "./exampleYmlFiles/docker-compose-latest-ultra-lite-security.yml" down
     # run_tests "Stirling-PDF-Security" "./exampleYmlFiles/docker-compose-latest-security.yml"
-	# docker-compose -f "./exampleYmlFiles/docker-compose-latest-security.yml" down
+    # docker-compose -f "./exampleYmlFiles/docker-compose-latest-security.yml" down
 
-	run_tests "Stirling-PDF-Security-Fat" "./exampleYmlFiles/test_cicd.yml"
-	if [ $? -eq 0 ]; then
-		cd cucumber
-		if python -m behave; then
-			passed_tests+=("Stirling-PDF-Regression")
-		else
-			failed_tests+=("Stirling-PDF-Regression")
-			echo "Printing docker logs of failed regression"
-			docker logs "Stirling-PDF-Security-Fat"
-			echo "Printed docker logs of failed regression"
-		fi
-		cd ..
-	fi
-	docker-compose -f "./exampleYmlFiles/docker-compose-latest-fat-security.yml" down
+    run_tests "Stirling-PDF-Security-Fat" "./exampleYmlFiles/docker-compose-latest-fat-security.yml"
+
+    echo "Testing webpage accessibility..."
+    cd "testing"
+    if ./test_webpages.sh -f webpage_urls_full.txt -b http://localhost:8080; then
+        passed_tests+=("Webpage-Accessibility-full")
+    else
+        failed_tests+=("Webpage-Accessibility-full")
+        echo "Webpage accessibility full tests failed"
+    fi
+    cd "$PROJECT_ROOT"
+
+    docker-compose -f "./exampleYmlFiles/docker-compose-latest-fat-security.yml" down
+
+    run_tests "Stirling-PDF-Security-Fat-with-login" "./exampleYmlFiles/test_cicd.yml"
+
+    if [ $? -eq 0 ]; then
+        cd "testing/cucumber"
+        if python -m behave; then
+            passed_tests+=("Stirling-PDF-Regression")
+        else
+            failed_tests+=("Stirling-PDF-Regression")
+            echo "Printing docker logs of failed regression"
+            docker logs "Stirling-PDF-Security-Fat-with-login"
+            echo "Printed docker logs of failed regression"
+        fi
+        cd "$PROJECT_ROOT"
+    fi
+
+    docker-compose -f "./exampleYmlFiles/test_cicd.yml" down
 
     # Report results
     echo "All tests completed in $SECONDS seconds."
 
-
-	if [ ${#passed_tests[@]} -ne 0 ]; then
-		echo "Passed tests:"
-	fi
+    if [ ${#passed_tests[@]} -ne 0 ]; then
+        echo "Passed tests:"
+    fi
     for test in "${passed_tests[@]}"; do
         echo -e "\e[32m$test\e[0m"  # Green color for passed tests
     done
 
-	if [ ${#failed_tests[@]} -ne 0 ]; then
-		echo "Failed tests:"
-	fi
+    if [ ${#failed_tests[@]} -ne 0 ]; then
+        echo "Failed tests:"
+    fi
     for test in "${failed_tests[@]}"; do
         echo -e "\e[31m$test\e[0m"  # Red color for failed tests
     done
