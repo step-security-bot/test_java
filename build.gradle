@@ -292,15 +292,13 @@ configurations.all {
     exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
 
     resolutionStrategy {
-        force 'com.thoughtworks.xstream:xstream:1.4.21'
+        force 'org.apache.commons:commons-compress:1.26.0'
     }
 }
 dependencies {
 
     // CWE-835 | CWE-770 | CWE-770
-    implementation("org.apache.commons:commons-compress:1.26.0")
-    // CWE-121 | CWE-502
-    // implementation 'com.thoughtworks.xstream:xstream:1.4.21'
+    // implementation("org.apache.commons:commons-compress:1.26.0")
 
     if (System.getenv("STIRLING_PDF_DESKTOP_UI") != "false") {
         implementation ("me.friwi:jcefmaven:127.3.1") {
