@@ -6,6 +6,8 @@ on:
     branches: [main]
   merge_group:
     branches: [main]
+  push:
+    branches: [ "main" ]
 
 permissions:
   # Required to upload SARIF file to CodeQL. See: https://github.com/github/codeql-action/issues/2117
@@ -16,5 +18,21 @@ permissions:
   contents: read
 
 jobs:
-  scan-pr:
+  scan-scheduled:
+    if: ${{ github.event_name == 'push' || github.event_name == 'schedule' }}
     uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@f8115f2f28022984d4e8070d2f0f85abcf6f3458 # v1.9.2
+    with:
+      # Example of specifying custom arguments
+      scan-args: |-
+        -r
+        --skip-git
+        ./
+  scan-pr:
+    if: ${{ github.event_name == 'pull_request' || github.event_name == 'merge_group' }}
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@f8115f2f28022984d4e8070d2f0f85abcf6f3458 # v1.9.2
+    with:
+      # Example of specifying custom arguments
+      scan-args: |-
+        -r
+        --skip-git
+        ./
