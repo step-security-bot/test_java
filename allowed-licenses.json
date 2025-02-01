@@ -2,7 +2,19 @@
   "allowedLicenses": [
     {
       "moduleName": ".*",
-      "moduleLicense": "MIT License"
+      "moduleLicense": "The BSD 3-Clause License (BSD3)"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "MIT"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "LICENSE.txt"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "LICENSE-JJ2000.txt, LICENSE-Sun.txt"
     },
     {
       "moduleName": ".*",
@@ -10,7 +22,23 @@
     },
     {
       "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache 2.0"
+    },
+    {
+      "moduleName": ".*",
       "moduleLicense": "MPL 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache 2"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "MIT License"
     },
     {
       "moduleName": ".*",
@@ -22,19 +50,23 @@
     },
     {
       "moduleName": ".*",
-      "moduleLicense": "Bouncy Castle Licence"
+      "moduleLicense": "BSD 2-Clause License"
     },
     {
       "moduleName": ".*",
-      "moduleLicense": "The 2-Clause BSD License"
+      "moduleLicense": "Apache License 2.0"
     },
     {
       "moduleName": ".*",
-      "moduleLicense": "The 3-Clause BSD License"
+      "moduleLicense": "GPL2 w/ CPE"
     },
     {
       "moduleName": ".*",
-      "moduleLicense": "GNU GENERAL PUBLIC LICENSE, Version 2 + Classpath Exception"
+      "moduleLicense": "COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "\"Apache License, version 2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.html\""
     },
     {
       "moduleName": ".*",
@@ -42,7 +74,7 @@
     },
     {
       "moduleName": ".*",
-      "moduleLicense": "Eclipse Distribution License - v 1.0"
+      "moduleLicense": "Eclipse Public License v. 2.0"
     },
     {
       "moduleName": ".*",
@@ -50,19 +82,83 @@
     },
     {
       "moduleName": ".*",
-      "moduleLicense": "BSD Zero Clause License"
+      "moduleLicense": "BSD-4 License"
     },
     {
-      "moduleName": "com.martiansoftware:jsap",
-      "moduleLicense": "LGPL"
+      "moduleName": ".*",
+      "moduleLicense": "BSD License"
     },
     {
-      "moduleName": "org.hibernate.orm:hibernate-core",
-      "moduleLicense": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0 License"
     },
     {
-      "moduleName": "org.latencyutils:LatencyUtils",
-      "moduleLicense": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Ubuntu Font Licence 1.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD-3-Clause"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Bouncy Castle Licence"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The MIT License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD-2-Clause"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Public Domain, per Creative Commons CC0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GPLv2+CE"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The W3C License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The 2-Clause BSD License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU GENERAL PUBLIC LICENSE, Version 2 + Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+        "moduleName": "com.martiansoftware:jsap",
+        "moduleLicense": "LGPL"
+    },
+    {
+        "moduleName": "org.hibernate.orm:hibernate-core",
+        "moduleLicense": "GNU Library General Public License v2.1 or later"
     }
   ]
 }
