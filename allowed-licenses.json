@@ -1,196 +1,1040 @@
 {
   "allowedLicenses": [
     {
-      "moduleLicense": "\"Apache License, version 2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.html\"",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "GNU Lesser General Public License"
     },
     {
-      "moduleLicense": "Apache 2",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "GNU Lesser General Public License"
     },
     {
-      "moduleLicense": "Apache 2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The BSD 3-Clause License (BSD3)"
     },
     {
-      "moduleLicense": "Apache License 2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "Apache License Version 1.1",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "MIT"
     },
     {
-      "moduleLicense": "Apache License Version 2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "Apache License, Version 2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "Apache License, version 2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "Apache-2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "Apache-2.0 License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "BSD 2-Clause License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "BSD 3-clause License w/nuclear disclaimer",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "BSD License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "BSD-2 License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "BSD-2-Clause",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "BSD-3 License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "BSD-3-Clause",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "BSD-4 License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "Bouncy Castle Licence",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
     },
     {
-      "moduleLicense": "CDDL/GPLv2+CE",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "LICENSE.txt"
     },
     {
-      "moduleLicense": "COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "LICENSE-JJ2000.txt, LICENSE-Sun.txt"
     },
     {
-      "moduleLicense": "Eclipse Public License - Version 2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
     },
     {
-      "moduleLicense": "Eclipse Public License - v 2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "Eclipse Public License, Version 2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
     },
     {
-      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache 2.0"
     },
     {
-      "moduleLicense": "GNU Lesser General Public License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "GNU Lesser General Public License version 2.1 (LGPLv2.1)",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
     },
     {
-      "moduleLicense": "GNU Library General Public License v2.1 or later",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "GPL2 w/ CPE",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
     },
     {
-      "moduleLicense": "GPLv2+CE",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "ISC License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
     },
     {
-      "moduleLicense": "JJ2000",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
     },
     {
-      "moduleLicense": "LGPL",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
     },
     {
-      "moduleLicense": "LICENSE-JJ2000.txt, LICENSE-Sun.txt",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "MPL 2.0"
     },
     {
-      "moduleLicense": "LICENSE.txt",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "LGPL"
     },
     {
-      "moduleLicense": "MIT",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "MIT License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "MPL 2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     },
     {
-      "moduleLicense": "Public Domain",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, version 2.0"
     },
     {
-      "moduleLicense": "Public Domain, per Creative Commons CC0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "Apache 2"
     },
     {
-      "moduleLicense": "SGI Free Software License B",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "MIT License"
     },
     {
-      "moduleLicense": "The Apache Software License, Version 2.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
     },
     {
-      "moduleLicense": "The BSD 3-Clause License (BSD3)",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The BSD License"
     },
     {
-      "moduleLicense": "The BSD License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The BSD License"
     },
     {
-      "moduleLicense": "The MIT License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The BSD License"
     },
     {
-      "moduleLicense": "Ubuntu Font Licence 1.0",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The BSD License"
     },
     {
-      "moduleLicense": "UnboundID SCIM2 SDK Free Use License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The BSD License"
     },
     {
-      "moduleLicense": "Zlib License",
-      "moduleName": ".*"
+      "moduleName": ".*",
+      "moduleLicense": "The BSD License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The BSD License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The BSD License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The BSD License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The BSD License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "UnboundID SCIM2 SDK Free Use License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "UnboundID SCIM2 SDK Free Use License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD 2-Clause License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "MIT License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GPL2 w/ CPE"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GPL2 w/ CPE"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GPL2 w/ CPE"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GPL2 w/ CPE"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GPL2 w/ CPE"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD-4 License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0 License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Ubuntu Font Licence 1.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD-3-Clause"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache-2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - v 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Bouncy Castle Licence"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Bouncy Castle Licence"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Bouncy Castle Licence"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Bouncy Castle Licence"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Bouncy Castle Licence"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Bouncy Castle Licence"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The MIT License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD-2-Clause"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD-2-Clause"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU Lesser General Public License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Public Domain, per Creative Commons CC0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GNU Library General Public License v2.1 or later"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The MIT License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Public Domain, per Creative Commons CC0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GPLv2+CE"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GPLv2+CE"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GPLv2+CE"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "GPLv2+CE"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD-2-Clause"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "MIT License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "MIT License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Apache License, Version 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "MIT License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The W3C License"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "The Apache Software License, Version 2.0"
     }
   ]
 }
