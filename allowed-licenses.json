@@ -143,6 +143,14 @@
     {
       "moduleName": ".*",
       "moduleLicense": "The Apache Software License, Version 2.0"
+    },
+    {
+        "moduleLicense": "LGPL",
+        "moduleName": "com.martiansoftware:jsap"
+    },
+    {
+        "moduleLicense": "GNU Library General Public License v2.1 or later",
+        "moduleName": "org.hibernate.orm:hibernate-core"
     }
   ]
 }
