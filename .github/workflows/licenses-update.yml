@@ -56,9 +56,6 @@ jobs:
           ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256 --refresh-dependencies help
           ./gradlew clean dependencies buildEnvironment spotlessApply --write-verification-metadata sha256,pgp --refresh-keys --export-keys --refresh-dependencies help
 
-      - name: Run Gradle Command
-        run: ./gradlew clean generateLicenseReport
-
       - name: check License
         run: ./gradlew clean checkLicense
 
