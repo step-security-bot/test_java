@@ -1,0 +1,196 @@
+{
+  "allowedLicenses": [
+    {
+      "moduleLicense": "\"Apache License, version 2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.html\"",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\"",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Apache 2",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Apache 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Apache License 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Apache License Version 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Apache License, Version 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Apache Software License - Version 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Apache-2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Apache-2.0 License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Bouncy Castle Licence",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD 2-Clause License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD 3-clause License w/nuclear disclaimer",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD-2 License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD-2-Clause",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD-3 License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD-3-Clause",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD-4 License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "CDDL/GPLv2+CE",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Creative Commons Zero v1.0 Universal",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Eclipse Distribution License - v 1.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Eclipse Public License - Version 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Eclipse Public License - v 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Eclipse Public License, Version 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Eclipse Public License v. 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "EPL 1.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "GNU General Public License version 2 (GPLv2)",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "GNU General Public License, version 2 with the GNU Classpath Exception",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "GNU Lesser General Public License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "GNU Lesser General Public License version 2.1 (LGPLv2.1)",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "GNU Library General Public License v2.1 or later",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "GPL2 w/ CPE",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "GPLv2+CE",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "ISC License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "LGPL",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "MIT",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "MIT License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "MPL 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Public Domain",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Public Domain, per Creative Commons CC0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "The Apache Software License, Version 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "The BSD 3-Clause License (BSD3)",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "The BSD License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "The MIT License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "UnboundID SCIM2 SDK Free Use License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Zlib License",
+      "moduleName": ".*"
+    }
+  ]
+}
