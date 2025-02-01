@@ -1,11 +1,7 @@
 {
   "allowedLicenses": [
     {
-      "moduleLicense": "\"Apache License, version 2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.html\"",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\"",
+      "moduleLicense": "Apache 2.0",
       "moduleName": ".*"
     },
     {
@@ -13,23 +9,11 @@
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "Apache 2.0",
-      "moduleName": ".*"
-    },
-    {
       "moduleLicense": "Apache License 2.0",
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "Apache License Version 2.0",
-      "moduleName": ".*"
-    },
-    {
       "moduleLicense": "Apache License, Version 2.0",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "Apache Software License - Version 2.0",
       "moduleName": ".*"
     },
     {
@@ -49,23 +33,7 @@
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "BSD 3-clause License w/nuclear disclaimer",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "BSD License",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "BSD-2 License",
-      "moduleName": ".*"
-    },
-    {
       "moduleLicense": "BSD-2-Clause",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "BSD-3 License",
       "moduleName": ".*"
     },
     {
@@ -73,11 +41,11 @@
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "BSD-4 License",
+      "moduleLicense": "BSD License",
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "CDDL/GPLv2+CE",
+      "moduleLicense": "BSD-4 License",
       "moduleName": ".*"
     },
     {
@@ -85,15 +53,7 @@
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "Creative Commons Zero v1.0 Universal",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "Eclipse Distribution License - v 1.0",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "Eclipse Public License - Version 2.0",
+      "moduleLicense": "CDDL/GPLv2+CE",
       "moduleName": ".*"
     },
     {
@@ -101,19 +61,19 @@
       "moduleName": ".*"
     },
     {
+      "moduleLicense": "Eclipse Public License - Version 2.0",
+      "moduleName": ".*"
+    },
+    {
       "moduleLicense": "Eclipse Public License, Version 2.0",
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "Eclipse Public License v. 2.0",
+      "moduleLicense": "GPL2 w/ CPE",
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "EPL 1.0",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "GNU General Public License version 2 (GPLv2)",
+      "moduleLicense": "GPLv2+CE",
       "moduleName": ".*"
     },
     {
@@ -130,14 +90,6 @@
     },
     {
       "moduleLicense": "GNU Library General Public License v2.1 or later",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "GPL2 w/ CPE",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "GPLv2+CE",
       "moduleName": ".*"
     },
     {
