@@ -35,6 +35,34 @@
     {
       "moduleName": ".*",
       "moduleLicense": "GNU GENERAL PUBLIC LICENSE, Version 2 + Classpath Exception"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - v 1.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Distribution License - v 1.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "Eclipse Public License - v 2.0"
+    },
+    {
+      "moduleName": ".*",
+      "moduleLicense": "BSD Zero Clause License"
+    },
+    {
+      "moduleName": "com.martiansoftware:jsap",
+      "moduleLicense": "LGPL"
+    },
+    {
+      "moduleName": "org.hibernate.orm:hibernate-core",
+      "moduleLicense": ".*"
+    },
+    {
+      "moduleName": "org.latencyutils:LatencyUtils",
+      "moduleLicense": ".*"
     }
   ]
 }
