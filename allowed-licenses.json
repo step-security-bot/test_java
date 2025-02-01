@@ -1,7 +1,7 @@
 {
   "allowedLicenses": [
     {
-      "moduleLicense": "Apache 2.0",
+      "moduleLicense": "\"Apache License, version 2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.html\"",
       "moduleName": ".*"
     },
     {
@@ -9,11 +9,27 @@
       "moduleName": ".*"
     },
     {
+      "moduleLicense": "Apache 2.0",
+      "moduleName": ".*"
+    },
+    {
       "moduleLicense": "Apache License 2.0",
       "moduleName": ".*"
     },
     {
+      "moduleLicense": "Apache License Version 1.1",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Apache License Version 2.0",
+      "moduleName": ".*"
+    },
+    {
       "moduleLicense": "Apache License, Version 2.0",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Apache License, version 2.0",
       "moduleName": ".*"
     },
     {
@@ -25,19 +41,11 @@
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "Bouncy Castle Licence",
-      "moduleName": ".*"
-    },
-    {
       "moduleLicense": "BSD 2-Clause License",
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "BSD-2-Clause",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "BSD-3-Clause",
+      "moduleLicense": "BSD 3-clause License w/nuclear disclaimer",
       "moduleName": ".*"
     },
     {
@@ -45,11 +53,27 @@
       "moduleName": ".*"
     },
     {
+      "moduleLicense": "BSD-2 License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD-2-Clause",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD-3 License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "BSD-3-Clause",
+      "moduleName": ".*"
+    },
+    {
       "moduleLicense": "BSD-4 License",
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0",
+      "moduleLicense": "Bouncy Castle Licence",
       "moduleName": ".*"
     },
     {
@@ -57,7 +81,7 @@
       "moduleName": ".*"
     },
     {
-      "moduleLicense": "Eclipse Public License - v 2.0",
+      "moduleLicense": "COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0",
       "moduleName": ".*"
     },
     {
@@ -65,15 +89,11 @@
       "moduleName": ".*"
     },
     {
+      "moduleLicense": "Eclipse Public License - v 2.0",
+      "moduleName": ".*"
+    },
+    {
       "moduleLicense": "Eclipse Public License, Version 2.0",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "GPL2 w/ CPE",
-      "moduleName": ".*"
-    },
-    {
-      "moduleLicense": "GPLv2+CE",
       "moduleName": ".*"
     },
     {
@@ -93,11 +113,31 @@
       "moduleName": ".*"
     },
     {
+      "moduleLicense": "GPL2 w/ CPE",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "GPLv2+CE",
+      "moduleName": ".*"
+    },
+    {
       "moduleLicense": "ISC License",
       "moduleName": ".*"
     },
     {
+      "moduleLicense": "JJ2000",
+      "moduleName": ".*"
+    },
+    {
       "moduleLicense": "LGPL",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "LICENSE-JJ2000.txt, LICENSE-Sun.txt",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "LICENSE.txt",
       "moduleName": ".*"
     },
     {
@@ -121,6 +161,10 @@
       "moduleName": ".*"
     },
     {
+      "moduleLicense": "SGI Free Software License B",
+      "moduleName": ".*"
+    },
+    {
       "moduleLicense": "The Apache Software License, Version 2.0",
       "moduleName": ".*"
     },
@@ -134,6 +178,10 @@
     },
     {
       "moduleLicense": "The MIT License",
+      "moduleName": ".*"
+    },
+    {
+      "moduleLicense": "Ubuntu Font Licence 1.0",
       "moduleName": ".*"
     },
     {
