@@ -53,9 +53,9 @@ repositories {
 }
 
 licenseReport {
-    renderers = [new JsonReportRenderer('index.json', true)]
+    renderers = [new JsonReportRenderer()]
     allowedLicensesFile = new File("$projectDir/allowed-licenses.json")
-    filters = [new ExcludeTransitiveDependenciesFilter(), new LicenseBundleNormalizer()]
+    // filters = [new LicenseBundleNormalizer()]
 }
 
 sourceSets {
