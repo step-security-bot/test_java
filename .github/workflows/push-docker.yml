@@ -166,3 +166,12 @@ jobs:
           labels: ${{ steps.meta3.outputs.labels }}
           build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
           platforms: linux/amd64,linux/arm64/v8
+
+      - name: Inspect latest-fat
+        run: |
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat
+          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
+
+      - name: Size latest-fat
+        run: |
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
