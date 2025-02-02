@@ -97,7 +97,7 @@ jobs:
 
       - name: Inspect latest
         run: |
-          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --platform=linux/amd64
           docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --format "{{.Size}}"
 
       - name: Size latest
@@ -133,7 +133,7 @@ jobs:
 
       - name: Inspect latest-ultra-lite
         run: |
-          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --platform=linux/amd64
           docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
 
       - name: Size latest-ultra-lite
@@ -169,7 +169,7 @@ jobs:
 
       - name: Inspect latest-fat
         run: |
-          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --platform=linux/amd64
           docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
 
       - name: Size latest-fat
