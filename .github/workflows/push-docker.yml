@@ -102,7 +102,7 @@ jobs:
 
       - name: Size latest
         run: |
-          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --platform=linux/amd64 --format "{{.Size}}"
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --format "{{.Size}}"
 
       - name: Generate tags ultra-lite
         id: meta2
@@ -138,7 +138,7 @@ jobs:
 
       - name: Size latest-ultra-lite
         run: |
-          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --platform=linux/amd64 --format "{{.Size}}"
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
 
       - name: Generate tags fat
         id: meta3
@@ -174,4 +174,4 @@ jobs:
 
       - name: Size latest-fat
         run: |
-          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --platform=linux/amd64 --format "{{.Size}}"
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
