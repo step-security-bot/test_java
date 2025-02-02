@@ -98,6 +98,12 @@ jobs:
       - name: Docker-Image-Size Dockerfile
         run: |
           docker images ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf --format "Image-Größe vor Push: {{.Size}}"
+          
+      - name: Prüfe Docker-Image-Größe nach dem Push
+        run: |
+          IMAGE="${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf:latest"
+          SIZE=$(docker manifest inspect $IMAGE | jq '[.layers[].size] | add')
+          echo "Docker Image Größe nach Push: $SIZE Bytes"
 
       - name: Generate tags ultra-lite
         id: meta2
