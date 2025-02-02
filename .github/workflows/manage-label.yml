@@ -3,15 +3,17 @@ name: Manage labels
 on:
   schedule:
     - cron: "10 21 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: read
-  issues: write
 
 jobs:
   labeler:
     name: Labeler
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
