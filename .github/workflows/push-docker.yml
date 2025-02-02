@@ -95,6 +95,15 @@ jobs:
           build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
           platforms: linux/amd64,linux/arm64/v8
 
+      - name: Inspect latest
+        run: |
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest
+          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --format "{{.Size}}"
+
+      - name: Size latest
+        run: |
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --format "{{.Size}}"
+
       - name: Generate tags ultra-lite
         id: meta2
         uses: docker/metadata-action@369eb591f429131d6889c46b94e711f089e6ca96 # v5.6.1
@@ -125,7 +134,7 @@ jobs:
       - name: Inspect latest-ultra-lite
         run: |
           docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite
-          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite
+          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
 
       - name: Size latest-ultra-lite
         run: |
