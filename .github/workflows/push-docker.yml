@@ -95,19 +95,6 @@ jobs:
           build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
           platforms: linux/amd64,linux/arm64/v8
 
-      - name: "Debug: Zeige alle Docker-Images"
-        run: docker images
-
-      - name: Docker-Image-Size Dockerfile
-        run: |
-          docker images ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf:latest --format "Image-Größe vor Push: {{.Size}}"
-
-      - name: Prüfe Docker-Image-Größe nach dem Push
-        run: |
-          IMAGE="${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf:latest"
-          SIZE=$(docker manifest inspect $IMAGE | jq '[.layers[].size] | add')
-          echo "Docker Image Größe nach Push: $SIZE Bytes"
-
       - name: Generate tags ultra-lite
         id: meta2
         uses: docker/metadata-action@369eb591f429131d6889c46b94e711f089e6ca96 # v5.6.1
@@ -135,16 +122,13 @@ jobs:
           build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
           platforms: linux/amd64,linux/arm64/v8
 
-      - name: Docker-Image-Size Dockerfile-ultra-lite
-        run: |
-          docker images ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf --format "Image-Größe vor Push: {{.Size}}"
-
-      - name: Inspect latest
+      - name: Inspect latest-ultra-lite
         run: |
           docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite
           docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite
 
-      - run: |
+      - name: Size latest-ultra-lite
+        run: |
           docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
 
       - name: Generate tags fat
@@ -173,7 +157,3 @@ jobs:
           labels: ${{ steps.meta3.outputs.labels }}
           build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
           platforms: linux/amd64,linux/arm64/v8
-
-      - name: Docker-Image-Size Dockerfile-ultra-lite
-        run: |
-          docker images ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf --format "Image-Größe vor Push: {{.Size}}"
