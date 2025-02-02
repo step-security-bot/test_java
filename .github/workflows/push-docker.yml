@@ -95,10 +95,14 @@ jobs:
           build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
           platforms: linux/amd64,linux/arm64/v8
 
+      - name: Debug: Zeige alle Docker-Images
+        run: docker images
+
+
       - name: Docker-Image-Size Dockerfile
         run: |
-          docker images ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf --format "Image-Größe vor Push: {{.Size}}"
-          
+          docker images ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf:latest --format "Image-Größe vor Push: {{.Size}}"
+
       - name: Prüfe Docker-Image-Größe nach dem Push
         run: |
           IMAGE="${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf:latest"
