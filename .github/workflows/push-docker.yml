@@ -95,9 +95,8 @@ jobs:
           build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
           platforms: linux/amd64,linux/arm64/v8
 
-      - name: Debug: Zeige alle Docker-Images
+      - name: "Debug: Zeige alle Docker-Images"
         run: docker images
-
 
       - name: Docker-Image-Size Dockerfile
         run: |
