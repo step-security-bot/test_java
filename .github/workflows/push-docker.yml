@@ -97,12 +97,12 @@ jobs:
 
       - name: Inspect latest
         run: |
-          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest
-          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --format "{{.Size}}"
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --platform=linux/amd64
+          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --platform=linux/amd64 --format "{{.Size}}"
 
       - name: Size latest
         run: |
-          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --format "{{.Size}}"
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --platform=linux/amd64 --format "{{.Size}}"
 
       - name: Generate tags ultra-lite
         id: meta2
@@ -133,12 +133,12 @@ jobs:
 
       - name: Inspect latest-ultra-lite
         run: |
-          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite
-          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --platform=linux/amd64
+          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --platform=linux/amd64 --format "{{.Size}}"
 
       - name: Size latest-ultra-lite
         run: |
-          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --platform=linux/amd64 --format "{{.Size}}"
 
       - name: Generate tags fat
         id: meta3
@@ -169,9 +169,9 @@ jobs:
 
       - name: Inspect latest-fat
         run: |
-          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat
-          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --platform=linux/amd64
+          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --platform=linux/amd64 --format "{{.Size}}"
 
       - name: Size latest-fat
         run: |
-          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --platform=linux/amd64 --format "{{.Size}}"
