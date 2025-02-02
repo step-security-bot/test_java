@@ -45,7 +45,7 @@ ENV DOCKER_ENABLE_SECURITY=false \
 RUN echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/main" | tee -a /etc/apk/repositories && \
     echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/community" | tee -a /etc/apk/repositories && \
     echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" | tee -a /etc/apk/repositories && \
-    apk upgrade --no-cache -a && \
+    # apk upgrade --no-cache -a && \
     apk add --no-cache \
         ca-certificates \
         tzdata \
@@ -74,7 +74,8 @@ RUN echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/main" | tee -a /et
     pip install --break-system-packages --no-cache-dir --upgrade unoconv WeasyPrint pdf2image pillow && \
     mv /usr/share/tessdata /usr/share/tessdata-original && \
     mkdir -p $HOME /configs /logs /customFiles /pipeline/watchedFolders /pipeline/finishedFolders && \
-    fc-cache -f -v && \
+#     fc-cache -f -v && \
+    fc-cache -s && \
     chmod +x /scripts/* && \
     chmod +x /scripts/init.sh && \
 # User permissions
