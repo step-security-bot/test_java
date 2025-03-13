@@ -296,6 +296,8 @@ tasks.wrapper {
 //}
 configurations.all {
     exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    // Remove all commons-logging dependencies so that only spring-jcl is used
+    exclude group: 'commons-logging', module: 'commons-logging'
 
     resolutionStrategy {
         force 'org.apache.commons:commons-compress:1.26.0'
