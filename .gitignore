@@ -189,3 +189,4 @@ id_ed25519.pub
 
 **/jcef-bundle/
 gradle/verification-keyring.gpg
+SwaggerDoc.json
