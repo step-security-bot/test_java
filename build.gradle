@@ -2,9 +2,13 @@ buildscript {
   repositories {
     maven { url = 'https://boegl.jfrog.io/artifactory/snapshots-gradle-dev-local/' }
     maven { url = 'https://jitpack.io' }
+        flatDir {
+            dirs "libs"
+        }
   }
   dependencies {
     classpath 'edu.sc.seis.launch4j:launch4j:latest.integration'
+        classpath name: "swaggerhub-V2-2.0.84"
   }
 }
 
@@ -20,6 +24,7 @@ plugins {
     //id "nebula.lint" version "19.0.3"
     id("org.panteleyev.jpackageplugin") version "1.6.1"
 }
+apply plugin: "io.swagger.swaggerhub.v2"
 
 import com.github.jk1.license.render.*
 import com.github.jk1.license.filter.*
@@ -453,6 +458,13 @@ swaggerhubUpload {
     inputFile = file("SwaggerDoc.json")  // The path to your Swagger docs
     token = "${System.getenv("SWAGGERHUB_API_KEY")}"  // Your SwaggerHub API key, passed as an environment variable
     oas = "3.0.0"  // The version of the OpenAPI Specification you"re using
+}
+
+swaggerhubSetDefaultVersion {
+    api = "Stirling-PDF"  // The name of your API on SwaggerHub
+    owner = "${System.getenv().getOrDefault('SWAGGERHUB_USER', 'Frooodle')}"  // Your SwaggerHub username (or organization name)
+    version = project.version  // The version of your API
+    token = "${System.getenv("SWAGGERHUB_API_KEY")}"  // Your SwaggerHub API key, passed as an environment variable
 }
 
 jar {
