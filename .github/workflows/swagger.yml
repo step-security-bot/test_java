@@ -2,6 +2,16 @@ name: Update Swagger
 
 on:
   workflow_dispatch:
+    inputs:
+      type:
+        description: |
+          Select the branch to release from above, then select the version level to bump below.
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+        default: minor
   push:
     branches:
       - master
