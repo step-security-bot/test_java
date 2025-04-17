@@ -34,11 +34,16 @@ jobs:
         run: |
           docker build -t stirling-pdf-pr:latest .
 
-      - name: 🧹 Stop and Remove old Container (if running)
-        working-directory: ${{ github.workspace }}
+      - name: 🧹 Stop and Remove if container exists
+        shell: pwsh
         run: |
-          docker stop stirling-pdf-pr 2>$null
-          docker rm stirling-pdf-pr 2>$null
+          $exists = docker ps -a --format '{{.Names}}' | Where-Object { $_ -eq 'stirling-pdf-pr' }
+          if ($exists) {
+              docker stop stirling-pdf-pr | Out-Null
+              docker rm stirling-pdf-pr | Out-Null
+          } else {
+              Write-Host "Container stirling-pdf-pr does not exist, nothing to stop/remove."
+          }
 
       - name: 🚀 Run Stirling-PDF Container
         working-directory: ${{ github.workspace }}
