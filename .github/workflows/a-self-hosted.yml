@@ -14,14 +14,20 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-    #   - name: 🧱 Gradle Build
-        # run: ./gradlew clean build
+      - name: 🧱 Gradle Build
+        run: ./gradlew clean build
+        shell: pwsh
+        working-directory: ${{ github.workspace }}
 
       - name: 🔍 Check build
         run: ls build
+        shell: pwsh
+        working-directory: ${{ github.workspace }}
 
       - name: 🔍 Check build/libs
         run: ls build/libs
+        shell: pwsh
+        working-directory: ${{ github.workspace }}
 
       - name: 🛠️ Build Stirling-PDF Docker Image
         run: |
