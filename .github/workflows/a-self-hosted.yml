@@ -30,15 +30,18 @@ jobs:
         working-directory: ${{ github.workspace }}
 
       - name: 🛠️ Build Stirling-PDF Docker Image
+        working-directory: ${{ github.workspace }}
         run: |
           docker build -t stirling-pdf-pr:latest .
 
       - name: 🧹 Stop and Remove old Container (if running)
+        working-directory: ${{ github.workspace }}
         run: |
           docker stop stirling-pdf-pr || true
           docker rm stirling-pdf-pr || true
 
       - name: 🚀 Run Stirling-PDF Container
+        working-directory: ${{ github.workspace }}
         run: |
           docker run -d \
             --name stirling-pdf-pr \
