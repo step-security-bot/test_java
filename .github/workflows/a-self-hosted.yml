@@ -18,10 +18,10 @@ jobs:
         run: ./gradlew clean build
 
       - name: 🔍 Check build
-        run: ls -la build
+        run: ls build
 
       - name: 🔍 Check build/libs
-        run: ls -la build/libs
+        run: ls build/libs
 
       - name: 🛠️ Build Stirling-PDF Docker Image
         run: |
