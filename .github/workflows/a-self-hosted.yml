@@ -14,6 +14,9 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
+      - name: 🧱 Gradle Build
+        run: ./gradlew clean build
+
       - name: 🛠️ Build Stirling-PDF Docker Image
         run: |
           docker build -t stirling-pdf-pr:latest .
