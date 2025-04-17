@@ -14,10 +14,10 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🧱 Gradle Build
-        run: ./gradlew clean build
-        shell: pwsh
-        working-directory: ${{ github.workspace }}
+    #   - name: 🧱 Gradle Build
+    #     run: ./gradlew clean build
+    #     shell: pwsh
+    #     working-directory: ${{ github.workspace }}
 
       - name: 🔍 Check build
         run: ls build
@@ -37,8 +37,8 @@ jobs:
       - name: 🧹 Stop and Remove old Container (if running)
         working-directory: ${{ github.workspace }}
         run: |
-          docker stop stirling-pdf-pr || true
-          docker rm stirling-pdf-pr || true
+          docker stop stirling-pdf-pr 2>$null
+          docker rm stirling-pdf-pr 2>$null
 
       - name: 🚀 Run Stirling-PDF Container
         working-directory: ${{ github.workspace }}
