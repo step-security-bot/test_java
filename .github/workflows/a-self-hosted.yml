@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 🧱 Gradle Build
-        run: ./gradlew clean build -x spotlessInternalRegisterDependencies -x spotlessJavaApply -x spotlessApply
+        run: ./gradlew clean build
         shell: pwsh
         working-directory: ${{ github.workspace }}
 
