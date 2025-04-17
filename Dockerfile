@@ -7,7 +7,7 @@ COPY scripts /scripts
 COPY pipeline /pipeline
 COPY src/main/resources/static/fonts/*.ttf /usr/share/fonts/opentype/noto/
 #COPY src/main/resources/static/fonts/*.otf /usr/share/fonts/opentype/noto/
-COPY build/libs/app.jar app.jar
+COPY build/libs/Stirling-PDF-0.39.2.jar app.jar
 
 ARG VERSION_TAG
 

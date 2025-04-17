@@ -469,7 +469,6 @@ swaggerhubSetDefaultVersion {
 
 jar {
     enabled = false
-    archiveFileName = "app.jar"
     manifest {
         attributes "Implementation-Title": "Stirling-PDF",
                    "Implementation-Version": project.version
