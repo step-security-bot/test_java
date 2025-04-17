@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-run:
-    runs-on: self-hosted
+    runs-on: self-hosted  // local windows runner
 
     steps:
       - name: 📥 Checkout Repository
@@ -16,16 +16,6 @@ jobs:
 
       - name: 🧱 Gradle Build
         run: ./gradlew clean build
-        shell: pwsh
-        working-directory: ${{ github.workspace }}
-
-      - name: 🔍 Check build
-        run: ls build
-        shell: pwsh
-        working-directory: ${{ github.workspace }}
-
-      - name: 🔍 Check build/libs
-        run: ls build/libs
         shell: pwsh
         working-directory: ${{ github.workspace }}
 
