@@ -44,4 +44,4 @@ jobs:
             -e METRICS_ENABLED=true \
             -e SYSTEM_GOOGLEVISIBILITY=false \
             --restart on-failure:5 \
-            stirling-pdf:latest
+            stirling-pdf-pr:latest
