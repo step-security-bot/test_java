@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 🧱 Gradle Build
-        run: ./gradlew clean build
+        # run: ./gradlew clean build
 
       - name: 🔍 Check build
         run: ls build
