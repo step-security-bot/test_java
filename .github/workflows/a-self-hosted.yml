@@ -1,14 +1,20 @@
 name: A Self-Hosted
 
 on:
-#   push:
-#     branches:
-#       - main
   workflow_dispatch:
+    inputs:
+      target_os:
+        description: 'Target runner OS'
+        required: true
+        default: 'windows'
+        type: choice
+        options:
+          - windows
+          - linux
 
 jobs:
   build-and-run:
-    runs-on: self-hosted  // local windows runner
+    runs-on: ${{ github.event.inputs.target_os == 'windows' && 'self-hosted' || 'selfhosted-linux' }}
 
     steps:
       - name: 📥 Checkout Repository
@@ -16,28 +22,34 @@ jobs:
 
       - name: 🧱 Gradle Build
         run: ./gradlew clean build
-        shell: pwsh
+        shell: ${{ github.event.inputs.target_os == 'windows' && 'pwsh' || 'bash' }}
         working-directory: ${{ github.workspace }}
 
       - name: 🛠️ Build Stirling-PDF Docker Image
+        run: docker build -t stirling-pdf-pr:latest .
+        shell: ${{ github.event.inputs.target_os == 'windows' && 'pwsh' || 'bash' }}
         working-directory: ${{ github.workspace }}
-        run: |
-          docker build -t stirling-pdf-pr:latest .
 
-      - name: 🧹 Stop and Remove if container exists
-        shell: pwsh
+      - name: 🧹 Stop and Remove Container
+        shell: ${{ github.event.inputs.target_os == 'windows' && 'pwsh' || 'bash' }}
         run: |
-          $exists = docker ps -a --format '{{.Names}}' | Where-Object { $_ -eq 'stirling-pdf-pr' }
+          ${{ github.event.inputs.target_os == 'windows' && '
+          $exists = docker ps -a --format \'{{.Names}}\' | Where-Object { $_ -eq \'stirling-pdf-pr\' }
           if ($exists) {
               docker stop stirling-pdf-pr | Out-Null
               docker rm stirling-pdf-pr | Out-Null
           } else {
-              Write-Host "Container stirling-pdf-pr does not exist, nothing to stop/remove."
+              Write-Host \"Container stirling-pdf-pr does not exist, nothing to stop/remove.\"
           }
+          ' || '
+          docker stop stirling-pdf-pr || true
+          docker rm stirling-pdf-pr || true
+          ' }}
 
       - name: 🚀 Run Stirling-PDF Container
-        working-directory: ${{ github.workspace }}
+        shell: ${{ github.event.inputs.target_os == 'windows' && 'pwsh' || 'bash' }}
         run: |
+          ${{ github.event.inputs.target_os == 'windows' && '
           docker run -d `
             --name stirling-pdf-pr `
             -p 7777:8080 `
@@ -47,11 +59,30 @@ jobs:
             -e DOCKER_ENABLE_SECURITY=true `
             -e SECURITY_ENABLELOGIN=true `
             -e SYSTEM_DEFAULTLOCALE=en-GB `
-            -e UI_APPNAME="Stirling-PDF PR#manual" `
-            -e UI_HOMEDESCRIPTION="Manual Test Deployment for Stirling-PDF" `
-            -e UI_APPNAMENAVBAR="PR#manual" `
+            -e UI_APPNAME=\"Stirling-PDF PR#manual\" `
+            -e UI_HOMEDESCRIPTION=\"Manual Test Deployment for Stirling-PDF\" `
+            -e UI_APPNAMENAVBAR=\"PR#manual\" `
             -e SYSTEM_MAXFILESIZE=100 `
             -e METRICS_ENABLED=true `
             -e SYSTEM_GOOGLEVISIBILITY=false `
             --restart on-failure:5 `
             stirling-pdf-pr:latest
+          ' || '
+          docker run -d \
+            --name stirling-pdf-pr \
+            -p 7777:8080 \
+            -v /stirling/test/data:/usr/share/tessdata:rw \
+            -v /stirling/test/config:/configs:rw \
+            -v /stirling/test/logs:/logs:rw \
+            -e DOCKER_ENABLE_SECURITY=true \
+            -e SECURITY_ENABLELOGIN=true \
+            -e SYSTEM_DEFAULTLOCALE=en-GB \
+            -e UI_APPNAME=\"Stirling-PDF PR#manual\" \
+            -e UI_HOMEDESCRIPTION=\"Manual Test Deployment for Stirling-PDF\" \
+            -e UI_APPNAMENAVBAR=\"PR#manual\" \
+            -e SYSTEM_MAXFILESIZE=100 \
+            -e METRICS_ENABLED=true \
+            -e SYSTEM_GOOGLEVISIBILITY=false \
+            --restart on-failure:5 \
+            stirling-pdf-pr:latest
+          ' }}
