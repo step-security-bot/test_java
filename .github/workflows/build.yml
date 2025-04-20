@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted-ubuntu-24-10
 
     permissions:
       pull-requests: write
