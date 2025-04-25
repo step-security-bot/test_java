@@ -1,11 +1,11 @@
-name: Push Docker Image with VersionNumber V3
+name: Push Docker Image with VersionNumber
 
 on:
   workflow_dispatch:
-#   push:
-#     branches:
-#       - master
-#       - main
+  # push:
+  #   branches:
+  #     - master
+  #     - main
 
 permissions:
   contents: read
@@ -16,21 +16,6 @@ jobs:
     permissions:
       packages: write
       id-token: write
-    strategy:
-      matrix:
-        dockerfile:
-          - name: regular
-            file: Dockerfile
-            tag-suffix: ""
-          - name: ultra-lite
-            file: Dockerfile.ultra-lite
-            tag-suffix: "-ultra-lite"
-            exclude-branch: main
-          - name: fat
-            file: Dockerfile.fat
-            tag-suffix: "-fat"
-            exclude-branch: main
-
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
@@ -79,6 +64,9 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392 # v3.6.0
 
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@d7d6bc7722e3daa8354c50bcb52f4837da5e9b6a # v3.8.1
+
       - name: Convert repository owner to lowercase
         id: repoowner
         run: echo "lowercase=$(echo ${{ github.repository_owner }} | awk '{print tolower($0)}')" >> $GITHUB_OUTPUT
@@ -86,26 +74,24 @@ jobs:
       - name: Generate tags
         id: meta
         uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
-        # if: matrix.dockerfile.exclude-branch != github.ref_name
         with:
           images: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
             ghcr.io/${{ steps.repoowner.outputs.lowercase }}/s-pdf
           tags: |
-            type=semver,pattern={{major}}.{{minor}}.{{patch}}${{ matrix.dockerfile.tag-suffix }},value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=semver,pattern={{major}}.{{minor}}${{ matrix.dockerfile.tag-suffix }},value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=semver,pattern={{major}}${{ matrix.dockerfile.tag-suffix }},value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=raw,value=latest${{ matrix.dockerfile.tag-suffix }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=raw,value=alpha,enable=${{ github.ref == 'refs/heads/main' && matrix.dockerfile.name == 'regular' }}
+            type=semver,pattern={{major}}.{{minor}}.{{patch}},value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=semver,pattern={{major}},value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+            type=raw,value=alpha,enable=${{ github.ref == 'refs/heads/main' }}
 
-      - name: Build and push Dockerfile
-        id: build-push
+      - name: Build and push main Dockerfile
+        id: build-push-regular
         uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
-        # if: matrix.dockerfile.exclude-branch != github.ref_name
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: .
-          file: ${{ matrix.dockerfile.file }}
+          file: ./Dockerfile
           push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -116,14 +102,93 @@ jobs:
           provenance: true
           sbom: true
 
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@d7d6bc7722e3daa8354c50bcb52f4837da5e9b6a # v3.8.1
-
-      - name: Sign images
-        # if: github.ref == 'refs/heads/master' && matrix.dockerfile.exclude-branch != github.ref_name
+      - name: Sign regular images
         env:
-          DIGEST: ${{ steps.build-push.outputs.digest }}
+          DIGEST: ${{ steps.build-push-regular.outputs.digest }}
           TAGS: ${{ steps.meta.outputs.tags }}
+        run: |
+          echo "$TAGS" | tr ',' '\n' | while read -r tag; do
+            cosign sign --yes \
+              --key ./cosign.key \
+              "${tag}@${DIGEST}"
+          done
+
+      - name: Generate tags ultra-lite
+        id: meta2
+        uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
+        with:
+          images: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+            ghcr.io/${{ steps.repoowner.outputs.lowercase }}/s-pdf
+          tags: |
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}-ultra-lite,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=semver,pattern={{major}}.{{minor}}-ultra-lite,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=semver,pattern={{major}}-ultra-lite,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=raw,value=latest-ultra-lite,enable=${{ github.ref == 'refs/heads/main' }}
+
+      - name: Build and push Dockerfile-ultra-lite
+        id: build-push-lite
+        uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
+        with:
+          context: .
+          file: ./Dockerfile.ultra-lite
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: ${{ steps.meta2.outputs.tags }}
+          labels: ${{ steps.meta2.outputs.labels }}
+          build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
+          platforms: linux/amd64,linux/arm64/v8
+          provenance: true
+          sbom: true
+
+      - name: Sign ultra-lite images
+        env:
+          DIGEST: ${{ steps.build-push-lite.outputs.digest }}
+          TAGS: ${{ steps.meta2.outputs.tags }}
+        run: |
+          echo "$TAGS" | tr ',' '\n' | while read -r tag; do
+            cosign sign --yes \
+              --key ./cosign.key \
+              "${tag}@${DIGEST}"
+          done
+
+      - name: Generate tags fat
+        id: meta3
+        uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
+        if: github.ref != 'refs/heads/main'
+        with:
+          images: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+            ghcr.io/${{ steps.repoowner.outputs.lowercase }}/s-pdf
+          tags: |
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}-fat,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=semver,pattern={{major}}.{{minor}}-fat,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=semver,pattern={{major}}-fat,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=raw,value=latest-fat,enable=${{ github.ref == 'refs/heads/main' }}
+
+      - name: Build and push main Dockerfile fat
+        id: build-push-fat
+        uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
+        if: github.ref != 'refs/heads/main'
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          context: .
+          file: ./Dockerfile.fat
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: ${{ steps.meta3.outputs.tags }}
+          labels: ${{ steps.meta3.outputs.labels }}
+          build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
+          platforms: linux/amd64,linux/arm64/v8
+          provenance: true
+          sbom: true
+
+      - name: Sign fat images
+        env:
+          DIGEST: ${{ steps.build-push-fat.outputs.digest }}
+          TAGS: ${{ steps.meta3.outputs.tags }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
             cosign sign --yes \
