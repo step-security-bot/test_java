@@ -122,6 +122,17 @@ jobs:
               "${tag}@${DIGEST}"
           done
 
+      - name: Verify signatures
+        env:
+          DIGEST: ${{ steps.build-push-regular.outputs.digest }}
+          TAGS: ${{ steps.meta.outputs.tags }}
+        run: |
+          echo "$TAGS" | tr ',' '\n' | while read -r tag; do
+            cosign verify \
+              --key ./cosign.pub \
+              "${tag}@${DIGEST}"
+          done
+
       - name: Inspect latest-regular
         run: |
           docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --platform=linux/amd64,linux/arm64/v8
@@ -169,6 +180,17 @@ jobs:
             cosign sign \
               --key ./cosign.key \
               --yes \
+              "${tag}@${DIGEST}"
+          done
+
+      - name: Verify signatures
+        env:
+          DIGEST: ${{ steps.build-push-lite.outputs.digest }}
+          TAGS: ${{ steps.meta.outputs.tags }}
+        run: |
+          echo "$TAGS" | tr ',' '\n' | while read -r tag; do
+            cosign verify \
+              --key ./cosign.pub \
               "${tag}@${DIGEST}"
           done
 
@@ -221,6 +243,17 @@ jobs:
             cosign sign \
               --key ./cosign.key \
               --yes \
+              "${tag}@${DIGEST}"
+          done
+
+      - name: Verify signatures
+        env:
+          DIGEST: ${{ steps.build-push-fat.outputs.digest }}
+          TAGS: ${{ steps.meta.outputs.tags }}
+        run: |
+          echo "$TAGS" | tr ',' '\n' | while read -r tag; do
+            cosign verify \
+              --key ./cosign.pub \
               "${tag}@${DIGEST}"
           done
 
