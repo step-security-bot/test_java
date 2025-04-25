@@ -116,7 +116,7 @@ jobs:
           TAGS: ${{ steps.build-push-regular.outputs.imageid }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-            cosign sign \
+            cosign sign-blob \
               --key ./cosign.key \
               --yes \
               "${tag}@${DIGEST}"
@@ -177,7 +177,7 @@ jobs:
           TAGS: ${{ steps.build-push-lite.outputs.imageid }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-            cosign sign \
+            cosign sign-blob \
               --key ./cosign.key \
               --yes \
               "${tag}@${DIGEST}"
@@ -240,7 +240,7 @@ jobs:
           TAGS: ${{ steps.build-push-fat.outputs.imageid }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-            cosign sign \
+            cosign sign-blob \
               --key ./cosign.key \
               --yes \
               "${tag}@${DIGEST}"
