@@ -113,19 +113,19 @@ jobs:
       - name: Sign regular images
         env:
           DIGEST: ${{ steps.build-push-regular.outputs.digest }}
-          TAGS: ${{ steps.meta.outputs.tags }}
+          TAGS: ${{ steps.build-push-regular.outputs.imageid }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
             cosign sign \
               --key ./cosign.key \
-               --yes \
+              --yes \
               "${tag}@${DIGEST}"
           done
 
       - name: Verify signatures
         env:
           DIGEST: ${{ steps.build-push-regular.outputs.digest }}
-          TAGS: ${{ steps.meta.outputs.tags }}
+          TAGS: ${{ steps.build-push-regular.outputs.imageid }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
             cosign verify \
@@ -174,7 +174,7 @@ jobs:
       - name: Sign ultra-lite images
         env:
           DIGEST: ${{ steps.build-push-lite.outputs.digest }}
-          TAGS: ${{ steps.meta2.outputs.tags }}
+          TAGS: ${{ steps.build-push-lite.outputs.imageid }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
             cosign sign \
@@ -186,7 +186,7 @@ jobs:
       - name: Verify signatures
         env:
           DIGEST: ${{ steps.build-push-lite.outputs.digest }}
-          TAGS: ${{ steps.meta.outputs.tags }}
+          TAGS: ${{ steps.build-push-lite.outputs.imageid }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
             cosign verify \
@@ -237,7 +237,7 @@ jobs:
       - name: Sign fat images
         env:
           DIGEST: ${{ steps.build-push-fat.outputs.digest }}
-          TAGS: ${{ steps.meta3.outputs.tags }}
+          TAGS: ${{ steps.build-push-fat.outputs.imageid }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
             cosign sign \
@@ -249,7 +249,7 @@ jobs:
       - name: Verify signatures
         env:
           DIGEST: ${{ steps.build-push-fat.outputs.digest }}
-          TAGS: ${{ steps.meta.outputs.tags }}
+          TAGS: ${{ steps.build-push-fat.outputs.imageid }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
             cosign verify \
