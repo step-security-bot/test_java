@@ -65,10 +65,9 @@ jobs:
         uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392 # v3.6.0
 
       - name: Install Cosign
-        uses: sigstore/cosign-installer@d7d6bc7722e3daa8354c50bcb52f4837da5e9b6a # v3.8.1
-
-      - name: Generate key pair
-        run: cosign generate-key-pair
+        uses: sigstore/cosign-installer@3454372f43399081ed03b604cb2d021dabca52bb # v3.8.2
+        with:
+          cosign-release: "v2.4.1"
 
       - name: Convert repository owner to lowercase
         id: repoowner
@@ -105,14 +104,21 @@ jobs:
           provenance: true
           sbom: true
 
+      - name: Generate Cosign key pair (unencrypted)
+        run: |
+          cosign generate-key-pair --output-key-prefix ./cosign
+          echo "Generated cosign.key and cosign.pub"
+          ls -l ./cosign*
+
       - name: Sign regular images
         env:
           DIGEST: ${{ steps.build-push-regular.outputs.digest }}
           TAGS: ${{ steps.meta.outputs.tags }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-            cosign sign --yes \
+            cosign sign \
               --key ./cosign.key \
+               --yes \
               "${tag}@${DIGEST}"
           done
 
@@ -160,8 +166,9 @@ jobs:
           TAGS: ${{ steps.meta2.outputs.tags }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-            cosign sign --yes \
+            cosign sign \
               --key ./cosign.key \
+              --yes \
               "${tag}@${DIGEST}"
           done
 
@@ -211,8 +218,9 @@ jobs:
           TAGS: ${{ steps.meta3.outputs.tags }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-            cosign sign --yes \
+            cosign sign \
               --key ./cosign.key \
+              --yes \
               "${tag}@${DIGEST}"
           done
 
