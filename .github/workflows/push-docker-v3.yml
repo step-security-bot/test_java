@@ -67,6 +67,9 @@ jobs:
       - name: Install Cosign
         uses: sigstore/cosign-installer@d7d6bc7722e3daa8354c50bcb52f4837da5e9b6a # v3.8.1
 
+      - name: Generate key pair
+        run: cosign generate-key-pair
+
       - name: Convert repository owner to lowercase
         id: repoowner
         run: echo "lowercase=$(echo ${{ github.repository_owner }} | awk '{print tolower($0)}')" >> $GITHUB_OUTPUT
@@ -113,6 +116,15 @@ jobs:
               "${tag}@${DIGEST}"
           done
 
+      - name: Inspect latest-regular
+        run: |
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --platform=linux/amd64,linux/arm64/v8
+          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --format "{{.Size}}"
+
+      - name: Size latest-regular
+        run: |
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
+
       - name: Generate tags ultra-lite
         id: meta2
         uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
@@ -153,6 +165,15 @@ jobs:
               "${tag}@${DIGEST}"
           done
 
+      - name: Inspect latest-ultra-lite
+        run: |
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --platform=linux/amd64,linux/arm64/v8
+          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
+
+      - name: Size latest-ultra-lite
+        run: |
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
+
       - name: Generate tags fat
         id: meta3
         uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
@@ -170,7 +191,6 @@ jobs:
       - name: Build and push main Dockerfile fat
         id: build-push-fat
         uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
-        if: github.ref != 'refs/heads/main'
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: .
@@ -195,3 +215,12 @@ jobs:
               --key ./cosign.key \
               "${tag}@${DIGEST}"
           done
+
+      - name: Inspect latest-fat
+        run: |
+          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --platform=linux/amd64,linux/arm64/v8
+          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
+
+      - name: Size latest-fat
+        run: |
+          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
