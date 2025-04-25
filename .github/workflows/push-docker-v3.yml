@@ -113,7 +113,7 @@ jobs:
       - name: Sign regular images
         env:
           DIGEST: ${{ steps.build-push-regular.outputs.digest }}
-          TAGS: ${{ steps.build-push-regular.outputs.imageid }}
+          TAGS: ${{ steps.meta.outputs.tags }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
             cosign sign-blob \
@@ -174,7 +174,7 @@ jobs:
       - name: Sign ultra-lite images
         env:
           DIGEST: ${{ steps.build-push-lite.outputs.digest }}
-          TAGS: ${{ steps.build-push-lite.outputs.imageid }}
+          TAGS: ${{ steps.meta2.outputs.tags }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
             cosign sign-blob \
@@ -237,7 +237,7 @@ jobs:
       - name: Sign fat images
         env:
           DIGEST: ${{ steps.build-push-fat.outputs.digest }}
-          TAGS: ${{ steps.build-push-fat.outputs.imageid }}
+          TAGS: ${{ steps.meta3.outputs.tags }}
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
             cosign sign-blob \
