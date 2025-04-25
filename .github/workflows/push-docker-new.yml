@@ -98,7 +98,9 @@ jobs:
             ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
             ghcr.io/${{ steps.repoowner.outputs.lowercase }}/s-pdf
           tags: |
-            type=raw,value=${{ steps.versionNumber.outputs.versionNumber }}${{ matrix.tag_suffix }},enable=${{ matrix.branch_condition }}
+            type=semver,pattern={{major}}.{{minor}}.{{patch}},value=${{ steps.versionNumber.outputs.versionNumber }}${{ matrix.tag_suffix }},enable=${{ matrix.branch_condition }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ steps.versionNumber.outputs.versionNumber }}${{ matrix.tag_suffix }},enable=${{ matrix.branch_condition }}
+            type=semver,pattern={{major}},value=${{ steps.versionNumber.outputs.versionNumber }}${{ matrix.tag_suffix }},enable=${{ matrix.branch_condition }}
             type=raw,value=latest${{ matrix.tag_suffix }},enable=${{ matrix.branch_condition }}
             type=raw,value=alpha,enable=${{ github.ref == 'refs/heads/main' }}
 
