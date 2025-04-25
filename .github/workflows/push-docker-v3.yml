@@ -117,7 +117,7 @@ jobs:
           USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-            cosign sign-blob \
+            cosign sign \
               --key ./cosign.key \
               --yes \
               "${USERNAME}@${DIGEST}"
@@ -180,7 +180,7 @@ jobs:
           USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-            cosign sign-blob \
+            cosign sign \
               --key ./cosign.key \
               --yes \
               "${USERNAME}@${DIGEST}"
@@ -245,7 +245,7 @@ jobs:
           USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
         run: |
           echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-            cosign sign-blob \
+            cosign sign \
               --key ./cosign.key \
               --yes \
               "${USERNAME}@${DIGEST}"
