@@ -86,7 +86,7 @@ jobs:
       - name: Generate tags
         id: meta
         uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
-        if: matrix.dockerfile.exclude-branch != github.ref_name
+        # if: matrix.dockerfile.exclude-branch != github.ref_name
         with:
           images: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
