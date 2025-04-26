@@ -105,11 +105,11 @@ jobs:
           provenance: true
           sbom: true
 
-      # - name: Generate Cosign key pair (unencrypted)
-      #   run: |
-      #     cosign generate-key-pair --output-key-prefix ./cosign
-      #     echo "Generated cosign.key and cosign.pub"
-      #     ls -l ./cosign*
+      - name: Generate Cosign key pair (unencrypted)
+        run: |
+          cosign generate-key-pair --output-key-prefix ./cosign
+          echo "Generated cosign.key and cosign.pub"
+          ls -l ./cosign*
 
       - name: Sign the published Docker image
         if: ${{ github.event_name != 'pull_request' }}
@@ -117,7 +117,7 @@ jobs:
           TAGS: ${{ steps.meta.outputs.tags }}
           DIGEST: ${{ steps.build-push-regular.outputs.digest }}
         run: |
-          echo "${TAGS}" | xargs -I {} cosign sign --yes --oidc-issuer https://token.actions.githubusercontent.com {}@${DIGEST}
+          echo "${TAGS}" | xargs -I {} cosign sign --yes --key ./cosign.key {}@${DIGEST}
 
       # - name: Sign regular images
       #   env:
