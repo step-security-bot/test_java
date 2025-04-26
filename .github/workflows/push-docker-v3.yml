@@ -102,6 +102,13 @@ jobs:
           provenance: true
           sbom: true
 
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: index.docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+          subject-digest: ${{ steps.build-push-regular.outputs.digest }}
+          push-to-registry: true
+
       - name: Sign the published Docker image
         env:
           TAGS: ${{ steps.meta.outputs.tags }}
