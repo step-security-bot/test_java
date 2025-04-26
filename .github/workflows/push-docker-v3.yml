@@ -127,14 +127,14 @@ jobs:
         run: |
           echo "${TAGS}" | xargs -I {} cosign verify --key env://COSIGN_PUB_KEY {}@${DIGEST}
 
-      # - name: Inspect latest-regular
-      #   run: |
-      #     docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --platform=linux/amd64
-      #     docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --format "{{.Size}}"
+      - name: Inspect latest-regular
+        run: |
+          docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf:latest --platform=linux/amd64
+          docker image inspect ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf:latest --format "{{.Size}}"
 
-      # - name: Size latest-regular
-      #   run: |
-      #     docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
+      - name: Size latest-regular
+        run: |
+          docker images ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf:latest --format "{{.Size}}"
 
       # - name: Generate tags ultra-lite
       #   id: meta2
