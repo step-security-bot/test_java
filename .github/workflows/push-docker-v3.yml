@@ -66,8 +66,6 @@ jobs:
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@3454372f43399081ed03b604cb2d021dabca52bb # v3.8.2
-        with:
-          cosign-release: "v2.4.1"
 
       - name: Convert repository owner to lowercase
         id: repoowner
@@ -86,6 +84,9 @@ jobs:
             type=semver,pattern={{major}},value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
             type=raw,value=alpha,enable=${{ github.ref == 'refs/heads/main' }}
+            type=ref,event=branch
+            type=ref,event=tag
+            type=sha
 
       - name: Build and push main Dockerfile
         id: build-push-regular
@@ -104,11 +105,19 @@ jobs:
           provenance: true
           sbom: true
 
-      - name: Generate Cosign key pair (unencrypted)
+      # - name: Generate Cosign key pair (unencrypted)
+      #   run: |
+      #     cosign generate-key-pair --output-key-prefix ./cosign
+      #     echo "Generated cosign.key and cosign.pub"
+      #     ls -l ./cosign*
+
+      - name: Sign the published Docker image
+        if: ${{ github.event_name != 'pull_request' }}
+        env:
+          TAGS: ${{ steps.meta.outputs.tags }}
+          DIGEST: ${{ steps.build-push-regular.outputs.digest }}
         run: |
-          cosign generate-key-pair --output-key-prefix ./cosign
-          echo "Generated cosign.key and cosign.pub"
-          ls -l ./cosign*
+          echo "${TAGS}" | xargs -I {} cosign sign --yes --oidc-issuer https://token.actions.githubusercontent.com {}@${DIGEST}
 
       # - name: Sign regular images
       #   env:
@@ -135,139 +144,144 @@ jobs:
       #         "${USERNAME}@${DIGEST}"
       #     done
 
-      - name: Inspect latest-regular
-        run: |
-          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --platform=linux/amd64
-          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --format "{{.Size}}"
-
-      - name: Size latest-regular
-        run: |
-          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
-
-      - name: Generate tags ultra-lite
-        id: meta2
-        uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
-        with:
-          images: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
-            ghcr.io/${{ steps.repoowner.outputs.lowercase }}/s-pdf
-          tags: |
-            type=semver,pattern={{major}}.{{minor}}.{{patch}}-ultra-lite,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=semver,pattern={{major}}.{{minor}}-ultra-lite,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=semver,pattern={{major}}-ultra-lite,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=raw,value=latest-ultra-lite,enable=${{ github.ref == 'refs/heads/main' }}
-
-      - name: Build and push Dockerfile-ultra-lite
-        id: build-push-lite
-        uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
-        with:
-          context: .
-          file: ./Dockerfile.ultra-lite
-          push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          tags: ${{ steps.meta2.outputs.tags }}
-          labels: ${{ steps.meta2.outputs.labels }}
-          build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
-          platforms: linux/amd64,linux/arm64/v8
-          provenance: true
-          sbom: true
-
-      # - name: Sign ultra-lite images
-      #   env:
-      #     DIGEST: ${{ steps.build-push-lite.outputs.digest }}
-      #     TAGS: ${{ steps.meta2.outputs.tags }}
-      #     USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+      # - name: Inspect latest-regular
       #   run: |
-      #     echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-      #       cosign sign \
-      #         --key ./cosign.key \
-      #         --yes \
-      #         "${USERNAME}@${DIGEST}"
-      #     done
+      #     docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --platform=linux/amd64
+      #     docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest --format "{{.Size}}"
 
-      # - name: Verify signatures
-      #   env:
-      #     DIGEST: ${{ steps.build-push-lite.outputs.digest }}
-      #     TAGS: ${{ steps.build-push-lite.outputs.imageid }}
-      #     USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+      # - name: Size latest-regular
       #   run: |
-      #     echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-      #       cosign verify \
-      #         --key ./cosign.pub \
-      #         "${USERNAME}@${DIGEST}"
-      #     done
+      #     docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
 
-      - name: Inspect latest-ultra-lite
-        run: |
-          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --platform=linux/amd64
-          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
+      # - name: Generate tags ultra-lite
+      #   id: meta2
+      #   uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
+      #   with:
+      #     images: |
+      #       ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+      #       ghcr.io/${{ steps.repoowner.outputs.lowercase }}/s-pdf
+      #     tags: |
+      #       type=semver,pattern={{major}}.{{minor}}.{{patch}}-ultra-lite,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+      #       type=semver,pattern={{major}}.{{minor}}-ultra-lite,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+      #       type=semver,pattern={{major}}-ultra-lite,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+      #       type=raw,value=latest-ultra-lite,enable=${{ github.ref == 'refs/heads/main' }}
+      #       type=ref,event=branch
+      #       type=ref,event=tag
+      #       type=sha
 
-      - name: Size latest-ultra-lite
-        run: |
-          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
+      # - name: Build and push Dockerfile-ultra-lite
+      #   id: build-push-lite
+      #   uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile.ultra-lite
+      #     push: true
+      #     cache-from: type=gha
+      #     cache-to: type=gha,mode=max
+      #     tags: ${{ steps.meta2.outputs.tags }}
+      #     labels: ${{ steps.meta2.outputs.labels }}
+      #     build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
+      #     platforms: linux/amd64,linux/arm64/v8
+      #     provenance: true
+      #     sbom: true
 
-      - name: Generate tags fat
-        id: meta3
-        uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
-        if: github.ref != 'refs/heads/main'
-        with:
-          images: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
-            ghcr.io/${{ steps.repoowner.outputs.lowercase }}/s-pdf
-          tags: |
-            type=semver,pattern={{major}}.{{minor}}.{{patch}}-fat,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=semver,pattern={{major}}.{{minor}}-fat,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=semver,pattern={{major}}-fat,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
-            type=raw,value=latest-fat,enable=${{ github.ref == 'refs/heads/main' }}
+      # # - name: Sign ultra-lite images
+      # #   env:
+      # #     DIGEST: ${{ steps.build-push-lite.outputs.digest }}
+      # #     TAGS: ${{ steps.meta2.outputs.tags }}
+      # #     USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+      # #   run: |
+      # #     echo "$TAGS" | tr ',' '\n' | while read -r tag; do
+      # #       cosign sign \
+      # #         --key ./cosign.key \
+      # #         --yes \
+      # #         "${USERNAME}@${DIGEST}"
+      # #     done
 
-      - name: Build and push main Dockerfile fat
-        id: build-push-fat
-        uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
-        with:
-          builder: ${{ steps.buildx.outputs.name }}
-          context: .
-          file: ./Dockerfile.fat
-          push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          tags: ${{ steps.meta3.outputs.tags }}
-          labels: ${{ steps.meta3.outputs.labels }}
-          build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
-          platforms: linux/amd64,linux/arm64/v8
-          provenance: true
-          sbom: true
+      # # - name: Verify signatures
+      # #   env:
+      # #     DIGEST: ${{ steps.build-push-lite.outputs.digest }}
+      # #     TAGS: ${{ steps.build-push-lite.outputs.imageid }}
+      # #     USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+      # #   run: |
+      # #     echo "$TAGS" | tr ',' '\n' | while read -r tag; do
+      # #       cosign verify \
+      # #         --key ./cosign.pub \
+      # #         "${USERNAME}@${DIGEST}"
+      # #     done
 
-      # - name: Sign fat images
-      #   env:
-      #     DIGEST: ${{ steps.build-push-fat.outputs.digest }}
-      #     TAGS: ${{ steps.meta3.outputs.tags }}
-      #     USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+      # - name: Inspect latest-ultra-lite
       #   run: |
-      #     echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-      #       cosign sign \
-      #         --key ./cosign.key \
-      #         --yes \
-      #         "${USERNAME}@${DIGEST}"
-      #     done
+      #     docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --platform=linux/amd64
+      #     docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
 
-      # - name: Verify signatures
-      #   env:
-      #     DIGEST: ${{ steps.build-push-fat.outputs.digest }}
-      #     TAGS: ${{ steps.build-push-fat.outputs.imageid }}
-      #     USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+      # - name: Size latest-ultra-lite
       #   run: |
-      #     echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-      #       cosign verify \
-      #         --key ./cosign.pub \
-      #         "${USERNAME}@${DIGEST}"
-      #     done
+      #     docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-ultra-lite --format "{{.Size}}"
 
-      - name: Inspect latest-fat
-        run: |
-          docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --platform=linux/amd64
-          docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
+      # - name: Generate tags fat
+      #   id: meta3
+      #   uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
+      #   with:
+      #     images: |
+      #       ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+      #       ghcr.io/${{ steps.repoowner.outputs.lowercase }}/s-pdf
+      #     tags: |
+      #       type=semver,pattern={{major}}.{{minor}}.{{patch}}-fat,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+      #       type=semver,pattern={{major}}.{{minor}}-fat,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+      #       type=semver,pattern={{major}}-fat,value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
+      #       type=raw,value=latest-fat,enable=${{ github.ref == 'refs/heads/main' }}
+      #       type=ref,event=branch
+      #       type=ref,event=tag
+      #       type=sha
 
-      - name: Size latest-fat
-        run: |
-          docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
+      # - name: Build and push main Dockerfile fat
+      #   id: build-push-fat
+      #   uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
+      #   with:
+      #     builder: ${{ steps.buildx.outputs.name }}
+      #     context: .
+      #     file: ./Dockerfile.fat
+      #     push: true
+      #     cache-from: type=gha
+      #     cache-to: type=gha,mode=max
+      #     tags: ${{ steps.meta3.outputs.tags }}
+      #     labels: ${{ steps.meta3.outputs.labels }}
+      #     build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
+      #     platforms: linux/amd64,linux/arm64/v8
+      #     provenance: true
+      #     sbom: true
+
+      # # - name: Sign fat images
+      # #   env:
+      # #     DIGEST: ${{ steps.build-push-fat.outputs.digest }}
+      # #     TAGS: ${{ steps.meta3.outputs.tags }}
+      # #     USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+      # #   run: |
+      # #     echo "$TAGS" | tr ',' '\n' | while read -r tag; do
+      # #       cosign sign \
+      # #         --key ./cosign.key \
+      # #         --yes \
+      # #         "${USERNAME}@${DIGEST}"
+      # #     done
+
+      # # - name: Verify signatures
+      # #   env:
+      # #     DIGEST: ${{ steps.build-push-fat.outputs.digest }}
+      # #     TAGS: ${{ steps.build-push-fat.outputs.imageid }}
+      # #     USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
+      # #   run: |
+      # #     echo "$TAGS" | tr ',' '\n' | while read -r tag; do
+      # #       cosign verify \
+      # #         --key ./cosign.pub \
+      # #         "${USERNAME}@${DIGEST}"
+      # #     done
+
+      # - name: Inspect latest-fat
+      #   run: |
+      #     docker pull ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --platform=linux/amd64
+      #     docker image inspect ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
+
+      # - name: Size latest-fat
+      #   run: |
+      #     docker images ${{ steps.repoowner.outputs.lowercase }}/s-pdf:latest-fat --format "{{.Size}}"
