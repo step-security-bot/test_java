@@ -117,7 +117,7 @@ jobs:
           TAGS: ${{ steps.meta.outputs.tags }}
           DIGEST: ${{ steps.build-push-regular.outputs.digest }}
         run: |
-          echo "${TAGS}" | xargs -I {} cosign sign --yes --key ./cosign.key {}@${DIGEST}
+          echo "${TAGS}" | xargs -I {} cosign sign --key ./cosign.key  --yes {}@${DIGEST}
 
       # - name: Sign regular images
       #   env:
