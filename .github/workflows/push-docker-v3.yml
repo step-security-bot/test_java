@@ -100,7 +100,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: linux/amd64
           provenance: true
           sbom: true
 
@@ -169,7 +169,7 @@ jobs:
           tags: ${{ steps.meta2.outputs.tags }}
           labels: ${{ steps.meta2.outputs.labels }}
           build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: linux/amd64
           provenance: true
           sbom: true
 
@@ -234,7 +234,7 @@ jobs:
           tags: ${{ steps.meta3.outputs.tags }}
           labels: ${{ steps.meta3.outputs.labels }}
           build-args: VERSION_TAG=${{ steps.versionNumber.outputs.versionNumber }}
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: linux/amd64
           provenance: true
           sbom: true
 
