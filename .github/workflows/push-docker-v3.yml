@@ -84,9 +84,6 @@ jobs:
             type=semver,pattern={{major}},value=${{ steps.versionNumber.outputs.versionNumber }},enable=${{ github.ref == 'refs/heads/main' }}
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
             type=raw,value=alpha,enable=${{ github.ref == 'refs/heads/main' }}
-            type=ref,event=branch
-            type=ref,event=tag
-            type=sha
 
       - name: Build and push main Dockerfile
         id: build-push-regular
@@ -121,31 +118,6 @@ jobs:
           COSIGN_PUB_KEY: ${{ secrets.COSIGN_PUB_KEY }}
         run: |
           echo "${TAGS}" | xargs -I {} cosign verify --key env://COSIGN_PUB_KEY {}@${DIGEST}
-
-      # - name: Sign regular images
-      #   env:
-      #     DIGEST: ${{ steps.build-push-regular.outputs.digest }}
-      #     TAGS: ${{ steps.meta.outputs.tags }}
-      #     USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
-      #   run: |
-      #     echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-      #       cosign sign \
-      #         --key ./cosign.key \
-      #         --yes \
-      #         "${USERNAME}@${DIGEST}"
-      #     done
-
-      # - name: Verify signatures
-      #   env:
-      #     DIGEST: ${{ steps.build-push-regular.outputs.digest }}
-      #     TAGS: ${{ steps.meta.outputs.tags }}
-      #     USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}/s-pdf
-      #   run: |
-      #     echo "$TAGS" | tr ',' '\n' | while read -r tag; do
-      #       cosign verify \
-      #         --key ./cosign.pub \
-      #         "${USERNAME}@${DIGEST}"
-      #     done
 
       # - name: Inspect latest-regular
       #   run: |
