@@ -67,25 +67,6 @@ jobs:
       - name: Install Cosign
         uses: sigstore/cosign-installer@3454372f43399081ed03b604cb2d021dabca52bb # v3.8.2
 
-      - name: Install OpenSSL
-        run: sudo apt-get update && sudo apt-get install -y openssl
-
-      - name: Write Cosign private key
-        run: echo "${{ secrets.COSIGN_PRIVATE_KEY }}" > cosign.key
-
-      - name: Generate cosign.pub from cosign.key
-        env:
-          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-        run: |
-          # Entschlüsseln des privaten Schlüssels (falls verschlüsselt)
-          if [[ -n "$COSIGN_PASSWORD" ]]; then
-            openssl pkey -in cosign.key -passin pass:$COSIGN_PASSWORD -out cosign_decrypted.key
-          else
-            cp cosign.key cosign_decrypted.key
-          fi
-          # Öffentlichen Schlüssel extrahieren
-          openssl pkey -in cosign_decrypted.key -pubout -out cosign.pub
-
       - name: Convert repository owner to lowercase
         id: repoowner
         run: echo "lowercase=$(echo ${{ github.repository_owner }} | awk '{print tolower($0)}')" >> $GITHUB_OUTPUT
@@ -125,25 +106,21 @@ jobs:
           sbom: true
 
       - name: Sign the published Docker image
-        if: ${{ github.event_name != 'pull_request' }}
         env:
           TAGS: ${{ steps.meta.outputs.tags }}
           DIGEST: ${{ steps.build-push-regular.outputs.digest }}
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
         run: |
-          echo "${TAGS}" | xargs -I {} cosign sign --key cosign.key --yes {}@${DIGEST}
+          echo "${TAGS}" | xargs -I {} cosign sign --key env://COSIGN_PRIVATE_KEY --yes {}@${DIGEST}
 
       - name: Verify the published Docker image
         env:
           TAGS: ${{ steps.meta.outputs.tags }}
           DIGEST: ${{ steps.build-push-regular.outputs.digest }}
+          COSIGN_PUB_KEY: ${{ secrets.COSIGN_PUB_KEY }}
         run: |
-          echo "${TAGS}" | xargs -I {} cosign verify --key cosign.pub {}@${DIGEST}
-
-      - name: Clean up keys
-        if: always()
-        run: |
-          rm -f cosign.key cosign_decrypted.key cosign.pub
+          echo "${TAGS}" | xargs -I {} cosign verify --key env://COSIGN_PUB_KEY {}@${DIGEST}
 
       # - name: Sign regular images
       #   env:
