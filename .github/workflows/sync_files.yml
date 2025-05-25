@@ -90,7 +90,6 @@ jobs:
             #### **Why these changes are necessary**
             - Keeps translation files aligned with the latest reference updates.
             - Ensures the documentation reflects the current translation progress.
-            - Strengthens dependency verification for a more secure build process.
 
             ---
 
