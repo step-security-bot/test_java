@@ -2,7 +2,8 @@ version: 1
 labels:
   - label: "Translation"
     files:
-      - 'stirling-pdf/src/main/resources/messages_*_*.properties'
+      - 'stirling-pdf/src/main/resources/messages_[a-zA-Z_]{2}_[a-zA-Z_]{2,7}\.properties'
+      - 'src/main/resources/messages_[a-zA-Z_]{2}_[a-zA-Z_]{2,7}.properties'
       - 'scripts/ignore_translation.toml'
       - 'stirling-pdf/src/main/resources/templates/fragments/languages.html'
 
@@ -87,6 +88,7 @@ labels:
   - label: "Github"
     files:
       - ".github/.*"
+      - ".github/**/*"
 
   - label: "Bump"
     title: "^Bump.*"
