@@ -38,6 +38,9 @@ labels:
   - label: "Documentation"
     title: '^docs:.*'
 
+  - label: 'API'
+    title: '.*openapi.*'
+
   - label: "Translation"
     files:
       - 'stirling-pdf/src/main/resources/messages_[a-zA-Z_]{2}_[a-zA-Z_]{2,7}.properties'
