@@ -60,7 +60,7 @@ labels:
     files:
       - 'common/src/main/java/.*.java'
       - 'proprietary/src/main/java/.*.java'
-      - 'stirling-pdf/src/main/java/.*.java'
+      - 'src/main/java/.*.java'
 
   - label: "Back End"
     files:
