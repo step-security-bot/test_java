@@ -125,16 +125,16 @@ labels:
 
   - label: "Devtools"
     files:
-      - '.devcontainer/**/*'
+      - '.devcontainer/.*'
       - 'Dockerfile.dev'
 
   - label: "Test"
     files:
-      - 'cucumber/**/*'
-      - 'common/src/test/**/*'
-      - 'proprietary/src/test/**/*'
-      - 'stirling-pdf/src/test/**/*'
-      - 'stirling-pdf/src/testing/**/*'
+      - 'cucumber/.*'
+      - 'common/src/test/.*'
+      - 'proprietary/src/test/.*'
+      - 'stirling-pdf/src/test/.*'
+      - 'stirling-pdf/src/testing/.*'
       - ".pre-commit-config"
       - '.github/workflows/pre_commit.yml'
       - ".github/workflows/scorecards.yml"
