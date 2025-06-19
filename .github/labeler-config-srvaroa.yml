@@ -107,7 +107,6 @@ labels:
       - '.*.md'
       - 'scripts/counter_translation.py'
       - 'scripts/ignore_translation.toml'
-    title: '^docs:.*'
 
   - label: "Docker"
     files:
