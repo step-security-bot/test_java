@@ -97,16 +97,19 @@ jobs:
           model: openai/gpt-4o
           prompt: |
             You are a senior software engineer reviewing a pull request for Stirling-PDF, a locally hosted web-based PDF manipulation tool built with Gradle.
-            Fülle das PR-Template aus und erstelle eine aussagekräftige Überschrift für die PR auf github.com auf englisch und im Markdown Format ausgeben. Achte darauf, dass es in Markdown-Format ausgibts!
+            Erstelle eine aussagekräftige Überschrift für die PR auf github.com auf englisch und im Markdown Format ausgeben. Achte darauf, dass es in Markdown-Format ausgibts!
             Verwende für die Überschrift, wenn möglich: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test. Beachte das Übersetzungen nicht docs zuzuordnen sind und verwende keine emojis
 
             **Diff Content:**
+
             ```
-            $(cat $GITHUB_WORKSPACE/diff-content.txt || echo "No diff content available")
+            $(cat $GITHUB_WORKSPACE/diff-content.txt)
             ```
 
+            **Changed Files:** $(cat $GITHUB_WORKSPACE/changed-files.txt)
+
             Please provide:
-            1. Fülle das PR-Template aus und erstelle eine aussagekräftige Überschrift für die PR auf github.com auf englisch und im Markdown Format ausgeben. Achte darauf, dass es in Markdown-Format ausgibts!
+            1. Erstelle eine aussagekräftige Überschrift für die PR auf github.com auf englisch und im Markdown Format ausgibts. Achte darauf, dass es in Markdown-Format ausgibts!
             2. Verwende für die Überschrift, wenn möglich: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test. Beachte das Übersetzungen nicht docs zuzuordnen sind und verwende keine emojis
 
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
