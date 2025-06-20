@@ -121,10 +121,13 @@ jobs:
 
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
 
-      - run: echo "${{ steps.ai-title-analysis.outputs.response }}"
-
-      - name: Update or Create PR Comment
-        run: echo "SCRIPT_OUTPUT<<EOF" >> $GITHUB_ENV && echo "${{ steps.ai-title-analysis.outputs.response }}" >> $GITHUB_ENV && echo "EOF" >> $GITHUB_ENV
+      - name: Set SCRIPT_OUTPUT env var safely
+        run: |
+          {
+            echo "SCRIPT_OUTPUT<<EOF"
+            echo "${{ steps.ai-title-analysis.outputs.response }}"
+            echo "EOF"
+          } >> "$GITHUB_ENV"
 
       - name: Post comment on PR
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
@@ -147,13 +150,15 @@ jobs:
             // Only update or create comments by the action user
             const expectedActor = "${{ steps.setup-bot.outputs.app-slug }}[bot]";
 
+            const body = `## 🤖 AI PR Title Suggestion for Stirling-PDF\n\n${SCRIPT_OUTPUT.trim()}\n`;
+
             if (comment && comment.user.login === expectedActor) {
               // Update existing comment
               await github.rest.issues.updateComment({
                 owner: repoOwner,
                 repo: repoName,
                 comment_id: comment.id,
-                body: `## 🤖 AI PR Title Suggestion for Stirling-PDF\n\n\n${SCRIPT_OUTPUT}\n`
+                body: body
               });
               console.log("Updated existing comment.");
             } else if (!comment) {
@@ -162,7 +167,7 @@ jobs:
                 owner: repoOwner,
                 repo: repoName,
                 issue_number: issueNumber,
-                body: `## 🤖 AI PR Title Suggestion for Stirling-PDF\n\n\n${SCRIPT_OUTPUT}\n`
+                body: body
               });
               console.log("Created new comment.");
             } else {
