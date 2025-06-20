@@ -181,7 +181,7 @@ jobs:
               }
             } else {
               // ✅ PR-Titel ist gut → Kommentar ggf. in Lob umwandeln
-              const praise = `## 🎉 PR Title Review\n\nGreat job! The current PR title is clear and well-structured.\n\n✅ No suggestions needed.\n\n---\n*Validated by GitHub Models AI*`;
+              const praise = `🤖 AI PR Title Suggestion for Stirling-PDF\n\nGreat job! The current PR title is clear and well-structured.\n\n✅ No suggestions needed.\n\n---\n*Validated by GitHub Models AI*`;
 
               if (existing) {
                 await github.rest.issues.updateComment({
