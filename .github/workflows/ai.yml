@@ -55,12 +55,13 @@ jobs:
             ```
 
             Compare the PR title `${{ github.event.pull_request.title }}` with your AI-generated title. Evaluate the PR title: if it does not follow the conventions or is unclear, return the AI-generated title. Otherwise, return the PR title as-is.
-            Check if the PR title `${{ github.event.pull_request.title }}` is a valid title.
+            Check if the PR title `${{ github.event.pull_request.title }}` is a valid title and reflects the content of the diff ${{ steps.get_diff.outputs.diff }}
 
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
             Respond ONLY in valid JSON (no markdown, no code fences) with the following fields:
             {
               "improved_rating": "<your improved rating>",
+              "improved_ai_title_rating": "<your improved ai title rating>",
               "improved_title": "<your improved title>"
             }
 
