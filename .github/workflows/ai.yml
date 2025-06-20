@@ -1,4 +1,4 @@
-name: AI PR Title Review for Stirling-PDF
+name: AI - PR Title Review
 
 on:
   pull_request:
@@ -76,7 +76,7 @@ jobs:
           IMPROVED_TITLE=$(jq -r '.improved_title // "?"' ai_response.json)
 
           cat > /tmp/ai-title-comment.md <<EOF
-          ## 🤖 AI PR Title Suggestion for Stirling-PDF
+          ## 🤖 AI PR Title Suggestion
 
           **PR-Title Rating**: $IMPROVED_RATING
 
@@ -108,7 +108,7 @@ jobs:
 
             const existing = comments.data.find(c =>
               c.user?.login === expectedActor &&
-              c.body.includes("## 🤖 AI PR Title Suggestion for Stirling-PDF")
+              c.body.includes("## 🤖 AI PR Title Suggestion")
             );
 
             if (rating === null) {
@@ -132,7 +132,7 @@ jobs:
                 console.log("Created new suggestion comment.");
               }
             } else {
-              const praise = `## 🤖 AI PR Title Suggestion for Stirling-PDF\n\nGreat job! The current PR title is clear and well-structured.\n\n✅ No suggestions needed.\n\n---\n*Validated by GitHub Models AI*`;
+              const praise = `## 🤖 AI PR Title Suggestion\n\nGreat job! The current PR title is clear and well-structured.\n\n✅ No suggestions needed.\n\n---\n*Validated by GitHub Models AI*`;
 
               if (existing) {
                 await github.rest.issues.updateComment({
