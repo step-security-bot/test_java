@@ -121,7 +121,7 @@ jobs:
 
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
 
-            vergleiche PR Title: `${{ github.event.pull_request.title }}` mit deinem AI-generierten Titel entscheide, wenn der PR Title nicht den Konventionen entspricht oder unklar ist.
+            vergleiche PR Title: `${{ github.event.pull_request.title }}` mit deinem AI-generierten Titel, bewerte den PR Title, wenn der PR Title nicht den Konventionen entspricht oder unklar ist, dann gibt den AI-generierten Titel zurück, ansonsten gib den PR Title zurück.
 
       - name: Set SCRIPT_OUTPUT env var safely
         run: |
