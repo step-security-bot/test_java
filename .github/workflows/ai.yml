@@ -106,8 +106,6 @@ jobs:
             $(cat $GITHUB_WORKSPACE/diff-content.txt)
             ```
 
-            **Changed Files:** $(cat $GITHUB_WORKSPACE/changed-files.txt)
-
             Please provide:
             1. Erstelle eine aussagekräftige Überschrift für die PR auf github.com auf englisch und im Markdown Format ausgibts. Achte darauf, dass es in Markdown-Format ausgibts!
             2. Verwende für die Überschrift, wenn möglich: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test. Beachte das Übersetzungen nicht docs zuzuordnen sind und verwende keine emojis
