@@ -58,16 +58,24 @@ jobs:
 
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
 
-      - name: Set SCRIPT_OUTPUT env var safely
+      - name: Extract title and prepare comment markdown
         run: |
-          cat > /tmp/ai-title-comment.md << 'EOF'
+          echo "${{ steps.ai-title-analysis.outputs.response }}" > /tmp/ai-raw.txt
+
+          # Extract rating and AI title line
+          RATING=$(grep '\*\*Rating\*\*' /tmp/ai-raw.txt || echo "")
+          TITLE_LINE=$(grep '\*\*AI-Generated Title\*\*' /tmp/ai-raw.txt || echo "")
+          TITLE=$(echo "$TITLE_LINE" | sed -E 's/\*\*AI-Generated Title\*\*: *`(.*)`/\1/')
+
+          cat > /tmp/ai-title-comment.md <<EOF
           ## 🤖 AI PR Title Suggestion for Stirling-PDF
 
-          ${{ steps.ai-title-analysis.outputs.response }}
+          $RATING
+          $TITLE_LINE
 
           ### ⬇️ Suggested Title (copy & paste):
           \`\`\`
-          ${{ steps.ai-title-analysis.outputs.response }}
+          $TITLE
           \`\`\`
 
           ---
