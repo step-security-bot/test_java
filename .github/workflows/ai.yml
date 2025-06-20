@@ -57,25 +57,28 @@ jobs:
             Compare the PR title `${{ github.event.pull_request.title }}` with your AI-generated title. Evaluate the PR title: if it does not follow the conventions or is unclear, return the AI-generated title. Otherwise, return the PR title as-is.
 
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
+            Respond ONLY in valid JSON (no markdown, no code fences) with the following fields:
+            {
+              "improved_rating": "<your improved rating>",
+              "improved_title": "<your improved title>"
+            }
 
-      - name: Extract title and prepare comment markdown
+      - name: Set SCRIPT_OUTPUT env var safely
         run: |
-          echo "${{ steps.ai-title-analysis.outputs.response }}" > /tmp/ai-raw.txt
+          echo '${{ steps.ai-title-analysis.outputs.response }}' > ai_response.json
 
-          # Extract rating and AI title line
-          RATING=$(grep '\*\*Rating\*\*' /tmp/ai-raw.txt || echo "")
-          TITLE_LINE=$(grep '\*\*AI-Generated Title\*\*' /tmp/ai-raw.txt || echo "")
-          TITLE=$(echo "$TITLE_LINE" | sed -E 's/\*\*AI-Generated Title\*\*: *`(.*)`/\1/')
+          # Parse JSON fields using jq
+          IMPROVED_RATING=$(jq -r '.improved_rating' ai_response.json)
+          IMPROVED_TITLE=$(jq -r '.improved_title' ai_response.json)
 
           cat > /tmp/ai-title-comment.md <<EOF
           ## 🤖 AI PR Title Suggestion for Stirling-PDF
 
-          $RATING
-          $TITLE_LINE
+          **Rating**: $IMPROVED_RATING/10
 
           ### ⬇️ Suggested Title (copy & paste):
           \`\`\`
-          $TITLE
+          $IMPROVED_TITLE
           \`\`\`
 
           ---
@@ -125,7 +128,7 @@ jobs:
                 console.log("Created new suggestion comment.");
               }
             } else {
-              const praise = `🤖 AI PR Title Suggestion for Stirling-PDF\n\nGreat job! The current PR title is clear and well-structured.\n\n✅ No suggestions needed.\n\n---\n*Validated by GitHub Models AI*`;
+              const praise = `## 🤖 AI PR Title Suggestion for Stirling-PDF\n\nGreat job! The current PR title is clear and well-structured.\n\n✅ No suggestions needed.\n\n---\n*Validated by GitHub Models AI*`;
 
               if (existing) {
                 await github.rest.issues.updateComment({
