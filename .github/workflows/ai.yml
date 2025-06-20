@@ -60,7 +60,7 @@ jobs:
         with:
           model: openai/gpt-4o
           prompt: |
-            You are a senior software engineer reviewing a pull request for Stirling-PDF, a locally hosted web-based PDF manipulation tool. Your task is to evaluate the PR title and suggest improvements based on the changed files.
+            You are a senior software engineer reviewing a pull request for Stirling-PDF, a locally hosted web-based PDF manipulation tool. Your task is to evaluate the PR title and suggest improvements only if the current title is unclear, overly vague, or misaligned with the changes. Avoid minor or pedantic refinements.
 
             **PR Title:** ${{ github.event.pull_request.title }}
 
@@ -72,10 +72,12 @@ jobs:
             **Change Scope:** ${{ steps.pr-info.outputs.change-scope }}
 
             Please provide:
-            1. A brief assessment of the current PR title's clarity and relevance to the Stirling-PDF project.
-            2. A suggested improved PR title that accurately reflects the changes, considering Stirling-PDF's focus on PDF operations (e.g., splitting, merging, converting, etc.).
-            3. A short explanation of why the suggested title is better, emphasizing alignment with Stirling-PDF's codebase and conventional commit style.
-            4. Ensure the suggested title follows conventional commit style (e.g., `feat:`, `fix:`, `docs:`, etc.) and is concise yet descriptive.
+            1. A brief assessment of whether the current PR title is sufficiently clear and relevant to the Stirling-PDF project (e.g., reflects PDF operations like splitting, merging, converting, or project maintenance).
+            2. If the title is inadequate (e.g., too vague like "Peter" or not descriptive), suggest one improved PR title that accurately reflects the changes. Use conventional commit style (e.g., `feat:`, `fix:`, `docs:`, `chore:`) and keep it concise yet descriptive.
+            3. If a new title is suggested, provide a short explanation of why it better aligns with the changes, focusing on significant improvements over minor wording tweaks.
+            4. If the current title is already clear and appropriate, state that no change is needed and briefly explain why.
+
+            **Important**: Only suggest a new title if the current one is significantly deficient (e.g., too generic, misleading, or missing context). Avoid iterative refinements like changing "miscellaneous files" to "configuration and scripts" unless the improvement is substantial.
 
             Keep the response concise and formatted as markdown.
 
