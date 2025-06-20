@@ -117,6 +117,9 @@ jobs:
             ${{ steps.get_diff.outputs.diff }}
             ```
 
+            The PR title is: `${{ steps.pr-info.outputs.PR_TITLE }}` vergleiche ihn mit deinem Vorschlag und bewerte ihn auf einer Skala von 1 bis 10, wobei 1 sehr schlecht und 10 perfekt ist. If the title is significantly deficient (rating ≤ 5), suggest an AI-generated title based on the diff content and change scope.
+            **Rating**: Provide a rating from 1 to 10 based on the quality of the PR title.
+
             **Important**: The provided PR title must not influence the generation of the AI title in any way. Only suggest the AI-generated title if the provided title is significantly deficient (rating ≤ 5). Avoid iterative refinements like changing "miscellaneous files" to "configuration and scripts" unless the improvement is substantial. If diff content is missing, use the change scope and file names to generate and evaluate the title.
 
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
