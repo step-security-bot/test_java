@@ -90,34 +90,32 @@ jobs:
           echo "Diff Content:"
           cat $GITHUB_WORKSPACE/diff-content.txt || echo "No diff content found"
 
+      - name: Get PR diff
+        id: get_diff
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff origin/${{ github.base_ref }}...HEAD > pr.diff
+          echo "diff<<EOF" >> $GITHUB_OUTPUT
+          cat pr.diff >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: AI PR Title Analysis
         id: ai-title-analysis
         uses: actions/ai-inference@v1
         with:
           model: openai/gpt-4o
           prompt: |
-            You are a senior software engineer reviewing a pull request for Stirling-PDF, a locally hosted web-based PDF manipulation tool built with Gradle. Your task is to generate an independent PR title based solely on the diff content and change scope, without any reference to the provided PR title. Then, compare the provided PR title to the AI-generated title to evaluate its quality. Suggest improvements only if the provided title is significantly deficient (rating ≤ 5).
+            You are a professional software engineer. Based on the following git diff, generate a **concise** and **meaningful** pull request title in **English**, using **Markdown format** and starting with one of the conventional commit types:
+            build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test.
 
-            **Provided PR Title:** ${{ github.event.pull_request.title }}
+            Do NOT use emojis. Do NOT include additional description. Output only a single Markdown-formatted line.
 
-            **Changed Files:**
+            Example: `refactor: improve session lifecycle handling in login filter`
+
+            Git diff:
             ```
-            $(cat $GITHUB_WORKSPACE/changed-files.txt || echo "No changed files available")
+            ${{ steps.get_diff.outputs.diff }}
             ```
-
-            **Change Scope:** ${{ steps.pr-info.outputs.change-scope }}
-
-            **Diff Content:**
-            ```
-            $(cat $GITHUB_WORKSPACE/diff-content.txt || echo "No diff content available")
-            ```
-
-            Please provide:
-            1. An independently generated PR title based solely on the diff content and change scope, using conventional commit style (e.g., `build:`, `chore:`, `ci:`, `docs:`, `feat:`, `fix:`, `perf:`, `refactor:`, `revert:`, `style:`, `test:`) and keeping it concise yet descriptive. Do not use or reference the provided PR title in any way when generating this title. If diff content is unavailable, base the title on the change scope and file names. Avoid emojis and ensure translations are not classified as `docs`.
-            2. A rating of the provided PR title on a scale of 1 to 10 (1 = worst, 10 = best), based on its clarity, relevance, and alignment with the changes compared to the AI-generated title.
-            3. A brief assessment of whether the provided PR title is sufficiently clear and relevant to the Stirling-PDF project (e.g., reflects PDF operations like splitting, merging, converting, or project maintenance), considering the diff content or change scope.
-            4. If the provided title is inadequate (rating ≤ 5), suggest the AI-generated title as an improvement and provide a short explanation of why it better aligns with the changes, referencing specific changes in the diff or change scope.
-            5. If the provided title is acceptable (rating ≥ 6), state that no change is needed and briefly explain why, comparing it to the AI-generated title.
 
             **Important**: The provided PR title must not influence the generation of the AI title in any way. Only suggest the AI-generated title if the provided title is significantly deficient (rating ≤ 5). Avoid iterative refinements like changing "miscellaneous files" to "configuration and scripts" unless the improvement is substantial. If diff content is missing, use the change scope and file names to generate and evaluate the title.
 
