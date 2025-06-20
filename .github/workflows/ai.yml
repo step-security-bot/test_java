@@ -27,69 +27,6 @@ jobs:
           app-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
-      - name: Gather PR Information
-        id: pr-info
-        env:
-          GH_TOKEN: "${{ steps.setup-bot.outputs.token }}"
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          PR_TITLE: ${{ github.event.pull_request.title }}
-        run: |
-          # Collect PR title and changed files
-          CHANGED_FILES=$(gh pr diff $PR_NUMBER --name-only || echo "Unable to retrieve changed files")
-          # Collect diff content for changed files
-          DIFF_CONTENT=$(gh pr diff $PR_NUMBER || echo "Unable to retrieve diff content")
-
-          # Save to files for AI processing
-          echo "$PR_TITLE" > $GITHUB_WORKSPACE/pr-title.txt
-          echo "$CHANGED_FILES" > $GITHUB_WORKSPACE/changed-files.txt
-          echo "$DIFF_CONTENT" > $GITHUB_WORKSPACE/diff-content.txt
-
-          # Initialize change scope
-          CHANGE_SCOPE=""
-
-          # Classify change scope based on file patterns specific to Stirling-PDF
-          if [[ "$CHANGED_FILES" =~ ^src/main/java/stirling/software/SPDF/.* ]]; then
-            CHANGE_SCOPE="${CHANGE_SCOPE}backend,"
-          fi
-          if [[ "$CHANGED_FILES" =~ ^src/main/resources/(static|templates)/.* ]]; then
-            CHANGE_SCOPE="${CHANGE_SCOPE}frontend,"
-          fi
-          if [[ "$CHANGED_FILES" =~ ^(Dockerfile.*|docker-compose.yml|src/main/resources/application.*\.properties) ]]; then
-            CHANGE_SCOPE="${CHANGE_SCOPE}deployment,"
-          fi
-          if [[ "$CHANGED_FILES" =~ ^docs/.* ]]; then
-            CHANGE_SCOPE="${CHANGE_SCOPE}documentation,"
-          fi
-          if [[ "$CHANGED_FILES" =~ ^src/test/.* ]]; then
-            CHANGE_SCOPE="${CHANGE_SCOPE}tests,"
-          fi
-          if [[ "$CHANGED_FILES" =~ ^\.github/workflows/.* ]]; then
-            CHANGE_SCOPE="${CHANGE_SCOPE}ci,"
-          fi
-          if [[ "$CHANGED_FILES" =~ ^src/main/resources/messages_.*\.properties$ ]]; then
-            CHANGE_SCOPE="${CHANGE_SCOPE}i18n,"
-          fi
-          if [[ "$CHANGED_FILES" =~ ^(build.gradle$|settings.gradle$|README.md$|\.gitignore$) ]]; then
-            CHANGE_SCOPE="${CHANGE_SCOPE}config,"
-          fi
-
-          # Fallback for unclassified files
-          if [[ -z "$CHANGE_SCOPE" ]]; then
-            CHANGE_SCOPE="system"
-          else
-            # Remove trailing comma
-            CHANGE_SCOPE="${CHANGE_SCOPE%,}"
-          fi
-
-          echo "change-scope=$CHANGE_SCOPE" >> $GITHUB_OUTPUT
-
-      - name: Debug File Contents
-        run: |
-          echo "Changed Files:"
-          cat $GITHUB_WORKSPACE/changed-files.txt || echo "No changed files found"
-          echo "Diff Content:"
-          cat $GITHUB_WORKSPACE/diff-content.txt || echo "No diff content found"
-
       - name: Get PR diff
         id: get_diff
         run: |
@@ -108,7 +45,7 @@ jobs:
             You are a professional software engineer. Based on the following git diff, generate a **concise** and **meaningful** pull request title in **English**, using **Markdown format** and starting with one of the conventional commit types:
             build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test.
 
-            Do NOT use emojis. Do NOT include additional description. Output only a single Markdown-formatted line.
+            Do NOT use emojis. Do NOT include additional description. Output only a single **Markdown-formatted** line with no explanation.
 
             Example: `refactor: improve session lifecycle handling in login filter`
 
@@ -117,15 +54,12 @@ jobs:
             ${{ steps.get_diff.outputs.diff }}
             ```
 
-            **Important**: The provided PR title must not influence the generation of the AI title in any way. Only suggest the AI-generated title if the provided title is significantly deficient (rating ≤ 5). Avoid iterative refinements like changing "miscellaneous files" to "configuration and scripts" unless the improvement is substantial. If diff content is missing, use the change scope and file names to generate and evaluate the title.
+            Compare the PR title `${{ github.event.pull_request.title }}` with your AI-generated title. Evaluate the PR title: if it does not follow the conventions or is unclear, return the AI-generated title. Otherwise, return the PR title as-is.
 
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
 
-            vergleiche PR Title: `${{ github.event.pull_request.title }}` mit deinem AI-generierten Titel, bewerte den PR Title, wenn der PR Title nicht den Konventionen entspricht oder unklar ist, dann gibt den AI-generierten Titel zurück, ansonsten gib den PR Title zurück.
-
       - name: Set SCRIPT_OUTPUT env var safely
         run: |
-          # Create the comment content
           cat > /tmp/ai-title-comment.md << 'EOF'
           ## 🤖 AI PR Title Suggestion for Stirling-PDF
 
@@ -146,7 +80,6 @@ jobs:
             const [owner, repo] = GITHUB_REPOSITORY.split('/');
             const issue_number = context.issue.number;
 
-            // Extract rating
             const ratingMatch = body.match(/\*\*Rating\*\*: (\d+)\/10/);
             const rating = ratingMatch ? parseInt(ratingMatch[1], 10) : null;
 
@@ -164,7 +97,6 @@ jobs:
             }
 
             if (rating <= 5) {
-              // ❗ PR-Titel ist schlecht → Kommentar erstellen/aktualisieren
               if (existing) {
                 await github.rest.issues.updateComment({
                   owner, repo,
@@ -180,7 +112,6 @@ jobs:
                 console.log("Created new suggestion comment.");
               }
             } else {
-              // ✅ PR-Titel ist gut → Kommentar ggf. in Lob umwandeln
               const praise = `🤖 AI PR Title Suggestion for Stirling-PDF\n\nGreat job! The current PR title is clear and well-structured.\n\n✅ No suggestions needed.\n\n---\n*Validated by GitHub Models AI*`;
 
               if (existing) {
