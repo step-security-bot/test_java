@@ -121,6 +121,8 @@ jobs:
 
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
 
+      - run: echo "${{ steps.ai-title-analysis.outputs.response }}"
+
       - name: Update or Create PR Comment
         run: echo "SCRIPT_OUTPUT<<EOF" >> $GITHUB_ENV && echo "${{ steps.ai-title-analysis.outputs.response }}" >> $GITHUB_ENV && echo "EOF" >> $GITHUB_ENV
 
