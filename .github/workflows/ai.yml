@@ -87,7 +87,7 @@ jobs:
         id: ai-title-analysis
         uses: actions/ai-inference@v1
         with:
-          model: openai/o4-mini
+          model: xai/grok-3-mini
           prompt: |
             You are a senior software engineer reviewing a pull request for Stirling-PDF, a locally hosted web-based PDF manipulation tool built with Gradle. Your task is to evaluate the PR title by analyzing the content of the changed files to understand the nature of the changes. Suggest improvements only if the current title is unclear, overly vague, or misaligned with the changes. Avoid minor or pedantic refinements.
 
