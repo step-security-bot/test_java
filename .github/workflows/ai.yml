@@ -96,9 +96,7 @@ jobs:
         with:
           model: openai/gpt-4o
           prompt: |
-            You are a senior software engineer reviewing a pull request for Stirling-PDF, a locally hosted web-based PDF manipulation tool built with Gradle. Your task is to generate an independent PR title based on the content of the changed files and compare it to the provided PR title. Suggest improvements only if the provided title is significantly deficient (rating ≤ 5).
-
-            **Provided PR Title:** ${{ github.event.pull_request.title }}
+            You are a senior software engineer reviewing a pull request for Stirling-PDF, a locally hosted web-based PDF manipulation tool built with Gradle. Your task is to generate an independent PR title based on the content of the changed files.
 
             **Changed Files:**
             ```
