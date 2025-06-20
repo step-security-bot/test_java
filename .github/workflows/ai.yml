@@ -129,7 +129,7 @@ jobs:
           prompt: |
             You are a professional software engineer. Based on the following PR title and AI-generated title, provide a rating from 1 to 10 for the PR title's quality, and suggest an AI-generated title if the rating is 5 or below.
 
-            PR Title: `${{ steps.pr-info.outputs.PR_TITLE }}`
+            PR Title: `${{ github.event.pull_request.title }}`
             AI Title: `${{ steps.ai-title-analysis.outputs.response }}`
 
       - name: Set SCRIPT_OUTPUT env var safely
