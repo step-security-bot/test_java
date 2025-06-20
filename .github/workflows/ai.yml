@@ -113,13 +113,7 @@ jobs:
             ```
 
             Please provide:
-            1. An independently generated PR title based on the diff content and change scope, using conventional commit style (e.g., `feat:`, `fix:`, `docs:`, `chore:`) and keeping it concise yet descriptive. If diff content is unavailable, base the title on the change scope and file names.
-            2. A rating of the provided PR title on a scale of 1 to 10 (1 = worst, 10 = best), based on its clarity, relevance, and alignment with the changes compared to the AI-generated title.
-            3. A brief assessment of whether the provided PR title is sufficiently clear and relevant to the Stirling-PDF project (e.g., reflects PDF operations like splitting, merging, converting, or project maintenance), considering the diff content or change scope.
-            4. If the provided title is inadequate (rating ≤ 5), suggest the AI-generated title as an improvement and provide a short explanation of why it better aligns with the changes, referencing specific changes in the diff or change scope.
-            5. If the provided title is acceptable (rating ≥ 6), state that no change is needed and briefly explain why, comparing it to the AI-generated title.
-
-            **Important**: Only suggest the AI-generated title if the provided title is significantly deficient (rating ≤ 5). Avoid iterative refinements like changing "miscellaneous files" to "configuration and scripts" unless the improvement is substantial. If diff content is missing, use the change scope and file names to generate and evaluate the title.
+            1. An independently generated PR title based on the diff content and change scope, using conventional commit style (e.g., `feat:`, `fix:`, `docs:`, `chore:`) and keeping it concise yet descriptive.
 
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
 
