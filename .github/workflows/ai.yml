@@ -56,7 +56,7 @@ jobs:
 
             Compare the PR title `${{ github.event.pull_request.title }}` with your AI-generated title. Evaluate the PR title: if it does not follow the conventions or is unclear, return the AI-generated title. Otherwise, return the PR title as-is.
             Check if the PR title `${{ github.event.pull_request.title }}` is a valid title.
-            
+
             Keep the response concise and formatted as markdown, with the rating and AI-generated title displayed prominently (e.g., "**Rating**: X/10", "**AI-Generated Title**: ...").
             Respond ONLY in valid JSON (no markdown, no code fences) with the following fields:
             {
@@ -97,7 +97,7 @@ jobs:
             const [owner, repo] = GITHUB_REPOSITORY.split('/');
             const issue_number = context.issue.number;
 
-            const ratingMatch = body.match(/\*\*Rating\*\*: (\d+)\/10/);
+            const ratingMatch = body.match(/\*\*PR-Title Rating\*\*: (\d+)\/10/);
             const rating = ratingMatch ? parseInt(ratingMatch[1], 10) : null;
 
             const expectedActor = "${{ steps.setup-bot.outputs.app-slug }}[bot]";
