@@ -25,6 +25,7 @@ jobs:
           git config --global advice.detachedHead false
 
       - name: Setup GitHub App Bot
+        if: github.actor != 'dependabot[bot]'
         id: setup-bot
         uses: ./.github/actions/setup-bot
         with:
@@ -223,7 +224,8 @@ jobs:
           exit 0 # Skip the AI title review for non-repo developers
 
       - name: Clean up
-        if: steps.actor.outputs.is_repo_dev == 'true'
+        if: always()
         run: |
           rm -f pr.diff ai_response.json /tmp/ai-title-comment.md
           echo "Cleaned up temporary files."
+        continue-on-error: true # Ensure cleanup runs even if previous steps fail
