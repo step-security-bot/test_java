@@ -1,5 +1,5 @@
 # First stage: Build the application
-FROM gradle:8.9.0-jdk21 AS build
+FROM gradle:8.9.0-jdk21@sha256:0c13b320f227a67179fca5d5746ab889c011ed143023c80c5fc8520609fe427f AS build
 
 # Set the working directory
 WORKDIR /app
@@ -13,7 +13,7 @@ COPY ./src /app/src
 RUN gradle build
 
 # Main stage
-FROM alpine:3.20.0
+FROM alpine:3.20.0@sha256:77726ef6b57ddf65bb551896826ec38bc3e53f75cdde31354fbffb4f25238ebd
 
 # Copy necessary files from the build stage
 COPY --from=build /app/build/libs/*.jar /app.jar
