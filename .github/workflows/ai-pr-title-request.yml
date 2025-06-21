@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    outputs:
-      pr_number: ${{ steps.meta.outputs.pr_number }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
@@ -22,7 +20,7 @@ jobs:
           egress-policy: audit
       - uses: actions/checkout@v4
         with:
-            fetch-depth: 0
+          fetch-depth: 0
 
       - name: Extract PR metadata
         run: |
@@ -30,11 +28,11 @@ jobs:
           echo "${{ github.event.pull_request.number }}" > meta/PR.txt
           echo "${{ github.event.pull_request.title }}" > meta/title.txt
           git fetch origin ${{ github.base_ref }}
-          git fetch origin ${{ github.base_ref }}
           git fetch origin ${{ github.head_ref }}
           git diff origin/${{ github.base_ref }}..origin/${{ github.head_ref }} > meta/diff.txt
 
       - uses: actions/upload-artifact@v4
+        if: success()
         with:
           name: pr-ai-metadata
           path: meta/
