@@ -98,8 +98,8 @@ jobs:
 
             Respond ONLY with valid JSON, without any Markdown, code fences, or additional text:
             {
-              "improved_rating": "<0-10>",
-              "improved_ai_title_rating": "<0-10>",
+              "improved_rating": <0-10>,
+              "improved_ai_title_rating": <0-10>,
               "improved_title": "<ai generated title>"
             }
 
