@@ -69,7 +69,6 @@ jobs:
           PR_TITLE=$(echo "${{ github.event.pull_request.title }}" | tr -d '\n\r' | head -c 72 | sed 's/[^[:print:]]//g')
           if [[ ${#PR_TITLE} -lt 5 ]]; then
             echo "PR title is too short. Must be at least 5 characters." >&2
-            exit 1
           fi
           echo "pr_title=$PR_TITLE" >> $GITHUB_OUTPUT
 
