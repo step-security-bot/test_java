@@ -15,15 +15,24 @@ jobs:
       models: read
 
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download Artifact
+        id: download
+        uses: actions/download-artifact@v4
         with:
           name: pr-ai-metadata
           path: ./meta
 
+      - name: Verify artifact presence
+        run: |
+          if [ ! -f ./meta/PR.txt ] || [ ! -f ./meta/diff.txt ] || [ ! -f ./meta/title.txt ]; then
+            echo "Missing required PR metadata files. Skipping."
+            exit 1
+          fi
+
       - name: Parse and validate input
         id: parse
         run: |
-          TITLE=$(cat ./meta/title.txt | tr -d '' | head -c 72 | sed 's/[^[:print:]]//g')
+          TITLE=$(cat ./meta/title.txt | tr -d '\n\r' | head -c 72 | sed 's/[^[:print:]]//g')
           DIFF=$(cat ./meta/diff.txt | head -c 10000 | tr -d '\r\n')
 
           echo "pr_title=$TITLE" >> $GITHUB_OUTPUT
