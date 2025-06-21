@@ -107,7 +107,11 @@ jobs:
         if: steps.actor.outputs.is_repo_dev == 'true'
         run: |
           # Schreibe AI-Antwort und entferne mögliche Markdown-Codezäune
-          printf "%s\n" "${{ steps.ai-title-analysis.outputs.response }}" | sed '/^```/d' > ai_response.json
+          # printf "%s\n" "${{ steps.ai-title-analysis.outputs.response }}" | sed '/^```/d' > ai_response.json
+
+          cat <<EOF > ai_response.json
+          ${{ steps.ai-title-analysis.outputs.response }}
+          EOF
 
           # Validiere JSON-Ausgabe
           VALID_JSON=$(
