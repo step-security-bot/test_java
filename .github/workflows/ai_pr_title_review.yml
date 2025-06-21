@@ -28,6 +28,10 @@ jobs:
           app-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
+      - name: actor github User
+        id: actor
+        run: echo "${{ github.actor }}"
+
       - name: Get PR diff
         id: get_diff
         run: |
