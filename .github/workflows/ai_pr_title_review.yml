@@ -31,9 +31,15 @@ jobs:
       - name: Check if actor is repo developer
         id: actor
         run: |
-          REPO_DEVS=("frooodle" "sf298" "Ludy87" "LaserKaspar" "sbplat" "reecebrowne" "DarioGii" "ConnorYoh")
-
-          if [[ " ${REPO_DEVS[*]} " == *" ${{ github.actor }} "* ]]; then
+          if [ ! -f .github/config/repo_devs.json ]; then
+            echo "Error: .github/config/repo_devs.json not found" >&2
+            exit 1
+          fi
+          # Validiere JSON-Format und extrahiere repo_devs
+          REPO_DEVS=$(jq -r '.repo_devs[]' .github/config/repo_devs.json 2>/dev/null || { echo "Error: Invalid JSON in repo_devs.json" >&2; exit 1; })
+          # Konvertiere Entwicklerliste in ein Bash-Array
+          mapfile -t DEVS_ARRAY <<< "$REPO_DEVS"
+          if [[ " ${DEVS_ARRAY[*]} " == *" ${{ github.actor }} "* ]]; then
             echo "is_repo_dev=true" >> $GITHUB_OUTPUT
           else
             echo "is_repo_dev=false" >> $GITHUB_OUTPUT
