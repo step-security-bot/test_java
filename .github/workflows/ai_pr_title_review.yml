@@ -94,9 +94,9 @@ jobs:
             Evaluate the current PR title and your own suggestion:
             - If the title is non-descriptive (e.g. "update", "fix", "1"), too short (<5 characters), or not aligned with the diff content, it must receive a rating of 3 or lower.
             - Rate both titles from 0 to 10, using numbers only (no slashes, no "10/10").
-            - your title length must be between 5 and 72 characters and printable ASCII characters only.
+            - Your title must be between 5 and 72 characters and use printable ASCII characters only.
             - If your title is better than the current PR title, it must receive a rating of 6 or higher.
-            - check the PR title for spelling and grammar errors, and rate it accordingly.
+            - If the current PR title has a rating of 6 or higher but contains spelling or grammar issues, suggest a corrected version **only**, not a full rewrite.
 
             Respond ONLY with valid JSON, without any Markdown, code fences, or additional text:
             {
