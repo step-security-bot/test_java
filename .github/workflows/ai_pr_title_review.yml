@@ -28,10 +28,12 @@ jobs:
           app-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
-      - name: actor github User
+      - name: Check if actor is repo developer
         id: actor
         run: |
-          if [ "${{ github.actor }}" === "PeterPan" ]; then
+          REPO_DEVS=("frooodle" "sf298" "Ludy87" "LaserKaspar" "sbplat" "reecebrowne" "DarioGii" "ConnorYoh")
+
+          if [[ " ${REPO_DEVS[*]} " == *" ${{ github.actor }} "* ]]; then
             echo "is_repo_dev=true" >> $GITHUB_OUTPUT
           else
             echo "is_repo_dev=false" >> $GITHUB_OUTPUT
