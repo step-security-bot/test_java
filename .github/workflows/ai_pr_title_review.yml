@@ -101,8 +101,6 @@ jobs:
               "pr_title": "${{ steps.sanitize_pr_title.outputs.pr_title }}"
             }
 
-            Evaluate the current PR title and suggest an improved version.
-
             Respond ONLY with valid JSON in the format:
             {
               "improved_rating": <0-10>,
