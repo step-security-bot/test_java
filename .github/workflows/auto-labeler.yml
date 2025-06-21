@@ -27,10 +27,10 @@ jobs:
           configuration-path: .github/labeler-config.yml
           sync-labels: true
 
-      -  run: echo "all-labels=$(echo ${{ steps.label-PR.outputs.all-labels }})" > labels.txt
+      - run: echo "all-labels=$(echo ${{ steps.label-PR.outputs.all-labels }})" > labels.txt
 
       - name: Upload Labels File
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           retention-days: 1
           overwrite: true
