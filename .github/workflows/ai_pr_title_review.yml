@@ -84,6 +84,7 @@ jobs:
               "diff": "${{ steps.get_diff.outputs.diff }}",
               "pr_title": "${{ steps.sanitize_pr_title.outputs.pr_title }}"
             }
+
             You are a professional software engineer. Based on the provided git diff, generate a concise and meaningful pull request title in English, starting with one of the conventional commit types:
             build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test.
 
@@ -92,11 +93,13 @@ jobs:
             Example: `refactor: improve session lifecycle handling in login filter`
 
             Evaluate the current PR title and your own suggestion:
+            - Do **not** let spelling or grammar issues affect the rating.
             - If the title is non-descriptive (e.g. "update", "fix", "1"), too short (<5 characters), or not aligned with the diff content, it must receive a rating of 3 or lower.
             - Rate both titles from 0 to 10, using numbers only (no slashes, no "10/10").
-            - Your title must be between 5 and 72 characters and use printable ASCII characters only.
-            - If your title is better than the current PR title, it must receive a rating of 6 or higher.
-            - If the current PR title has a rating of 6 or higher but contains spelling or grammar issues, suggest a corrected version **only**, not a full rewrite.
+            - Your title must be between 5 and 72 characters and consist only of printable ASCII characters.
+            - If your suggested title is better than the current PR title, it must receive a rating of 6 or higher.
+            - If the current PR title is rated 6 or higher and contains spelling or grammar issues, suggest only a corrected version (do not rephrase or rewrite it).
+            - Otherwise, generate a completely new and better title based on the diff.
 
             Respond ONLY with valid JSON, without any Markdown, code fences, or additional text:
             {
