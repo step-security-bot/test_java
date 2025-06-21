@@ -78,9 +78,11 @@ jobs:
       - name: Check and sanitize PR title
         if: steps.actor.outputs.is_repo_dev == 'true'
         id: sanitize_pr_title
+        env:
+          PR_TITLE_RAW: ${{ github.event.pull_request.title }}
         run: |
           # Bereinige PR-Titel: max 72 Zeichen, nur druckbare Zeichen
-          PR_TITLE=$(echo "${{ github.event.pull_request.title }}" | tr -d '\n\r' | head -c 72 | sed 's/[^[:print:]]//g')
+          PR_TITLE=$(echo "$PR_TITLE_RAW" | tr -d '\n\r' | head -c 72 | sed 's/[^[:print:]]//g')
           if [[ ${#PR_TITLE} -lt 5 ]]; then
             echo "PR title is too short. Must be at least 5 characters." >&2
           fi
