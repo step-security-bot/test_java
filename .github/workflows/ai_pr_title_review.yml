@@ -79,23 +79,23 @@ jobs:
               "diff": "${{ steps.get_diff.outputs.diff }}",
               "pr_title": "${{ steps.sanitize_pr_title.outputs.pr_title }}"
             }
-            You are a professional software engineer. Based on the provided git diff, generate a **concise** and **meaningful** pull request title in **English**, using **Markdown format** and starting with one of the conventional commit types:
+            You are a professional software engineer. Based on the provided git diff, generate a **concise** and **meaningful** pull request title in **English**, starting with one of the conventional commit types:
             build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test.
 
             Do NOT use emojis. Do NOT include additional description.
 
             Example: `refactor: improve session lifecycle handling in login filter`
 
-            Compare the provided PR title with your AI-generated title. Evaluate the PR title using the following criteria:
-            - It must meaningfully describe the change and reflect the content of the diff.
-            - Titles like "1", "update", "fix", or any title under 5 characters must be rated no higher than 3/10.
-            - If the title fails these rules, provide a corrected title.
+            Evaluate the current PR title and your own suggestion:
+            - If the title is non-descriptive (e.g. "update", "fix", "1"), too short (<5 characters), or not aligned with the diff content, it must receive a rating of 3 or lower.
+            - Return your suggested title in plain text using only lowercase and no trailing periods.
+            - Rate both titles from 0 to 10, using **numbers only** (no slashes, no "10/10").
 
-            Respond ONLY in strict valid JSON (no markdown, no code fences, no trailing commas) with the following fields:
+            Respond **only** with valid JSON using this format:
             {
-              "improved_rating": "<your rating of the current PR title out of 10>",
-              "improved_ai_title_rating": "<your rating of your suggested title>",
-              "improved_title": "<your improved title>"
+              "improved_rating": "<0-10>",
+              "improved_ai_title_rating": "<0-10>",
+              "improved_title": "<ai generated title>"
             }
 
       - name: Validate and set SCRIPT_OUTPUT
