@@ -96,6 +96,7 @@ jobs:
             - Rate both titles from 0 to 10, using numbers only (no slashes, no "10/10").
             - your title length must be between 5 and 72 characters and printable ASCII characters only.
             - If your title is better than the current PR title, it must receive a rating of 6 or higher.
+            - check the PR title for spelling and grammar errors, and rate it accordingly.
 
             Respond ONLY with valid JSON, without any Markdown, code fences, or additional text:
             {
