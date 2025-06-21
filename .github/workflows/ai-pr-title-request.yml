@@ -20,10 +20,11 @@ jobs:
         uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
         with:
           egress-policy: audit
+      - uses: actions/checkout@v4
+
       - name: Extract PR metadata
-        id: meta
         run: |
-          mkdir meta
+          mkdir -p meta
           echo "${{ github.event.pull_request.number }}" > meta/PR.txt
           echo "${{ github.event.pull_request.title }}" > meta/title.txt
           git fetch origin ${{ github.base_ref }}
