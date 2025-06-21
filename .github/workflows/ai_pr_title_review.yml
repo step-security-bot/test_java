@@ -134,6 +134,7 @@ jobs:
           **PR-Title Rating**: $IMPROVED_RATING/10
 
           ### ⬇️ Suggested Title (copy & paste):
+
           \`\`\`
           $IMPROVED_TITLE
           \`\`\`
