@@ -31,7 +31,7 @@ jobs:
       - name: actor github User
         id: actor
         run: |
-          if [ "${{ github.actor }}" == "PeterPan" ]; then
+          if [ "${{ github.actor }}" === "PeterPan" ]; then
             echo "is_repo_dev=true" >> $GITHUB_OUTPUT
           else
             echo "is_repo_dev=false" >> $GITHUB_OUTPUT
@@ -159,3 +159,8 @@ jobs:
                 console.log("Rating > 5 and no existing comment → skipping comment.");
               }
             }
+
+      - name: is not repo dev
+        if: steps.actor.outputs.is_repo_dev != 'true'
+        run: |
+          exit 0 # Skip the AI title review for non-repo developers
