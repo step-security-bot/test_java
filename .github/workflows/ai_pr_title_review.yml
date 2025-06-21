@@ -20,6 +20,10 @@ jobs:
           fetch-depth: 0
           filter: blob:none
 
+      - name: Configure Git to suppress detached HEAD warning
+        run: |
+          git config --global advice.detachedHead false
+
       - name: Setup GitHub App Bot
         id: setup-bot
         uses: ./.github/actions/setup-bot
@@ -51,8 +55,9 @@ jobs:
         run: |
           git fetch origin ${{ github.base_ref }}
           git diff origin/${{ github.base_ref }}...HEAD > pr.diff
+          DIFF=$(cat pr.diff | head -c 10000 | tr -d '\r\n' | sed 's/[^[:print:]]//g')
           echo "diff<<EOF" >> $GITHUB_OUTPUT
-          cat pr.diff >> $GITHUB_OUTPUT
+          echo "$DIFF" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Check and sanitize PR title
@@ -83,15 +88,15 @@ jobs:
             build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test.
 
             Do NOT use emojis. Do NOT include additional description.
+            Use sentence case, no trailing period.
 
-            Example: `refactor: improve session lifecycle handling in login filter`
+            Example: `Refactor login session lifecycle management`
 
             Evaluate the current PR title and your own suggestion:
             - If the title is non-descriptive (e.g. "update", "fix", "1"), too short (<5 characters), or not aligned with the diff content, it must receive a rating of 3 or lower.
-            - Return your suggested title in plain text using only lowercase and no trailing periods.
             - Rate both titles from 0 to 10, using **numbers only** (no slashes, no "10/10").
 
-            Respond **only** with valid JSON using this format:
+            Respond ONLY in valid JSON:
             {
               "improved_rating": "<0-10>",
               "improved_ai_title_rating": "<0-10>",
@@ -102,15 +107,22 @@ jobs:
         if: steps.actor.outputs.is_repo_dev == 'true'
         run: |
           echo '${{ steps.ai-title-analysis.outputs.response }}' > ai_response.json
-          # Validiere JSON-Ausgabe
-          VALID_JSON=$(jq -e 'select(.improved_rating | test("^[0-9]{1,2}$")) and select(.improved_ai_title_rating | test("^[0-9]{1,2}$")) and select(.improved_title | type == "string") and (length == 3)' ai_response.json)
+          VALID_JSON=$(jq -e '
+            keys | length == 3 and
+            .improved_rating | test("^(10|[0-9])$") and
+            .improved_ai_title_rating | test("^(10|[0-9])$") and
+            .improved_title | type == "string"
+          ' ai_response.json)
+
           if [ -z "$VALID_JSON" ]; then
             echo "Invalid AI response format" >&2
+            cat ai_response.json >&2
             exit 1
           fi
           # Parse JSON-Felder
           IMPROVED_RATING=$(jq -r '.improved_rating' ai_response.json)
           IMPROVED_TITLE=$(jq -r '.improved_title' ai_response.json)
+
           cat > /tmp/ai-title-comment.md <<EOF
           ## 🤖 AI PR Title Suggestion
 
@@ -173,7 +185,6 @@ jobs:
               }
             } else {
               const praise = `## 🤖 AI PR Title Suggestion\n\nGreat job! The current PR title is clear and well-structured.\n\n✅ No suggestions needed.\n\n---\n*Validated by GitHub Models AI*`;
-
               if (existing) {
                 await github.rest.issues.updateComment({
                   owner, repo,
