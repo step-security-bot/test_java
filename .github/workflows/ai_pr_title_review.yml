@@ -107,9 +107,17 @@ jobs:
         if: steps.actor.outputs.is_repo_dev == 'true'
         run: |
           # Schreibe AI-Antwort und entferne mögliche Markdown-Codezäune
-          echo "${{ steps.ai-title-analysis.outputs.response }}" | sed 's/```json//g; s/```//g' > ai_response.json
+          printf "%s\n" "${{ steps.ai-title-analysis.outputs.response }}" | sed '/^```/d' > ai_response.json
+
           # Validiere JSON-Ausgabe
-          VALID_JSON=$(jq -e 'keys | length == 3 and .improved_rating | test("^(10|[0-9])$") and .improved_ai_title_rating | test("^(10|[0-9])$") and .improved_title | type == "string"' ai_response.json)
+          VALID_JSON=$(
+          jq -e '
+            (keys | sort) == ["improved_ai_title_rating", "improved_rating", "improved_title"] and
+            (.improved_rating | type == "number" and . >= 0 and . <= 10) and
+            (.improved_ai_title_rating | type == "number" and . >= 0 and . <= 10) and
+            (.improved_title | type == "string")
+          ' ai_response.json
+          )
           if [ -z "$VALID_JSON" ]; then
             echo "Invalid AI response format" >&2
             cat ai_response.json >&2
