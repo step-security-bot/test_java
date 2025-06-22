@@ -36,7 +36,7 @@ jobs:
           fi
 
           # Extract list and check
-          if jq -e --arg user "$COMMENT_USER" '.repo_devs_comment | index($user)' "$FILE" > /dev/null; then
+          if jq -e --arg user "$COMMENT_USER" '.repo_devs_comments | index($user)' "$FILE" > /dev/null; then
             echo "✅ $COMMENT_USER is authorized to trigger deployment"
             echo allowed_user=true >> $GITHUB_OUTPUT
           else
