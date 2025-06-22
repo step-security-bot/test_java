@@ -24,6 +24,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Validate commenter is in allowed list
+        id: validate-commenter
         env:
           COMMENT_USER: ${{ github.event.comment.user.login }}
         run: |
@@ -37,14 +38,15 @@ jobs:
           # Extract list and check
           if jq -e --arg user "$COMMENT_USER" '.repo_devs_comment | index($user)' "$FILE" > /dev/null; then
             echo "✅ $COMMENT_USER is authorized to trigger deployment"
+            echo allowed_user=true >> $GITHUB_OUTPUT
           else
             echo "❌ $COMMENT_USER is not authorized to deploy" >&2
-            exit 1
+            echo allowed_user=false >> $GITHUB_OUTPUT
           fi
         continue-on-error: true
 
       - name: Trigger Deployment
-        if: success()  # Only run if the previous step succeeded
+        if: steps.validate-commenter.outputs.is_repo_dev == 'true'
         run: |
           echo "🚀 Deployment triggered by ${{ github.event.comment.user.login }}!"
           # Here you would add the actual deployment logic, e.g., calling a script or API
