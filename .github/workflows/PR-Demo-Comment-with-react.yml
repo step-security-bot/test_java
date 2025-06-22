@@ -46,7 +46,7 @@ jobs:
         continue-on-error: true
 
       - name: Trigger Deployment
-        if: steps.validate-commenter.outputs.is_repo_dev == 'true'
+        if: steps.validate-commenter.outputs.allowed_user == 'true'
         run: |
           echo "🚀 Deployment triggered by ${{ github.event.comment.user.login }}!"
           # Here you would add the actual deployment logic, e.g., calling a script or API
