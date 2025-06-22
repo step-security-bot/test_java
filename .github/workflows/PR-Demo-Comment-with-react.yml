@@ -1,0 +1,43 @@
+name: PR Deployment via Comment
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check-comment:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    if: |
+      github.event.issue.pull_request &&
+      (
+        contains(github.event.comment.body, 'prdeploy') ||
+        contains(github.event.comment.body, 'deploypr')
+      )
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Validate commenter is in allowed list
+        env:
+          COMMENT_USER: ${{ github.event.comment.user.login }}
+        run: |
+          FILE=".github/config/repo_devs.json"
+
+          if [ ! -f "$FILE" ]; then
+            echo "❌ Error: $FILE not found" >&2
+            exit 1
+          fi
+
+          # Extract list and check
+          if jq -e --arg user "$COMMENT_USER" '.repo_devs | index($user)' "$FILE" > /dev/null; then
+            echo "✅ $COMMENT_USER is authorized to trigger deployment"
+          else
+            echo "❌ $COMMENT_USER is not authorized to deploy" >&2
+            exit 1
+          fi
