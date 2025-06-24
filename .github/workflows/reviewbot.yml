@@ -59,4 +59,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.setup-bot.outputs.token }}
         run: |
-          gh pr review ${{ github.event.issue.number }} --approve -b "${{ steps.setup-bot.outputs.app-slug }}[bot] approved this PR in response to a comment from @${{ github.actor }}."
+          gh pr review ${{ github.event.issue.number }} --approve -b "${{ steps.setup-bot.outputs.app-slug }} approved this PR in response to a comment from @${{ github.actor }}."
