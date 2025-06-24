@@ -79,7 +79,6 @@ jobs:
           if [ ! -s pr.diff ]; then
             echo "PR diff is empty. Skipping AI title review." >&2
             echo "is_repo_dev=false" >> $GITHUB_OUTPUT
-            exit 0
           fi
 
       - name: Check and sanitize PR title
