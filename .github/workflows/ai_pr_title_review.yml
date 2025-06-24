@@ -71,7 +71,7 @@ jobs:
           echo "diff<<EOF" >> $GITHUB_OUTPUT
           cat pr.diff >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-        failure: continue
+        continue-on-error: true
 
       - name: Check if PR diff is empty
         if: steps.actor.outputs.is_repo_dev == 'true'
