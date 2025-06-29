@@ -17,7 +17,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    if: github.event.action == 'closed' # && github.event.labels.*.name == 'pr-deployed'
+    if: github.event.action == 'closed'
 
     steps:
       - name: Harden Runner
@@ -28,23 +28,27 @@ jobs:
       - name: Has Label 'pr-deployed'
         id: has-label
         run: |
-          echo "Checking if the 'pr-deployed' label is present..."
-          cat <<EOF
-          ${{ toJson(github.event.pull_request.labels) }}
-          EOF
-          if [[ "${{ github.event.pull_request.labels.*.name }}" == *"pr-deployed"* ]]; then
+          echo "Checking if 'pr-deployed' label is present..."
+          LABELS_JSON='${{ toJson(github.event.pull_request.labels) }}'
+          echo "$LABELS_JSON" | jq .
+
+          if echo "$LABELS_JSON" | jq -e '.[] | select(.name == "pr-deployed")' > /dev/null; then
             echo "Label found."
+            echo "present=true" >> $GITHUB_OUTPUT
           else
             echo "Label not found."
+            echo "present=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Set up SSH
+        if: steps.has-label.outputs.present == 'true'
         run: |
           mkdir -p ~/.ssh/
           echo "${{ secrets.VPS_SSH_KEY }}" > ../private.key
           sudo chmod 600 ../private.key
 
       - name: Cleanup PR deployment
+        if: steps.has-label.outputs.present == 'true'
         id: cleanup
         run: |
           echo "Checking if cleanup is needed for PR #${{ github.event.pull_request.number }}..."
