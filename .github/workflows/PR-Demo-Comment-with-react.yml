@@ -149,7 +149,6 @@ jobs:
     permissions:
       contents: read
       issues: write
-      pull-requests: write
 
     steps:
       - name: Harden Runner
@@ -334,6 +333,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: prNumber,
+                token: ${{ steps.setup-bot.outputs.token }},
                 labels: ['pr-deployed']
               });
               console.log(`Added 'pr-deployed' label to PR #${prNumber}`);
