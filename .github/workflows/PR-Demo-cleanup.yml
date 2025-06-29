@@ -71,8 +71,8 @@ jobs:
 
             // Find existing comment
             const comments = await github.rest.issues.listComments({
-              owner: repoOwner,
-              repo: repoName,
+              owner,
+              repo,
               issue_number: prNumber
             });
 
