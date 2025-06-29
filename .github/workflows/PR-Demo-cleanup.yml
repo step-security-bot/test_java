@@ -69,6 +69,29 @@ jobs:
             }
             core.setOutput('present', hasLabel);
 
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number: prNumber,
+              per_page: 100,
+            });
+
+            const deploymentComment = comments.find(c =>
+              c.body?.startsWith("## 🚀 PR Test Deployment") &&
+              c.user?.type === "Bot"
+            );
+
+            if (deploymentComment) {
+              await github.rest.issues.deleteComment({
+                owner,
+                repo,
+                comment_id: deploymentComment.id
+              });
+              console.log(`Deleted deployment comment (ID: ${deploymentComment.id})`);
+            } else {
+              console.log("No matching deployment comment found.");
+            }
+
       - name: Set up SSH
         if: steps.remove-label.outputs.present == 'true'
         run: |
