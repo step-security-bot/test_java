@@ -45,7 +45,7 @@ jobs:
           egress-policy: audit
 
       - name: Setup GitHub App Bot
-        if: github.actor != 'dependabot[bot]' && steps.actor.outputs.is_repo_dev == 'true'
+        if: github.actor != 'dependabot[bot]'
         id: setup-bot
         uses: ./.github/actions/setup-bot
         continue-on-error: true
@@ -154,7 +154,7 @@ jobs:
           egress-policy: audit
 
       - name: Setup GitHub App Bot
-        if: github.actor != 'dependabot[bot]' && steps.actor.outputs.is_repo_dev == 'true'
+        if: github.actor != 'dependabot[bot]'
         id: setup-bot
         uses: ./.github/actions/setup-bot
         continue-on-error: true
