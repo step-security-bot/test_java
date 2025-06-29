@@ -320,6 +320,19 @@ jobs:
               console.error(`Failed to add reaction: ${error.message}`);
               console.error(error);
             }
+            # add label to PR
+            const prNumber = ${{ needs.check-comment.outputs.pr_number }};
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                labels: ['pr-deployed']
+              });
+              console.log(`Added 'pr-deployed' label to PR #${prNumber}`);
+            } catch (error) {
+              console.error(`Failed to add label to PR: ${error.message}`);
+              console.error(error);
 
       - name: Add failure reaction to comment
         if: failure()
