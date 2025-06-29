@@ -25,30 +25,59 @@ jobs:
         with:
           egress-policy: audit
 
-      - name: Has Label 'pr-deployed'
-        id: has-label
-        run: |
-          echo "Checking if 'pr-deployed' label is present..."
-          LABELS_JSON='${{ toJson(github.event.pull_request.labels) }}'
-          echo "$LABELS_JSON" | jq .
+      - name: Checkout PR
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-          if echo "$LABELS_JSON" | jq -e '.[] | select(.name == "pr-deployed")' > /dev/null; then
-            echo "Label found."
-            echo "present=true" >> $GITHUB_OUTPUT
-          else
-            echo "Label not found."
-            echo "present=false" >> $GITHUB_OUTPUT
-          fi
+      - name: Setup GitHub App Bot
+        if: github.actor != 'dependabot[bot]'
+        id: setup-bot
+        uses: ./.github/actions/setup-bot
+        continue-on-error: true
+        with:
+          # app-id: ${{ secrets.GH_APP_ID }}
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+      - name: Remove 'pr-deployed' label if present
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          github-token: ${{ steps.setup-bot.outputs.token }}
+          script: |
+            const prNumber = ${{ github.event.pull_request.number }};
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // Hole alle Labels auf dem PR
+            const { data: labels } = await github.rest.issues.listLabelsOnIssue({
+              owner,
+              repo,
+              issue_number: prNumber
+            });
+
+            const hasLabel = labels.some(label => label.name === 'pr-deployed');
+
+            if (hasLabel) {
+              console.log("Label 'pr-deployed' found. Removing...");
+              await github.rest.issues.removeLabel({
+                owner,
+                repo,
+                issue_number: prNumber,
+                name: 'pr-deployed'
+              });
+            } else {
+              console.log("Label 'pr-deployed' not found. Nothing to do.");
+            }
+            core.setOutput('present', hasLabel);
 
       - name: Set up SSH
-        if: steps.has-label.outputs.present == 'true'
+        if: steps.remove-label.outputs.present == 'true'
         run: |
           mkdir -p ~/.ssh/
           echo "${{ secrets.VPS_SSH_KEY }}" > ../private.key
           sudo chmod 600 ../private.key
 
       - name: Cleanup PR deployment
-        if: steps.has-label.outputs.present == 'true'
+        if: steps.remove-label.outputs.present == 'true'
         id: cleanup
         run: |
           echo "Checking if cleanup is needed for PR #${{ github.event.pull_request.number }}..."
