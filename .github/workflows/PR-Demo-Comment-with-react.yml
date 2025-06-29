@@ -38,7 +38,7 @@ jobs:
       disable_security: ${{ steps.check-security-flag.outputs.disable_security }}
       enable_pro: ${{ steps.check-pro-flag.outputs.enable_pro }}
       enable_enterprise: ${{ steps.check-pro-flag.outputs.enable_enterprise }}
-      token: ${{ steps.setup-bot.outputs.token }}
+      token: ${{ steps.set-token.outputs.token }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
@@ -57,6 +57,11 @@ jobs:
           # app-id: ${{ secrets.GH_APP_ID }}
           app-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+      - name: Set token fallback
+        id: set-token
+        run: |
+          echo "token=${{ steps.setup-bot.outputs.token }}" >> $GITHUB_ENV
 
       - name: Get PR data
         id: get-pr
@@ -151,9 +156,6 @@ jobs:
       contents: read
       issues: write
 
-    env:
-      BOT_TOKEN: ${{ needs.check-comment.outputs.token }}
-
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
@@ -165,7 +167,7 @@ jobs:
         with:
           repository: ${{ needs.check-comment.outputs.pr_repository }}
           ref: ${{ needs.check-comment.outputs.pr_ref }}
-          token: ${{ env.BOT_TOKEN }}
+          token: ${{ needs.check-comment.outputs.token }}
 
       - name: Set up JDK
         uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
