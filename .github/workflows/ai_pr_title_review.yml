@@ -66,18 +66,10 @@ jobs:
         if: steps.actor.outputs.is_repo_dev == 'true'
         id: get_diff
         run: |
-          echo "Fetching diff for PR #${{ github.event.pull_request.number }}"
-          echo "Repository: ${{ github.repository }}"
-          echo "PR URL: https://patch-diff.githubusercontent.com/raw/${{ github.repository }}/pull/${{ github.event.pull_request.number }}.diff"
           curl -s -H "Authorization: Bearer ${{ steps.setup-bot.outputs.token }}" \
-            https://patch-diff.githubusercontent.com/raw/${{ github.repository }}/pull/${{ github.event.pull_request.number }}.diff > raw_diff.txt || { echo "Fehler beim Abrufen des Diffs"; exit 1; }
-          echo "Raw diff size: $(wc -l raw_diff.txt)"
-          head -n 10000 raw_diff.txt > trimmed_diff.txt || { echo "Fehler bei head"; exit 1; }
-          echo "Trimmed diff size: $(wc -l trimmed_diff.txt)"
-          grep -vP '[\x00-\x08\x0B\x0C\x0E-\x1F\x7F\x{202E}\x{200B}]' trimmed_diff.txt > pr.diff || { echo "Fehler bei grep"; exit 1; }
-          echo "Filtered diff size: $(wc -l pr.diff)"
-          echo "Content of pr.diff:"
-          cat pr.diff
+            https://patch-diff.githubusercontent.com/raw/${{ github.repository }}/pull/${{ github.event.pull_request.number }}.diff > raw_diff.txt || exit 1
+          head -n 10000 raw_diff.txt > trimmed_diff.txt
+          grep -vP '[\x00-\x08\x0B\x0C\x0E-\x1F\x7F\x{202E}\x{200B}]' trimmed_diff.txt > pr.diff
           echo '```bash' >> $GITHUB_STEP_SUMMARY
           cat pr.diff >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
@@ -93,6 +85,13 @@ jobs:
             exit 0
           fi
           echo "is_empty=true" >> $GITHUB_OUTPUT
+
+      - name: Read diff content as output
+        if: steps.check_diff.outputs.is_empty == 'true'
+        id: read_diff
+        run: |
+          DIFF_CONTENT=$(cat pr.diff | head -c 10000 | jq -Rs .)
+          echo "diff_content=${DIFF_CONTENT}" >> $GITHUB_OUTPUT
 
       - name: Check and sanitize PR title
         if: steps.check_diff.outputs.is_empty == 'true'
@@ -118,7 +117,7 @@ jobs:
             Based on the following input data:
 
             {
-              "diff": "$(cat pr.diff)",
+              "diff": ${{ steps.read_diff.outputs.diff_content }},
               "pr_title": "${{ steps.sanitize_pr_title.outputs.pr_title }}"
             }
 
@@ -240,8 +239,7 @@ jobs:
 
       - name: is not repo dev
         if: steps.actor.outputs.is_repo_dev != 'true'
-        run: |
-          exit 0 # Skip the AI title review for non-repo developers
+        run: exit 0 # Skip the AI title review for non-repo developers
 
       - name: Clean up
         if: always()
