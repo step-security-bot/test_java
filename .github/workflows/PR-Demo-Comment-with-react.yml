@@ -340,6 +340,7 @@ jobs:
             } catch (error) {
               console.error(`Failed to add label to PR: ${error.message}`);
               console.error(error);
+            }
 
       - name: Add failure reaction to comment
         if: failure()
