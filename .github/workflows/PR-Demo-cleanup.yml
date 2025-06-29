@@ -25,6 +25,16 @@ jobs:
         with:
           egress-policy: audit
 
+      - name: Has Label 'pr-deployed'
+        id: has-label
+        run: |
+          echo "Checking if the 'pr-deployed' label is present..."
+          if [[ "${{ github.event.pull_request.labels.*.name }}" == *"pr-deployed"* ]]; then
+            echo "Label found."
+          else
+            echo "Label not found."
+          fi
+
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
