@@ -69,15 +69,15 @@ jobs:
             }
             core.setOutput('present', hasLabel);
 
-            const comments = await github.paginate(github.rest.issues.listComments, {
-              owner,
-              repo,
-              issue_number: prNumber,
-              per_page: 100,
+            // Find existing comment
+            const comments = await github.rest.issues.listComments({
+              owner: repoOwner,
+              repo: repoName,
+              issue_number: prNumber
             });
 
-            const deploymentComment = comments.find(c =>
-              c.body?.startsWith("## 🚀 PR Test Deployment") &&
+            const deploymentComment = comments.data.find(c =>
+              c.body?.includes("## 🚀 PR Test Deployment") &&
               c.user?.type === "Bot"
             );
 
