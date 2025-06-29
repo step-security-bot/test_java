@@ -29,6 +29,9 @@ jobs:
         id: has-label
         run: |
           echo "Checking if the 'pr-deployed' label is present..."
+          cat <<EOF
+          ${{ toJson(github.event.pull_request.labels) }}
+          EOF
           if [[ "${{ github.event.pull_request.labels.*.name }}" == *"pr-deployed"* ]]; then
             echo "Label found."
           else
