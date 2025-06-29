@@ -23,21 +23,9 @@ jobs:
           egress-policy: audit
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          fetch-depth: 0
 
       - name: Configure Git to suppress detached HEAD warning
         run: git config --global advice.detachedHead false
-
-      - name: Setup GitHub App Bot
-        if: github.actor != 'dependabot[bot]'
-        id: setup-bot
-        uses: ./.github/actions/setup-bot
-        continue-on-error: true
-        with:
-          # app-id: ${{ secrets.GH_APP_ID }}
-          app-id: ${{ vars.GH_APP_ID }}
-          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
       - name: Check if actor is repo developer
         id: actor
@@ -61,6 +49,16 @@ jobs:
           else
             echo "is_repo_dev=false" >> $GITHUB_OUTPUT
           fi
+
+      - name: Setup GitHub App Bot
+        if: github.actor != 'dependabot[bot]' && steps.actor.outputs.is_repo_dev == 'true'
+        id: setup-bot
+        uses: ./.github/actions/setup-bot
+        continue-on-error: true
+        with:
+          # app-id: ${{ secrets.GH_APP_ID }}
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
       - name: Get PR diff
         if: steps.actor.outputs.is_repo_dev == 'true'
