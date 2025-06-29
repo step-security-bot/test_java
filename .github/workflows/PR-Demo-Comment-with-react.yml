@@ -149,6 +149,7 @@ jobs:
     permissions:
       contents: read
       issues: write
+      pull-requests: write
 
     steps:
       - name: Harden Runner
@@ -326,7 +327,8 @@ jobs:
               console.error(`Failed to add reaction: ${error.message}`);
               console.error(error);
             }
-            # add label to PR
+
+            // add label to PR
             const prNumber = ${{ needs.check-comment.outputs.pr_number }};
             try {
               await github.rest.issues.addLabels({
