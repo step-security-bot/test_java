@@ -17,7 +17,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    if: github.event.action == 'closed' && github.event.labels.*.name === 'pr-deployed'
+    if: github.event.action == 'closed' && github.event.labels.*.name == 'pr-deployed'
 
     steps:
       - name: Harden Runner
